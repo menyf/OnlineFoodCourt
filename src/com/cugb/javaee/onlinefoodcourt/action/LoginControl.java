@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/* é—¨ä¸€å‡¡æ³¨é‡Š
 import edu.cugb.xg.javaee.bean.Users;
 import edu.cugb.xg.javaee.biz.UserService;
+*/
 
 /**
  * Servlet implementation class LoginControl
@@ -29,22 +31,24 @@ public class LoginControl extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//step 1 »ñÈ¡ÓÃ»§Ìá½»µÄÓÃ»§ÃûºÍ¿ÚÁî
+		/* é—¨ä¸€å‡¡æ³¨é‡Š
+		//step 1 è·å–ç”¨æˆ·æäº¤çš„ç”¨æˆ·åå’Œå£ä»¤
 		String username = request.getParameter("loginName");
 		String password = request.getParameter("loginPass");
 		Users user = new Users();
 		user.setUsername(username);
 		user.setPassword(password);
-		//step 2 Êı¾İ¿âÑéÖ¤ÓÃ»§
+		//step 2 æ•°æ®åº“éªŒè¯ç”¨æˆ·
 		UserService userserv = new UserService();
 		if(userserv.validateUser(user)){
-			//ÑéÖ¤Í¨¹ı £¬Ìø×ªµ½show.jsp
+			//éªŒè¯é€šè¿‡ ï¼Œè·³è½¬åˆ°show.jsp
 			request.getRequestDispatcher("show.jsp").forward(request, response);
 		}else{
-			//·ñÔò£¬ÖØĞÂµÇÂ¼
+			//å¦åˆ™ï¼Œé‡æ–°ç™»å½•
 			response.sendRedirect("login.html");
 //			request.getRequestDispatcher("login.html").forward(request, response);
 		}
+		*/
 	}
 
 	/**

@@ -1,9 +1,9 @@
-<<<<<<< HEAD
-FANLEEHAO
- 2017-05-09-11:18 fanleehao "modified"
-=======
-201705091123  fanleehao
->>>>>>> refs/remotes/origin/dev
 # OnlineFoodCourt
-2017.5.9 menyifan 
-哈哈哈哈
+
+2017.5.18 门一凡
+log:
+* 添加了bean文件夹下的customer+dish+order+orderitem
+* 添加了JDNI访问
+
+
+问题：bean.order里的时间 是java.util 还是 java.sql类型？？

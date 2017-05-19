@@ -49,6 +49,9 @@ public class LoginControl extends HttpServlet {
 //			request.getRequestDispatcher("login.html").forward(request, response);
 		}
 		*/
+		String username = request.getParameter("loginName");
+		String password = request.getParameter("loginPass");
+		
 	}
 
 	/**

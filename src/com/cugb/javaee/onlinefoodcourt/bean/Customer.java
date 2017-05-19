@@ -1,15 +1,16 @@
 package com.cugb.javaee.onlinefoodcourt.bean;
 
-public class customer {
-	private String userid;
+public class Customer {
+	private String userID;
 	private String username;
 	private String password;
 	
-	public String getUserid() {
-		return userid;
+	
+	public String getUserID() {
+		return userID;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 	public String getUsername() {
 		return username;

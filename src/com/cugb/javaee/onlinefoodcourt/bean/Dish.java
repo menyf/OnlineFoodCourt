@@ -1,18 +1,18 @@
 package com.cugb.javaee.onlinefoodcourt.bean;
 
-public class dish {
-	private String dishid;
+public class Dish {
+	private String dishID;
 	private String name;
 	private float price;
 	private String description;
-	private String imgurl;
+	private String imgURL;
 	private String discount;
 	
-	public String getDishid() {
-		return dishid;
+	public String getDishID() {
+		return dishID;
 	}
-	public void setDishid(String dishid) {
-		this.dishid = dishid;
+	public void setDishID(String dishID) {
+		this.dishID = dishID;
 	}
 	public String getName() {
 		return name;
@@ -32,11 +32,11 @@ public class dish {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getImgurl() {
-		return imgurl;
+	public String getImgURL() {
+		return imgURL;
 	}
-	public void setImgurl(String imgurl) {
-		this.imgurl = imgurl;
+	public void setImgURL(String imgURL) {
+		this.imgURL = imgURL;
 	}
 	public String getDiscount() {
 		return discount;
@@ -44,6 +44,8 @@ public class dish {
 	public void setDiscount(String discount) {
 		this.discount = discount;
 	}
+	
+
 	
 	
 }

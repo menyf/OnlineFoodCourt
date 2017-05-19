@@ -27,7 +27,7 @@ public class JDBCUtils {
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 			myds = (DataSource)envCtx.lookup("jndi/OnlineFoodCourt");
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
+			System.out.println("lookup失败");
 			e.printStackTrace();
 		}
 		
@@ -40,4 +40,20 @@ public class JDBCUtils {
 		return conn;
 	}
 	
+	public static void free(ResultSet rs, PreparedStatement ps, Connection conn){
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (ps != null) {
+				ps.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
 }

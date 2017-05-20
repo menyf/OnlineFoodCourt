@@ -59,16 +59,11 @@ public class LoginControl extends HttpServlet {
 		String username = request.getParameter("loginName");
 		String password = request.getParameter("loginPass");
 		try {
-			System.out.println("进入try");
 			ICustomerDAO  cusDAO = (ICustomerDAO)DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
-			System.out.println("实例化完成cusDAO");
 			
-//			Customer cus = cusDAO.findCustomer("root");
 			Customer cus = cusDAO.findCustomer(username);
 			String pwd = cus.getPassword();
 			
-//			String pwd = "admin";
-			System.out.println("密码为"+pwd);
 			if (pwd.equals(password)) {
 				request.getRequestDispatcher("show.jsp").forward(request, response);
 			}

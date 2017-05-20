@@ -70,7 +70,7 @@ public class LoginControl extends HttpServlet {
 //			String pwd = "admin";
 			System.out.println("密码为"+pwd);
 			if (pwd.equals(password)) {
-				request.getRequestDispatcher("show.html").forward(request, response);
+				request.getRequestDispatcher("show.jsp").forward(request, response);
 			}
 			else {
 				response.sendRedirect("login.html");

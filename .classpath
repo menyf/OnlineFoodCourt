@@ -9,10 +9,8 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_131]">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="E:/JavaEE Tools/apache-tomcat-8.0.44-windows-x64/apache-tomcat-8.0.44/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="E:/JavaEE Tools/apache-tomcat-8.0.44-windows-x64/apache-tomcat-8.0.44/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

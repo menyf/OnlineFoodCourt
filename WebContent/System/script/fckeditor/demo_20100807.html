@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<!-- 1，引入js -->
+		<script type="text/javascript" src="fckeditor.js"></script>
+
+		<script type="text/javascript">
+			window.onload = function(){
+				var oFCKeditor = new FCKeditor( 'content' ) ;
+				oFCKeditor.BasePath	= "./" ;
+				oFCKeditor.ToolbarSet = "Default";
+				oFCKeditor.ReplaceTextarea() ;
+			}
+		</script>
+		
+	</head>
+	<body>
+
+		<form>
+
+			<!-- 在要使用的地方写一段js代码 -->
+			<script type="text/javascript">
+				/*
+				var oFCKeditor = new FCKeditor( 'content' ) ; // 传递的参数也是提交表单时所使用的参数名
+				oFCKeditor.BasePath	= "./" ; // 一定要以'/'结尾
+				oFCKeditor.Height	= 300 ;
+				oFCKeditor.Width	= 600 ;
+				oFCKeditor.Value	= '初始值' ;
+				oFCKeditor.Create() ;
+				*/
+			</script>
+
+			<textarea name="content"></textarea>
+
+			<hr>
+			<input type="submit" value="提交"/>
+		</form>
+	</body>
+</html>

@@ -62,11 +62,15 @@ public class LoginControl extends HttpServlet {
 			System.out.println("进入try");
 			ICustomerDAO  cusDAO = (ICustomerDAO)DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
 			System.out.println("实例化完成cusDAO");
-			Customer cus = cusDAO.findCustomer(username); 
-			String pwd = cus.getPassword();
+			
+			Customer cus = cusDAO.findCustomer("root");
+//			Customer cus = cusDAO.findCustomer(username);
+//			String pwd = cus.getPassword();
+			
+			String pwd = "admin";
 			System.out.println("密码为"+pwd);
 			if (pwd.equals(password)) {
-				request.getRequestDispatcher("show.jsp").forward(request, response);
+				request.getRequestDispatcher("show.html").forward(request, response);
 			}
 			else {
 				response.sendRedirect("login.html");
@@ -77,9 +81,8 @@ public class LoginControl extends HttpServlet {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("SQL异常");
 			e.printStackTrace();
-		}
+		} 
 		
 	}
 

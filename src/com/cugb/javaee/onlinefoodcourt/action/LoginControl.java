@@ -1,11 +1,17 @@
 package com.cugb.javaee.onlinefoodcourt.action;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.cugb.javaee.onlinefoodcourt.bean.Customer;
+import com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO;
+import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
 
 /* 门一凡注释
 import edu.cugb.xg.javaee.bean.Users;
@@ -49,8 +55,31 @@ public class LoginControl extends HttpServlet {
 //			request.getRequestDispatcher("login.html").forward(request, response);
 		}
 		*/
+		
 		String username = request.getParameter("loginName");
 		String password = request.getParameter("loginPass");
+		try {
+			System.out.println("进入try");
+			ICustomerDAO  cusDAO = (ICustomerDAO)DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
+			System.out.println("实例化完成cusDAO");
+			Customer cus = cusDAO.findCustomer(username); 
+			String pwd = cus.getPassword();
+			System.out.println("密码为"+pwd);
+			if (pwd.equals(password)) {
+				request.getRequestDispatcher("show.jsp").forward(request, response);
+			}
+			else {
+				response.sendRedirect("login.html");
+			}
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("实例化异常");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL异常");
+			e.printStackTrace();
+		}
 		
 	}
 

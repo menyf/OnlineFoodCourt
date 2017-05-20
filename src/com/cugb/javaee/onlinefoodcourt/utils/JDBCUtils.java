@@ -18,9 +18,11 @@ public class JDBCUtils {
 	private static String url;
 	private static String username;
 	private static String password;
-	private static DataSource myds = null;
+
 	private JDBCUtils(){}
 	
+	/*  ===== JNDI开始 =====
+	private static DataSource myds = null;
 	static{
 		try {
 			Context initCtx = new InitialContext();
@@ -30,7 +32,6 @@ public class JDBCUtils {
 			System.out.println("lookup失败");
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public static Connection getConnection() throws SQLException{
@@ -39,6 +40,19 @@ public class JDBCUtils {
 		System.out.println("正在生成: "+conn);
 		return conn;
 	}
+	===== JNDI结束 ===== */
+	
+	
+	// ===== JDCP开始 =====
+	// 依赖MyConnection和MyDataSource
+	private static MyDataSource myds = new MyDataSource();
+	
+	public static Connection getConnection(){
+		Connection conn = null;
+		conn = myds.getConnection(); 
+		return conn;
+	}
+	// ===== JDCP结束 =====
 	
 	public static void free(ResultSet rs, PreparedStatement ps, Connection conn){
 		try {

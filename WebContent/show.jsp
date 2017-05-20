@@ -1,9 +1,16 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <!-- saved from url=(0047)http://www.51meal.com/shop.asp?nowmenuid=500001 -->
 <HTML>
 <HEAD>
-<TITLE>ÎÒÑ§ÎÒ»áÍøÉÏ¶©²ÍÏµÍ³</TITLE>
-<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<TITLE>æˆ‘å­¦æˆ‘ä¼šç½‘ä¸Šè®¢é¤ç³»ç»Ÿ</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
 <link rel="stylesheet" href="./css/styles.css" type="text/css" />
 
 <SCRIPT language=JavaScript type=text/JavaScript>
@@ -21,7 +28,7 @@
 		<tr>
 			<TD
 				style="FONT-SIZE: 24pt; FILTER: blur(add = 1, direction = 120, strength = 5); WIDTH: 100%; COLOR: #000000; FONT-FAMILY: arial; POSITION: relative"
-				noWrap><B><span class="STYLE1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XXXX</span>ÍøÉÏ¶©²ÍÏµÍ³</B></TD>
+				noWrap><B><span class="STYLE1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XXXX</span>ç½‘ä¸Šè®¢é¤ç³»ç»Ÿ</B></TD>
 		</tr>
 		<tr>
 			<td></td>
@@ -39,19 +46,19 @@
 								<TD align=middle><FONT
 									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT><A
 									href="#" target=_self><FONT
-										style="FONT-SIZE: 13px; COLOR: #000000">ÍøÕ¾Ê×Ò³</FONT></A><FONT
+										style="FONT-SIZE: 13px; COLOR: #000000">ç½‘ç«™é¦–é¡µ</FONT></A><FONT
 									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT><A
 									href="#" target=_self><FONT
-										style="FONT-SIZE: 13px; COLOR: #000000">¹ØÓÚÎÒÃÇ</FONT></A><FONT
+										style="FONT-SIZE: 13px; COLOR: #000000">å…³äºæˆ‘ä»¬</FONT></A><FONT
 									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT><A
 									href="#" target=_self><FONT
-										style="FONT-SIZE: 13px; COLOR: #000000">¶¨²Í°ïÖú</FONT></A><FONT
+										style="FONT-SIZE: 13px; COLOR: #000000">å®šé¤å¸®åŠ©</FONT></A><FONT
 									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT><A
 									href="#" target=_self><FONT
-										style="FONT-SIZE: 13px; COLOR: #000000">ÍøÉÏ¶¨²Í</FONT></A><FONT
+										style="FONT-SIZE: 13px; COLOR: #000000">ç½‘ä¸Šå®šé¤</FONT></A><FONT
 									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT><A
 									href="#" target=_self><FONT
-										style="FONT-SIZE: 13px; COLOR: #000000">¿Í·şÖĞĞÄ</FONT></A><FONT
+										style="FONT-SIZE: 13px; COLOR: #000000">å®¢æœä¸­å¿ƒ</FONT></A><FONT
 									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT></TD>
 							</TR>
 						</TBODY>
@@ -133,7 +140,7 @@
 										<marquee style="FONT-SIZE: 13px; COLOR: #0000FF"
 											scrollamount='5' direction='left'>
 											<IMG height=15 src="images/tp009.gif" width=15>
-											»¶Ó­ÄúÊ¹ÓÃÎÒÑ§ÎÒ»áÍøÉÏ¶©²ÍÏµÍ³£¬×£ÄúÓÃ²ÍÓä¿ì£¡
+											æ¬¢è¿æ‚¨ä½¿ç”¨æˆ‘å­¦æˆ‘ä¼šç½‘ä¸Šè®¢é¤ç³»ç»Ÿï¼Œç¥æ‚¨ç”¨é¤æ„‰å¿«ï¼
 										</marquee>
 									</div> &nbsp;&nbsp;
 								</TD>
@@ -166,31 +173,117 @@
 									<TABLE cellSpacing=2 cellPadding=1 width="100%" align=center
 										border=0>
 										<TBODY>
+
+											<%
+												IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
+												ArrayList<Dish> arr = disDAO.findDishs();
+												 for (int i = 0; i < arr.size(); i++) {
+													if(i % 2 == 0){
+														out.println("<tr>");
+													}
+													Dish dish = arr.get(i);
+													
+													out.println("<td>");
+													out.println("<table border=\"0\" cellpadding=\"2\" cellspacing=\"1\" height=\"100%\">");
+													out.println("<tbody>");
+													out.println("<tr>");
+													out.println("<td height=\"90\" valign=\"top\" width=\"90\">");
+													out.println("<a href=\"#\" target=\"_blank\">");
+													out.println("<img alt=\"ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹\" border=\"0\" height=\"80\" src=\""+dish.getImgURL()+"\" width=\"80\"/>");
+													out.println("</a>");
+													out.println("</td>");
+													out.println("<td valign=\"top\">");
+													out.println("<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"1\" width=\"100%\">");
+													out.println("<tbody>");
+													out.println("<tr>");
+													out.println("<td>");
+													out.println("<a href=\"#\" target=\"_blank\">");
+													out.println("<strong>");
+													out.println(dish.getName());
+													out.println("</strong>");
+													out.println("</a>");
+													out.println("</td>");
+													out.println("</tr>");
+													out.println("<tr>");
+													out.println("<td height=\"21\">");
+													out.println("<font color=\"#ff0000\">");
+													out.println("<ç°ä»·ï¼šäººæ°‘å¸"+dish.getPrice()+"å…ƒ>");
+													out.println("</font>");
+													out.println("<br>");
+													out.println("<a href=\"#\">");
+													if(dish.getDescription().length() < 20){
+														out.println(dish.getDescription());	
+													}
+													else{
+														out.println(dish.getDescription().substring(0, 20)+"...");
+													}
+													out.println("</a>");
+													out.println("</br>");
+													out.println("</td>");
+													out.println("</tr>");
+													out.println("</tbody>");
+													out.println("</table>");
+													out.println("</td>");
+													out.println("</tr>");
+													out.println("<tr>");
+													out.println("<td height=\"28\">");
+													out.println("ç¼–å·: "+dish.getDishID()+"");
+													out.println("</td>");
+													out.println("<td>");
+													out.println("<table border=\"0\" cellpadding=\"0\" cellspacing=\"1\" width=\"145\">");
+													out.println("<tbody>");
+													out.println("<tr>");
+													out.println("<td align=\"middle\" width=\"70\">");
+													out.println("<a href=\"#\">");
+													out.println("<img border=\"0\" height=\"20\" longdesc=\"shoppingCart.html\" src=\"images/buy_cn.gif\" width=\"60\">");
+													out.println("</img>");
+													out.println("</a>");
+													out.println("</td>");
+													out.println("<td align=\"middle\" width=\"70\">");
+													out.println("<a href=\"#\" target=\"_blank\">");
+													out.println("<img border=\"0\" height=\"20\" src=\"images/detail_cn.gif\" width=\"60\"/>");
+													out.println("</a>");
+													out.println("</td>");
+													out.println("</tr>");
+													out.println("</tbody>");
+													out.println("</table>");
+													out.println("</td>");
+													out.println("</tr>");
+													out.println("</tbody>");
+													out.println("</table>");
+													out.println("</td>");
+
+													if(i % 2 == 1){
+														out.println("</tr>");
+													}
+												} 
+											%>
+											<!--
 											<TR>
 												<TD>
 													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500047.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href=# target=_blank><STRONG>Æ¤µ°ÊİÈâÖà</STRONG></A></TD>
+																				<TD><A href=# target=_blank><STRONG>çš®è›‹ç˜¦è‚‰ç²¥</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò5Ôª</FONT><BR>
-																					<a href="#">ÃÀÎ¶¿É¿Ú</a>£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸5å…ƒ</FONT><BR>
+																					<a href="#">ç¾å‘³å¯å£</a>ï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 22</TD>
+																<TD height=28>ç¼–å·: 22</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -216,25 +309,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500046.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href=# target=_blank><STRONG>Çå³´Ê±Êß</STRONG></A></TD>
+																				<TD><A href=# target=_blank><STRONG>æ¸…ç‚’æ—¶è”¬</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò5Ôª</FONT><BR>
-																					Ê±ÁîÂÌÉ«Êß²Ë£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸5å…ƒ</FONT><BR>
+																					æ—¶ä»¤ç»¿è‰²è”¬èœï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 21</TD>
+																<TD height=28>ç¼–å·: 21</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -260,25 +353,26 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500045.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
+
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href=# target=_blank><STRONG>Õ¨½´Ãæ</STRONG></A></TD>
+																				<TD><A href=# target=_blank><STRONG>ç‚¸é…±é¢</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò8Ôª</FONT><BR>
-																					¾©Î¶Ğ¡³Ô£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸8å…ƒ</FONT><BR>
+																					äº¬å‘³å°åƒï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 20</TD>
+																<TD height=28>ç¼–å·: 20</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -302,25 +396,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500044.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href=# target=_blank><STRONG>ÈâË¿ÇÑ×Ó</STRONG></A></TD>
+																				<TD><A href=# target=_blank><STRONG>è‚‰ä¸èŒ„å­</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò10Ôª</FONT><BR>
-																					ÃÀÎ¶¿É¿Ú£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸10å…ƒ</FONT><BR>
+																					ç¾å‘³å¯å£ï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 19</TD>
+																<TD height=28>ç¼–å·: 19</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -346,25 +440,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500043.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href=# target=_blank><STRONG>Î÷ºìÊÁ³´¼¦µ°</STRONG></A></TD>
+																				<TD><A href=# target=_blank><STRONG>è¥¿çº¢æŸ¿ç‚’é¸¡è›‹</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò6Ôª</FONT><BR>
-																					¾­µä´îÅä£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸6å…ƒ</FONT><BR>
+																					ç»å…¸æ­é…ï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 18</TD>
+																<TD height=28>ç¼–å·: 18</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -388,25 +482,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500042.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href=# target=_blank><STRONG>ÏãÓÍ³­ÊÖ</STRONG></A></TD>
+																				<TD><A href=# target=_blank><STRONG>é¦™æ²¹æŠ„æ‰‹</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò4Ôª</FONT><BR>
-																					´¨Î¶Ğ¡³Ô£¬ÏÊÏã¿É¿Ú£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸4å…ƒ</FONT><BR>
+																					å·å‘³å°åƒï¼Œé²œé¦™å¯å£ï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 17</TD>
+																<TD height=28>ç¼–å·: 17</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -432,25 +526,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500041.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href=# target=_blank><STRONG>Ëá¶¹½Ç³´ÈâÄ©¸Ç·¹</STRONG></A></TD>
+																				<TD><A href=# target=_blank><STRONG>é…¸è±†è§’ç‚’è‚‰æœ«ç›–é¥­</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò8Ôª</FONT><BR>
-																					¿ªÎ¸¿É¿Ú£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸8å…ƒ</FONT><BR>
+																					å¼€èƒƒå¯å£ï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 16</TD>
+																<TD height=28>ç¼–å·: 16</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -474,25 +568,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500038.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href=# target=_blank><STRONG>´´Òâ³´·¹</STRONG></A></TD>
+																				<TD><A href=# target=_blank><STRONG>åˆ›æ„ç‚’é¥­</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò7Ôª</FONT><BR>
-																					Ô­ÁÏ£º¼¦µ°¡¢ºúÂÜ²·¡¢Çà¶¹¡£¡£¡£¿ÚÎ¶ÊÊÖĞ£¬·Ç³£Ë¬¿Ú£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸7å…ƒ</FONT><BR>
+																					åŸæ–™ï¼šé¸¡è›‹ã€èƒ¡èåœã€é’è±†ã€‚ã€‚ã€‚å£å‘³é€‚ä¸­ï¼Œéå¸¸çˆ½å£ï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 14</TD>
+																<TD height=28>ç¼–å·: 14</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -518,25 +612,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500036.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href=# target=_blank><STRONG>ÖØÇìĞ¡Ãæ</STRONG></A></TD>
+																				<TD><A href=# target=_blank><STRONG>é‡åº†å°é¢</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò5Ôª</FONT><BR>
-																					Õı×ÚÖØÇì½ÖÍ·ÌØÉ«Ğ¡Ãæ£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸5å…ƒ</FONT><BR>
+																					æ­£å®—é‡åº†è¡—å¤´ç‰¹è‰²å°é¢ï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 12</TD>
+																<TD height=28>ç¼–å·: 12</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -560,25 +654,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500035.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href=# target=_blank><STRONG>Ã×·ÛÌÀ</STRONG></A></TD>
+																				<TD><A href=# target=_blank><STRONG>ç±³ç²‰æ±¤</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò8Ôª</FONT><BR>
-																					Ô­ÁÏ£ºÃ×·Û¡¢¹ÇÍ·ÌÀ¡¢¶¹¸¯¡¢ÈâÍèÌÀÎ¶ÏÊÃÀ£¬¿Ú¸Ğ¼«¼Ñ£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸8å…ƒ</FONT><BR>
+																					åŸæ–™ï¼šç±³ç²‰ã€éª¨å¤´æ±¤ã€è±†è…ã€è‚‰ä¸¸æ±¤å‘³é²œç¾ï¼Œå£æ„Ÿæä½³ï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 10</TD>
+																<TD height=28>ç¼–å·: 10</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -604,25 +698,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500034.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>ÌØÉ«³´·¹</STRONG></A></TD>
+																				<TD><A href="#" target=_blank><STRONG>ç‰¹è‰²ç‚’é¥­</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò7Ôª</FONT><BR>
-																					Ô­ÁÏ£ºÄ¢¹½¡¢¼¦µ°¡¢ºúÂÜ²·¡¢Çà½·¡¢ÂÌÉ«Êß²Ë¡£¿Ú¸Ğ¼«ºÃ£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸7å…ƒ</FONT><BR>
+																					åŸæ–™ï¼šè˜‘è‡ã€é¸¡è›‹ã€èƒ¡èåœã€é’æ¤’ã€ç»¿è‰²è”¬èœã€‚å£æ„Ÿæå¥½ï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 9</TD>
+																<TD height=28>ç¼–å·: 9</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -646,25 +740,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500033.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>Ä¾ĞëÈâ¸Ç·¹</STRONG></A></TD>
+																				<TD><A href="#" target=_blank><STRONG>æœ¨é¡»è‚‰ç›–é¥­</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò8Ôª</FONT><BR>
-																					Ô­ÁÏ£ºÄ¾¶ú¡¢ÖíÈâ¡¢Çà¹Ï¡¢¼¦µ°¡£¿ÚÎ¶ÊÊÖĞ£¬ÓªÑøÃÀÎ¶¡£</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸8å…ƒ</FONT><BR>
+																					åŸæ–™ï¼šæœ¨è€³ã€çŒªè‚‰ã€é’ç“œã€é¸¡è›‹ã€‚å£å‘³é€‚ä¸­ï¼Œè¥å…»ç¾å‘³ã€‚</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 8</TD>
+																<TD height=28>ç¼–å·: 8</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -690,25 +784,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500026.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>Ä¾ĞëÈâ¸Ç·¹</STRONG></A></TD>
+																				<TD><A href="#" target=_blank><STRONG>æœ¨é¡»è‚‰ç›–é¥­</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò8Ôª</FONT><BR>
-																					Ô­ÁÏ£ºÄ¾¶ú¡¢ÖíÈâ¡¢Çà¹Ï¡¢¼¦µ°¡£¿ÚÎ¶Çåµ­£¬ÃÀÎ¶ÓªÑø¡£</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸8å…ƒ</FONT><BR>
+																					åŸæ–™ï¼šæœ¨è€³ã€çŒªè‚‰ã€é’ç“œã€é¸¡è›‹ã€‚å£å‘³æ¸…æ·¡ï¼Œç¾å‘³è¥å…»ã€‚</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 7</TD>
+																<TD height=28>ç¼–å·: 7</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -732,25 +826,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500025.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>Î÷ºìÊÁ´òÂ±Ãæ</STRONG></A></TD>
+																				<TD><A href="#" target=_blank><STRONG>è¥¿çº¢æŸ¿æ‰“å¤é¢</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò7Ôª</FONT><BR>
-																					ÅäÁÏ£ºÎ÷ºìÊÁ¡¢¼¦µ°¿ÚÎ¶£ºÇåµ­¡£</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸7å…ƒ</FONT><BR>
+																					é…æ–™ï¼šè¥¿çº¢æŸ¿ã€é¸¡è›‹å£å‘³ï¼šæ¸…æ·¡ã€‚</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 6</TD>
+																<TD height=28>ç¼–å·: 6</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -776,25 +870,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500024.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>À­Ãæ</STRONG></A></TD>
+																				<TD><A href="#" target=_blank><STRONG>æ‹‰é¢</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò6Ôª</FONT><BR>
-																					ÅäÁÏ£ºÅ£Èâ¡¢¹ÇÍ·ÌÀ¿ÚÎ¶£ºÎ¢À±¡¢ÖĞÀ±¡¢³¬À±¡£</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸6å…ƒ</FONT><BR>
+																					é…æ–™ï¼šç‰›è‚‰ã€éª¨å¤´æ±¤å£å‘³ï¼šå¾®è¾£ã€ä¸­è¾£ã€è¶…è¾£ã€‚</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 4</TD>
+																<TD height=28>ç¼–å·: 4</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -818,25 +912,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500023.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>µ¶Ï÷Ãæ</STRONG></A></TD>
+																				<TD><A href="#" target=_blank><STRONG>åˆ€å‰Šé¢</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò6Ôª</FONT><BR>
-																					ÅäÁÏ£ºÇà²Ë¡¢ÖíÈâ¡¢º£´ø¡¢¹ÇÍ·ÌÀ¿ÚÎ¶£ºÎ¢À±¡¢ÖĞÀ±¡¢³¬À±¡£</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸6å…ƒ</FONT><BR>
+																					é…æ–™ï¼šé’èœã€çŒªè‚‰ã€æµ·å¸¦ã€éª¨å¤´æ±¤å£å‘³ï¼šå¾®è¾£ã€ä¸­è¾£ã€è¶…è¾£ã€‚</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 3</TD>
+																<TD height=28>ç¼–å·: 3</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -862,25 +956,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500022.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>Çà²ËÈâË¿Öà</STRONG></A></TD>
+																				<TD><A href="#" target=_blank><STRONG>é’èœè‚‰ä¸ç²¥</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò4Ôª</FONT><BR>
-																					Ô­ÁÏ£ºÇà²Ë¡¢ÈâË¿¿ÚÎ¶Çåµ­£¬ÇåÏã¿É¿Ú£¡</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸4å…ƒ</FONT><BR>
+																					åŸæ–™ï¼šé’èœã€è‚‰ä¸å£å‘³æ¸…æ·¡ï¼Œæ¸…é¦™å¯å£ï¼</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 2</TD>
+																<TD height=28>ç¼–å·: 2</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -904,25 +998,25 @@
 														<TBODY>
 															<TR>
 																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=µã»÷Í¼Æ¬²é¿´ÄÚÈİ
+																	target=_blank><IMG height=80 alt=ç‚¹å‡»å›¾ç‰‡æŸ¥çœ‹å†…å®¹
 																		src="images/500008.jpg" width=80 border=0></A></TD>
 																<TD vAlign=top>
 																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
 																		align=center border=0>
 																		<TBODY>
 																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>ÍÁ¶¹Ë¿¸Ç·¹</STRONG></A></TD>
+																				<TD><A href="#" target=_blank><STRONG>åœŸè±†ä¸ç›–é¥­</STRONG></A></TD>
 																			</TR>
 																			<TR>
-																				<TD height=21><FONT color=#ff0000>ÏÖ¼Û£ºÈËÃñ±Ò7Ôª</FONT><BR>
-																					ºÃºÃ³ÔÅ¶</TD>
+																				<TD height=21><FONT color=#ff0000>ç°ä»·ï¼šäººæ°‘å¸7å…ƒ</FONT><BR>
+																					å¥½å¥½åƒå“¦</TD>
 																			</TR>
 																		</TBODY>
 																	</TABLE>
 																</TD>
 															</TR>
 															<TR>
-																<TD height=28>±àºÅ: 1</TD>
+																<TD height=28>ç¼–å·: 1</TD>
 																<TD>
 																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
 																		<TBODY>
@@ -942,6 +1036,8 @@
 													</TABLE>
 												</TD>
 											</TR>
+										-->
+										
 										</TBODY>
 									</TABLE>
 								</TD>
@@ -969,7 +1065,7 @@
 								<TD align=middle><BR>
 									<P align=center>
 										<FONT color=#000000>Copyright &copy;
-											2010&nbsp;&nbsp;&nbsp;&nbsp; XXXXÓĞÏŞ¹«Ë¾ËùÓĞ</FONT>
+											2010&nbsp;&nbsp;&nbsp;&nbsp; XXXXæœ‰é™å…¬å¸æ‰€æœ‰</FONT>
 									</P>
 									<P align=center></P> <BR> <BR></TD>
 							</TR>

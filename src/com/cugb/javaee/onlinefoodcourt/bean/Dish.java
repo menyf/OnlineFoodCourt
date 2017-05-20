@@ -6,7 +6,7 @@ public class Dish {
 	private float price;
 	private String description;
 	private String imgURL;
-	private String discount;
+	private float discount;
 	
 	public String getDishID() {
 		return dishID;
@@ -38,12 +38,13 @@ public class Dish {
 	public void setImgURL(String imgURL) {
 		this.imgURL = imgURL;
 	}
-	public String getDiscount() {
+	public float getDiscount() {
 		return discount;
 	}
-	public void setDiscount(String discount) {
+	public void setDiscount(float discount) {
 		this.discount = discount;
 	}
+	
 	
 
 	

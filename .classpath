@@ -10,7 +10,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="E:/JavaEE Tools/apache-tomcat-8.0.44-windows-x64/apache-tomcat-8.0.44/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="E:/JavaEE Tools/apache-tomcat-8.0.44-windows-x64/apache-tomcat-8.0.44/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/apache-tomcat-7.0.78/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/apache-tomcat-7.0.78/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -23,9 +23,9 @@ public class CustomerDAOMySqlImplTest {
 	@Test
 	public void testAddCustomer() throws SQLException {
 		Customer cus = new Customer();
-		cus.setUserID("1004");
-		cus.setUsername("root4");
+		cus.setUsername("1003");
 		cus.setPassword("admin");
+		cus.setNickname("cus1003");
 		assertEquals(1, cusDAO.addCustomer(cus));
 	}
 

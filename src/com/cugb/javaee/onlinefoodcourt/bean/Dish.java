@@ -1,17 +1,18 @@
 package com.cugb.javaee.onlinefoodcourt.bean;
 
 public class Dish {
-	private String dishID;
+	private int dishID;
 	private String name;
 	private float price;
 	private String description;
 	private String imgURL;
 	private float discount;
 	
-	public String getDishID() {
+	
+	public int getDishID() {
 		return dishID;
 	}
-	public void setDishID(String dishID) {
+	public void setDishID(int dishID) {
 		this.dishID = dishID;
 	}
 	public String getName() {

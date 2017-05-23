@@ -207,7 +207,7 @@
 													out.println("<tr>");
 													out.println("<td height=\"21\">");
 													out.println("<font color=\"#ff0000\">");
-													out.println("<现价：人民币"+dish.getPrice()+"元>");
+													out.println("现价：人民币"+String.valueOf(dish.getPrice())+"元");
 													out.println("</font>");
 													out.println("<br>");
 													out.println("<a href=\"#\">");
@@ -227,7 +227,7 @@
 													out.println("</tr>");
 													out.println("<tr>");
 													out.println("<td height=\"28\">");
-													out.println("编号: "+dish.getDishID()+"");
+													out.println("编号: "+String.valueOf(dish.getDishID())+"");
 													out.println("</td>");
 													out.println("<td>");
 													out.println("<table border=\"0\" cellpadding=\"0\" cellspacing=\"1\" width=\"145\">");

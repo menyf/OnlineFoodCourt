@@ -9,6 +9,7 @@ public class Order {
 	private int count;
 	private float totalPrice;
 	private String payStatus; //支付状态
+	
 	public String getOrderID() {
 		return orderID;
 	}

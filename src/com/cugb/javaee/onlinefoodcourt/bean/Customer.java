@@ -1,9 +1,10 @@
 package com.cugb.javaee.onlinefoodcourt.bean;
 
 public class Customer {
-	private String username; //用户名
-	private String nickname; //昵称
+	private String username; //用户名	
 	private String password; //密码
+	private String nickname; //昵称
+	
 	public String getUsername() {
 		return username;
 	}

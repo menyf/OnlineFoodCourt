@@ -21,24 +21,24 @@ public interface IDishDAO
      * @return 增加的菜品的数量。
      * @throws SQLException 执行操作发生任何异常时。
      */
-    public int addDish(Dish Dish) throws SQLException;
+    public int addDish(Dish dish) throws SQLException;
     
     /**
      * 删除指定的菜品信息。
-     * @param string 要删除的菜品的ID。
+     * @param dishid为要删除的菜品的ID。
      * @return 已经删除的菜品的数量。
      * @throws SQLException 执行操作发生任何异常时。
      */
-    public int removeDish(String string) throws SQLException;
+    public int removeDish(int dishid) throws SQLException;
     
     /**
      * 修改指定的菜品信息，可以修改的信息包括：
-     * 菜品id 菜品名 密码。
+     * 原菜品id 欲改成的菜品全部信息。
      * @param Dish 包含菜品信息的对象。
      * @return 被修改的菜品的数量。
      * @throws SQLException 执行操作发生任何异常时。
      */
-    public int modifyDish(Dish Dish) throws SQLException;
+    public int modifyDish(Dish dish) throws SQLException;
     
     /**
      * 查询所有的菜品信息。
@@ -53,6 +53,6 @@ public interface IDishDAO
      * @return 该菜品的所有信息
      * @throws SQLException 执行操作发生任何异常时。
      */
-    public Dish findDish(String string) throws SQLException;
+    public Dish findDish(int dishid) throws SQLException;
 }
 

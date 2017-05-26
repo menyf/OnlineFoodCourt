@@ -8,7 +8,6 @@ public class Dish {
 	private String imgURL;
 	private float discount;
 	
-	
 	public int getDishID() {
 		return dishID;
 	}

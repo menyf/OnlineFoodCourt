@@ -22,10 +22,16 @@ public class DishDAOMySqlImplTest {
 	}
 
 //	@Test
-//	public void testAddDish() {
-//		fail("Not yet implemented");
+//	public void testAddDish() throws SQLException {
+//		Dish dish = new Dish();
+//		dish.setName("test");
+//		dish.setPrice(25.50f);
+//		dish.setDescription("miaoshu");
+//		dish.setDiscount(1.00f);
+//		dish.setImgURL("hahaha");
+//		assertEquals(1, disDAO.addDish(dish));;
 //	}
-//
+
 //	@Test
 //	public void testRemoveDish() {
 //		fail("Not yet implemented");
@@ -39,6 +45,7 @@ public class DishDAOMySqlImplTest {
 	@Test
 	public void testFindDishs() throws SQLException {
 		ArrayList<Dish> arr = disDAO.findDishs();
+		System.out.println(arr.size());
 		assertNotNull(arr);
 	}
 

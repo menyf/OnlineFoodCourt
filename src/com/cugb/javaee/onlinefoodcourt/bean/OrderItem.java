@@ -1,14 +1,14 @@
 package com.cugb.javaee.onlinefoodcourt.bean;
 
 public class OrderItem {
-	private String dishID;
+	private int dishID;
 	private String orderID;
 	private int count;
 	private float finalPrice; //成交单价
-	public String getDishID() {
+	public int getDishID() {
 		return dishID;
 	}
-	public void setDishID(String dishID) {
+	public void setDishID(int dishID) {
 		this.dishID = dishID;
 	}
 	public String getOrderID() {

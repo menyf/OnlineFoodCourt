@@ -1,5 +1,6 @@
 package com.cugb.javaee.onlinefoodcourt.action;
 
+import com.cugb.javaee.onlinefoodcourt.test.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -22,7 +23,7 @@ import edu.cugb.xg.javaee.biz.UserService;
  * Servlet implementation class LoginControl
  */
 @WebServlet("/LoginControl")
-public class LoginControl extends HttpServlet {
+public class LoginControl extends BaseService {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -55,7 +56,8 @@ public class LoginControl extends HttpServlet {
 //			request.getRequestDispatcher("login.html").forward(request, response);
 		}
 		*/
-		
+		//logger.debug(getServletConfig());;
+		logger.error(getServletName(), null);;
 		String username = request.getParameter("loginName");
 		String password = request.getParameter("loginPass");
 		try {

@@ -15,7 +15,7 @@ import com.cugb.javaee.onlinefoodcourt.bean.OrderItem;
 import com.cugb.javaee.onlinefoodcourt.dao.IOrderDAO;
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
 
-public class OrderDAOMySqlImplTest {
+public class OrderDAOMySqlImplTest{
 	
 	IOrderDAO orderdao = null;
 	@Before
@@ -72,5 +72,6 @@ public class OrderDAOMySqlImplTest {
 		for(Order order: arrayList){
 			System.out.println(order.getTime().toString());
 		}
+		
 	}
 }

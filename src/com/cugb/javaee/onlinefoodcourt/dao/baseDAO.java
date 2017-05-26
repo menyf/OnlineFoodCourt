@@ -13,10 +13,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import com.cugb.javaee.onlinefoodcourt.test.BaseService;
 import com.cugb.javaee.onlinefoodcourt.utils.JDBCUtils;
 
 
-public class baseDAO {
+public class baseDAO{
 	
 	//找多个用户
 	public ArrayList findObjs(String sql,Class clazz){

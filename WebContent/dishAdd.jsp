@@ -1,3 +1,4 @@
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.JSPOutput"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -214,44 +215,7 @@ function giveURL()
 							<p>菜品信息</p>
 							<form action="dishAdd" method="post">
 								<%
-									IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
-									out.println("<div class=\"form-group\">");
-									out.println(" <label for=\"exampleInputPassword1\">");
-									out.println("  菜品名称");
-									out.println(" </label>");
-									out.println(" <input class=\"form-control\" name=\"name\" placeholder=\"菜品名称\" type=\"text\" \">");
-									out.println(" </input>");
-									out.println("</div>");
-									out.println("<div class=\"form-group\">");
-									out.println(" <label for=\"exampleInputPassword1\">");
-									out.println("  价格");
-									out.println(" </label>");
-									out.println(" <input class=\"form-control\" name=\"price\" placeholder=\"价格\" type=\"text\" \">");
-									out.println(" </input>");
-									out.println("</div>");
-									out.println("<div class=\"form-group\">");
-									out.println(" <label for=\"exampleInputPassword1\">");
-									out.println("  描述");
-									out.println(" </label>");
-									out.println(" <textarea class=\"form-control\" name=\"description\" placeholder=\"描述\" rows=\"3\" \"></textarea>");
-									out.println(" <!-- <input type=\"text\" class=\"form-control\" id=\"description\"");
-									out.println("										placeholder=\"描述\" rows=\"3\"> -->");
-									out.println("</div>");
-									out.println("<div class=\"form-group\">");
-									out.println(" <label for=\"exampleInputPassword1\">");
-									out.println("  图片地址");
-									out.println(" </label>");
-									out.println(" <input id=\"imgURL\" class=\"form-control\" name=\"imgURL\" placeholder=\"http://\" type=\"text\" onblur=\"giveURL()\">");
-									out.println(" </input>");
-									out.println("</div>");
-									out.println("<div class=\"form-group\">");
-									out.println(" <label for=\"exampleInputPassword1\">");
-									out.println("  菜品折扣");
-									out.println(" </label>");
-									out.println(" <input class=\"form-control\" name=\"discount\" placeholder=\"1.00\" type=\"text\" value=\"\">");
-									out.println(" </input>");
-									out.println("</div>");
-
+									JSPOutput.outputDishAdd(out);
 								%>
 								
 								<%-- <div class="form-group">

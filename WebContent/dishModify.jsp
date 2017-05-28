@@ -1,3 +1,4 @@
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.JSPOutput"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -220,50 +221,7 @@ function giveURL()
 									if(id == null) id ="1";
 									IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
 									Dish dish = disDAO.findDish(Integer.parseInt(id));
-									out.println("<div class=\"form-group\">");
-									out.println(" <label for=\"exampleInputEmail1\">");
-									out.println("  菜品ID");
-									out.println(" </label>");
-									out.println(" <input class=\"form-control\" name=\"dishID\" placeholder=\"菜品ID\" readonly=\"true\" type=\"email\" value=\""+String.valueOf(dish.getDishID())+"\">");
-									out.println(" </input>");
-									out.println("</div>");
-									out.println("<div class=\"form-group\">");
-									out.println(" <label for=\"exampleInputPassword1\">");
-									out.println("  菜品名称");
-									out.println(" </label>");
-									out.println(" <input class=\"form-control\" name=\"name\" placeholder=\"菜品名称\" type=\"text\" value=\""+dish.getName()+"\">");
-									out.println(" </input>");
-									out.println("</div>");
-									out.println("<div class=\"form-group\">");
-									out.println(" <label for=\"exampleInputPassword1\">");
-									out.println("  价格");
-									out.println(" </label>");
-									out.println(" <input class=\"form-control\" name=\"price\" placeholder=\"价格\" type=\"text\" value=\""+String.valueOf(dish.getPrice())+"\">");
-									out.println(" </input>");
-									out.println("</div>");
-									out.println("<div class=\"form-group\">");
-									out.println(" <label for=\"exampleInputPassword1\">");
-									out.println("  描述");
-									out.println(" </label>");
-									out.println(" <textarea class=\"form-control\" name=\"description\" placeholder=\"描述\" rows=\"3\" \">"+dish.getDescription()+"</textarea>");
-									out.println(" <!-- <input type=\"text\" class=\"form-control\" id=\"description\"");
-									out.println("										placeholder=\"描述\" rows=\"3\"> -->");
-									out.println("</div>");
-									out.println("<div class=\"form-group\">");
-									out.println(" <label for=\"exampleInputPassword1\">");
-									out.println("  图片地址");
-									out.println(" </label>");
-									out.println(" <input id=\"imgURL\" class=\"form-control\" name=\"imgURL\" placeholder=\"http://\" type=\"text\" onblur=\"giveURL()\" value=\""+dish.getImgURL()+"\">");
-									out.println(" </input>");
-									out.println("</div>");
-									out.println("<div class=\"form-group\">");
-									out.println(" <label for=\"exampleInputPassword1\">");
-									out.println("  菜品折扣");
-									out.println(" </label>");
-									out.println(" <input class=\"form-control\" name=\"discount\" placeholder=\"1.00\" type=\"text\" value=\""+String.valueOf(dish.getDiscount())+"\">");
-									out.println(" </input>");
-									out.println("</div>");
-
+									JSPOutput.outputDishModify(out, dish);
 								%>
 								
 								<%-- <div class="form-group">

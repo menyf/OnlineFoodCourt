@@ -1,3 +1,4 @@
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.JSPOutput"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
@@ -215,58 +216,9 @@
 						ArrayList<Dish> arr = disDAO.findDishs();
 						for(int i = 0; i < arr.size(); i++){
 							Dish dish = arr.get(i);
-							out.println("<tr>");
-							out.println(" <td class=\"cart_product\" width=\"100\">");
-							out.println("  <a href=\"#\">");
-							out.println("   <img alt=\"\" src=\""+dish.getImgURL().replace("80x80", "110x110")+"\">");
-							out.println("   </img>");
-							out.println("  </a>");
-							out.println(" </td>");
-							out.println(" <td class=\"cart_description\">");
-							out.println("  <h4>");
-							out.println("   <a href=\"\">");
-							out.println(dish.getName());
-							out.println("   </a>");
-							out.println("  </h4>");
-							out.println("  <p>");
-							out.println("   Dish ID: "+String.valueOf(dish.getDishID()));
-							out.println("  </p>");
-							out.println(" </td>");
-							out.println(" <td class=\"cart_total\">");
-							out.println("  <p class=\"cart_total_price\">");
-							out.println("   ¥"+String.valueOf(dish.getPrice()));
-							out.println("  </p>");
-							out.println(" </td>");
-							out.println(" <td class=\"cart_total\">");
-							out.println("  <p class=\"cart_total_price\">");
-							out.println(dish.getDiscount());
-							out.println("  </p>");
-							out.println(" </td>");
-							out.println(" <td class=\"cart_total\" width=\"30%\">");
-							out.println("  <h5>");
-							out.println(dish.getDescription());
-							out.println("  </h5>");
-							out.println(" </td>");
-							out.println(" <td class=\"cart_delete\" width=\"100\">");
-							out.println("  <a class=\"cart_quantity_delete\" href=\"dishModify.jsp?dishid="+String.valueOf(dish.getDishID())+"\">");
-							out.println("   <i class=\"fa fa-pencil\">");
-							out.println("   </i>");
-							out.println("  </a>");
-							out.println(" &nbsp;");
-							out.println("  <a class=\"cart_quantity_delete\" href=\"dishDelete.jsp?dishid="+String.valueOf(dish.getDishID())+"\">");
-							out.println("   <i class=\"fa fa-trash-o fa-fw\">");
-							out.println("   </i>");
-							out.println("  </a>");
-							out.println(" </td>");
-							out.println("</tr>");
-
-						}
-						
-
-						
+							JSPOutput.outputDish(out, dish);
+						}						
 					%>
-
-
 
 
 					<!-- <tr>

@@ -36,7 +36,7 @@ public class CustomerDAOMySqlImpl extends baseDAO implements ICustomerDAO {
 
 	@Override
 	public Customer findCustomer(String string) throws SQLException {
-		String sql = "select password Password, nickname Nickname from Customer where username = ?";
+		String sql = "select username Username, password Password, nickname Nickname from Customer where username = ?";
 		Object[] params = {string};
 		return (Customer) findObj(sql, params, Customer.class);
 	}

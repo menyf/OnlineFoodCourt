@@ -1,5 +1,5 @@
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.Customer"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.JSPOutput"%>
-<%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
@@ -35,16 +35,6 @@
 	href="images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
-<script>
-function giveURL()
-{
-	var element = document.getElementById("dishImg");
-	var inbox = document.getElementById("imgURL");
-	var url = inbox.value.substr(0,93);
-	url += "335x335";
-	element.src=url;
-}
-</script>
 </head>
 <!--/head-->
 <body>
@@ -183,7 +173,6 @@ function giveURL()
 			<ol class="breadcrumb">
 				<li><a href="#">Admin</a></li>
 				<li class="active">菜品管理</li>
-				<li class="active">菜品信息修改</li>
 			</ol>
 		</div>
 		<!--/breadcrums-->
@@ -197,94 +186,42 @@ function giveURL()
 
 
 		<div class="review-payment">
-			<h2>菜品管理</h2>
+			<h2>用户管理</h2>
 		</div>
-		<div class="step-one">
-			<h2 class="heading">修改菜品信息</h2>
-		</div>
-		<div class="register-req">
-			<p>请注意，修改之后将无法恢复原信息</p>
-		</div>
+
 		<div class="table-responsive cart_info">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>用户名</th>
+						<th>密码</th>
+						<th>昵称</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						ICustomerDAO cusDAO = (ICustomerDAO) DAOFactory
+								.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
+						ArrayList<Customer> arr = cusDAO.findCustomers();
+						for (int i = 0; i < arr.size(); i++) {
+							Customer cus = arr.get(i);
+							JSPOutput.outputCustomer(out, cus);
+						}
+					%>
 
+					<!-- <tr>
+      <td>Tanmay</td>
+      <td>Bangalore</td>
+      <td>560001</td>
+      <td width="50"><a class="cart_quantity_delete" href="dishDelete.jsp?dishid=1">
+   <i class="fa fa-trash-o fa-lg">
+   </i>
+  </a></td>
+    </tr> -->
 
-			<div class="shopper-informations">
-				<div class="row">
-					<div class="col-sm-1"></div>
-					<div class="col-sm-5">
-						<div class="shopper-info">
-						 <br>
-							<p>菜品信息</p>
-							<form action="dishModify" method="post">
-								<%
-									String id = request.getParameter("dishid");
-									if(id == null) response.sendRedirect("dishManage.jsp");
-									IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
-									Dish dish = disDAO.findDish(Integer.parseInt(id));
-									JSPOutput.outputDishModify(out, dish);
-								%>
-								
-								<%-- <div class="form-group">
-									<label for="exampleInputEmail1">菜品ID</label> <input
-										type="email" class="form-control" name="dishID"
-										placeholder="菜品ID" readonly="true" value="${dish_1.dishID}">
-								</div>
-								<div class="form-group">
-									<label for="exampleInputPassword1">菜品名称</label> <input
-										type="text" class="form-control" name="name" placeholder="菜品名称">
-								</div>
-								<div class="form-group">
-									<label for="exampleInputPassword1">价格</label> <input
-										type="text" class="form-control" name="price" placeholder="价格">
-								</div>
-								<div class="form-group">
-									<label for="exampleInputPassword1">描述</label>
-									<textarea class="form-control" rows="3" placeholder="描述" name="description"></textarea>
-									<!-- <input type="text" class="form-control" id="description"
-										placeholder="描述" rows="3"> -->
-								</div>
-								<div class="form-group">
-									<label for="exampleInputPassword1">图片地址</label> <input
-										type="text" class="form-control" name="imgURL"
-										placeholder="http://">
-								</div>
-								<div class="form-group">
-									<label for="exampleInputPassword1">菜品折扣</label> <input
-										type="text" class="form-control" name="discount"
-										placeholder="1.00">
-								</div> --%>
-
-
-								<button type="submit" class="btn btn-primary" width="80"
-									padding="20">确认修改</button>
-							</form>
-
-
-							<br>
-						</div>
-					</div>
-					<div class="col-sm-1"></div>
-					<div class="col-sm-4">
-						<div class="order-message">
-						 
-							<br>
-							<p>图片预览</p>
-							<img id="dishImg"
-								<%
-									out.println("src="+dish.getImgURL().substring(0, 93)+"335x335");
-								%>
-								height="335" width="335">
-
-
-						</div>
-					</div>
-
-
-				</div>
-			</div>
-
-
-
+				</tbody>
+			</table>
 		</div>
 
 	</div>

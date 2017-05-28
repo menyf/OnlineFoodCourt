@@ -6,6 +6,7 @@ import javax.servlet.jsp.JspWriter;
 
 import org.apache.jasper.runtime.*;
 
+import com.cugb.javaee.onlinefoodcourt.bean.Customer;
 import com.cugb.javaee.onlinefoodcourt.bean.Dish;
 
 public class JSPOutput {
@@ -211,6 +212,57 @@ public class JSPOutput {
 		out.println(
 				" <input class=\"form-control\" name=\"discount\" readonly=\"true\" placeholder=\"1.00\" type=\"text\" value=\""
 						+ String.valueOf(dish.getDiscount()) + "\">");
+		out.println(" </input>");
+		out.println("</div>");
+	}
+
+	//customerManage
+	public static void outputCustomer(JspWriter out, Customer cus) throws IOException{
+		out.println("<tr>");
+		  out.println(" <td>");
+		  out.println(cus.getUsername());
+		  out.println(" </td>");
+		  out.println(" <td>");
+		  out.println(cus.getPassword());
+		  out.println(" </td>");
+		  out.println(" <td>");
+		  out.println(cus.getNickname());
+		  out.println(" </td>");
+		  out.println(" <td width=\"50\">");
+		  out.println("  <a class=\"cart_quantity_delete\" href=\"customerDelete.jsp?username="+cus.getUsername()+"\">");
+		  out.println("   <i class=\"fa fa-trash-o fa-lg\">");
+		  out.println("   </i>");
+		  out.println("  </a>");
+		  out.println(" </td>");
+		  out.println("</tr>");
+	}
+
+	public static void outputCustomerDelete(JspWriter out, Customer cus) throws IOException{
+		out.println("<div class=\"form-group\">");
+		out.println(" <label for=\"exampleInputEmail1\">");
+		out.println("  用户名");
+		out.println(" </label>");
+		out.println(
+				" <input class=\"form-control\" name=\"dishID\" placeholder=\"用户名\" readonly=\"true\" type=\"email\" value=\""
+						+ cus.getUsername() + "\">");
+		out.println(" </input>");
+		out.println("</div>");
+		out.println("<div class=\"form-group\">");
+		out.println(" <label for=\"exampleInputEmail1\">");
+		out.println("  密码");
+		out.println(" </label>");
+		out.println(
+				" <input class=\"form-control\" name=\"dishID\" placeholder=\"密码\" readonly=\"true\" type=\"email\" value=\""
+						+ cus.getPassword() + "\">");
+		out.println(" </input>");
+		out.println("</div>");
+		out.println("<div class=\"form-group\">");
+		out.println(" <label for=\"exampleInputEmail1\">");
+		out.println(" 昵称");
+		out.println(" </label>");
+		out.println(
+				" <input class=\"form-control\" name=\"dishID\" placeholder=\"昵称\" readonly=\"true\" type=\"email\" value=\""
+						+ cus.getNickname() + "\">");
 		out.println(" </input>");
 		out.println("</div>");
 	}

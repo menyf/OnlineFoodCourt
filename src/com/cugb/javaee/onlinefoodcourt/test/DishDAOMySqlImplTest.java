@@ -1,5 +1,7 @@
 package com.cugb.javaee.onlinefoodcourt.test;
 
+import com.cugb.javaee.onlinefoodcourt.test.Log4JTestServlet;
+
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;

@@ -195,21 +195,18 @@
 			<div class="table-responsive cart_info">
 
 				<table class="table table-condensed">
-					<thead>
-						<tr class="cart_menu">
-							<td class="image" width="15%">菜品图片</td>
-							<td class="description" width="20%">名称</td>
-							<td class="price" width="10%">价格</td>
-							<td class="price" width="7%">折扣</td>
-							<td class="total" width="40%">描述</td>
-
-						<td><a class="cart_quantity_delete"
-							href="dishAdd.jsp"> <i class="fa fa-plus-circle fa-lg">新增
-							</i>
-						</a></td>
+				<thead>
+					<tr class="cart_menu">
+						<td class="image" width="15%">菜品图片</td>
+						<td class="description" width="20%">名称</td>
+						<td class="price" width="10%">价格</td>
+						<td class="price" width="7%">折扣</td>
+						<td class="total" width="40%">描述</td>
+						<td><a class="cart_quantity_delete" href="dishAdd.jsp"> <i
+								class="fa fa-plus-circle fa-lg">新增 </i></a></td>
 					</tr>
-					</thead>
-					<tbody>
+				</thead>
+				<tbody>
 
 					<%
 						IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");

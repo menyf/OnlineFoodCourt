@@ -49,6 +49,12 @@ public class DishDAOMySqlImplTest {
 		assertNotNull(arr);
 	}
 
+	@Test
+	public void testFindMaxDish() throws SQLException {
+		Dish dish = disDAO.findMaxDish();
+		assertNotNull(null, dish);
+	}
+	
 //	@Test
 //	public void testFindDish() {
 //		fail("Not yet implemented");

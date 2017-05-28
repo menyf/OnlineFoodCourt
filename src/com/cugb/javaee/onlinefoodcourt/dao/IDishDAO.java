@@ -54,5 +54,13 @@ public interface IDishDAO
      * @throws SQLException 执行操作发生任何异常时。
      */
     public Dish findDish(int dishid) throws SQLException;
+    
+    /**
+     * 查询编号最大的菜品信息。
+     * @param 
+     * @return 最新菜品的信息
+     * @throws SQLException 执行操作发生任何异常时。
+     */
+    public Dish findMaxDish() throws SQLException;
 }
 

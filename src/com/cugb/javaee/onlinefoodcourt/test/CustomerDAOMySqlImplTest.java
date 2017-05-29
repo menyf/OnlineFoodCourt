@@ -20,14 +20,14 @@ public class CustomerDAOMySqlImplTest {
 		cusDAO = (ICustomerDAO)DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
 	}
 
-//	@Test
-//	public void testAddCustomer() throws SQLException {
-//		Customer cus = new Customer();
-//		cus.setUserID("1002");
-//		cus.setUsername("root2");
-//		cus.setPassword("admin");
-//		assertEquals(1, cusDAO.addCustomer(cus));
-//	}
+	@Test
+	public void testAddCustomer() throws SQLException {
+		Customer cus = new Customer();
+		cus.setUsername("1003");
+		cus.setPassword("admin");
+		cus.setNickname("cus1003");
+		assertEquals(1, cusDAO.addCustomer(cus));
+	}
 
 //	@Test
 //	public void testRemoveCustomer() {
@@ -38,16 +38,16 @@ public class CustomerDAOMySqlImplTest {
 //	public void testModifyCustomer() {
 //		fail("Not yet implemented");
 //	}
-//
 //	@Test
 //	public void testFindCustomers() {
 //		fail("Not yet implemented");
 //	}
 
-	@Test
-	public void testFindCustomer() throws SQLException {
-		Customer cus = cusDAO.findCustomer("root");
-		assertEquals("admin", cus.getPassword());
-	}
+//	@Test
+//	public void testFindCustomer() throws SQLException {
+//		Customer cus = cusDAO.findCustomer("root");
+//		System.out.println(cus.getPassword());
+//		assertEquals("admin", cus.getPassword());
+//	}
 
 }

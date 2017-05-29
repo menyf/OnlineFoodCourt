@@ -1,8 +1,16 @@
 package com.cugb.javaee.onlinefoodcourt.action;
 
-import java.io.IOException;
-import java.sql.SQLException;
+import com.cugb.javaee.onlinefoodcourt.test.*;
+import com.cugb.javaee.onlinefoodcourt.bean.*;
+import com.cugb.javaee.onlinefoodcourt.biz.*;
+import com.cugb.javaee.onlinefoodcourt.utils.*;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.Properties;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +21,10 @@ import com.cugb.javaee.onlinefoodcourt.bean.Customer;
 import com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO;
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
 
+//import edu.cugb.xg.javaee.bean.Dish;
+//import edu.cugb.xg.javaee.biz.DishService;
+//import edu.cugb.xg.javaee.utils.PageModel;
+
 /* 门一凡注释
 import edu.cugb.xg.javaee.bean.Users;
 import edu.cugb.xg.javaee.biz.UserService;
@@ -21,10 +33,20 @@ import edu.cugb.xg.javaee.biz.UserService;
 /**
  * Servlet implementation class LoginControl
  */
-@WebServlet("/LoginControl")
-public class LoginControl extends HttpServlet {
+//@WebServlet("/loginControl")
+public class LoginControl extends BaseService {
 	private static final long serialVersionUID = 1L;
-       
+	private static Properties prop = null;
+	static{
+		InputStream in = DAOFactory.class.getClassLoader().getResourceAsStream("dao.properties");
+		prop = new Properties();
+		try {
+			prop.load(in);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private int pageSize = 6;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -55,22 +77,56 @@ public class LoginControl extends HttpServlet {
 //			request.getRequestDispatcher("login.html").forward(request, response);
 		}
 		*/
+		//logger.debug(getServletConfig());;
+		String actiontype = request.getParameter("actiontype");
+        System.out.println(actiontype);
+		switch (actiontype) {
+		case "login":
+			// 登录
+			loginCheck(request, response);
+			break;
+		case "pagelist":
+			System.out.println("----------------");
+			// 分页显示
+			try {
+				pageListView(request, response);
+				System.out.println("分页");
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "detail":
+			// 显示某一个菜品的详细信息
+		case "cart":
+			// 添加到购物车
+		}
 		
+		
+	}
+	
+	private void loginCheck(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		logger.error(getServletName(), null);
 		String username = request.getParameter("loginName");
 		String password = request.getParameter("loginPass");
 		try {
-			System.out.println("进入try");
-			ICustomerDAO  cusDAO = (ICustomerDAO)DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
-			System.out.println("实例化完成cusDAO");
-			
-			Customer cus = cusDAO.findCustomer("root");
-//			Customer cus = cusDAO.findCustomer(username);
-//			String pwd = cus.getPassword();
-			
-			String pwd = "admin";
-			System.out.println("密码为"+pwd);
+			ICustomerDAO  cusDAO = (ICustomerDAO)DAOFactory.newInstance("ICustomerDAO");
+			Customer cus = cusDAO.findCustomer(username);
+			System.out.println(username);
+			String pwd = cus.getPassword();
+			//System.out.println("233333333");
 			if (pwd.equals(password)) {
-				request.getRequestDispatcher("show.html").forward(request, response);
+				DishService dishserv = new DishService();
+				int pageNO = 1;
+				//int pageSize = Integerprop.getProperty("pageSize");
+				PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
+				System.out.println("ok");
+				request.setAttribute("dishlist", pagemodel.getList());
+				logger.debug(pagemodel.getTotalrecords());
+				System.out.println(pagemodel.getTotalrecords()+" 全部记录");
+				request.setAttribute("pageModel", pagemodel);
+				request.getRequestDispatcher("show2.jsp").forward(request, response);
 			}
 			else {
 				response.sendRedirect("login.html");
@@ -85,6 +141,29 @@ public class LoginControl extends HttpServlet {
 		} 
 		
 	}
+	private void pageListView(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		// 获取当前页号
+		//logger.debug(request.getParameter("pageNO"));
+		int pageNO = Integer.parseInt(request.getParameter("pageNO"));
+		//int pageSize = Integer.parseInt(prop.getProperty("pageSize"));
+		// 分页查询
+		// int pageSize = 6;
+		// 生成pageModel对象
+		DishService dishserv = new DishService();
+		PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
+		// 跳转到show页面
+		logger.debug(pagemodel.getList());
+		System.out.println(pagemodel.getList().get(1).getDescription()+"   FUCK YOU");
+		request.setAttribute("dishlist", pagemodel.getList());
+		request.setAttribute("pageModel", pagemodel);
+		RequestDispatcher rd = request
+				.getRequestDispatcher("show2.jsp?pageNO=" + pageNO + "&totalpages=" + pagemodel.getTotalPages());
+		rd.forward(request, response);
+
+	}
+
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -18,7 +18,7 @@ drop table if exists Orders;
 create table Customer
 (
    userid               varchar(32) not null,
-   username             varchar(32),
+   username             varchar(32) unique,
    password             varchar(32),
    primary key (userid)
 );

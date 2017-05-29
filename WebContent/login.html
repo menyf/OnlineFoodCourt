@@ -3,7 +3,7 @@
 <HTML>
 <HEAD>
 <TITLE>我学我会网上订餐系统</TITLE>
-<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
 <link rel="stylesheet" href="./css/styles.css" type="text/css" />
 
 <script language="javascript">
@@ -172,7 +172,7 @@
 				loginName参数用来保存用户名 
 				loginPass参数用来保存密码
 			-->
-			<form method="GET" name="loginForm" onSubmit="return checkUserInfo()" action="login">
+			<form method="POST" name="loginForm" onSubmit="return checkUserInfo()" action="login">
 			<table width="100%" border="0">
 				<tr>
 					<td width="15%">　</td>
@@ -197,12 +197,12 @@
 				<tr>
 					<td>　</td>
 					<td colspan="2" align="center"><input type="submit"
-						name="Submit" value="登录"></td>
+						name="Submit" value="login"></td>
 					<td>　</td>
 				</tr>
 				<tr>
 					<td height="33">　</td>
-					<td>　</td>
+					<td>　<input type="hidden" name="actiontype" value="login"></td>
 					<td>　</td>
 					<td>　</td>
 				</tr>

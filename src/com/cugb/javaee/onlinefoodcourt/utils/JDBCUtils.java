@@ -4,11 +4,12 @@ package com.cugb.javaee.onlinefoodcourt.utils;
 import java.sql.*;
 import java.util.Properties;
 
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
+import com.cugb.javaee.onlinefoodcourt.test.*;
 //import org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory;
 
 import java.io.*;
@@ -55,6 +56,7 @@ public class JDBCUtils {
 	// ===== JDCP结束 =====
 	
 	public static void free(ResultSet rs, PreparedStatement ps, Connection conn){
+        
 		try {
 			if (rs != null) {
 				rs.close();

@@ -12,28 +12,21 @@ import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.cugb.javaee.onlinefoodcourt.bean.Customer;
-import com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO;
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
 
 //import edu.cugb.xg.javaee.bean.Dish;
 //import edu.cugb.xg.javaee.biz.DishService;
 //import edu.cugb.xg.javaee.utils.PageModel;
 
-/* 门一凡注释
-import edu.cugb.xg.javaee.bean.Users;
-import edu.cugb.xg.javaee.biz.UserService;
-*/
-
 /**
  * Servlet implementation class LoginControl
  */
-//@WebServlet("/loginControl")
 public class LoginControl extends BaseService {
 	private static final long serialVersionUID = 1L;
 	private static Properties prop = null;
@@ -59,38 +52,18 @@ public class LoginControl extends BaseService {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* 门一凡注释
-		//step 1 获取用户提交的用户名和口令
-		String username = request.getParameter("loginName");
-		String password = request.getParameter("loginPass");
-		Users user = new Users();
-		user.setUsername(username);
-		user.setPassword(password);
-		//step 2 数据库验证用户
-		UserService userserv = new UserService();
-		if(userserv.validateUser(user)){
-			//验证通过 ，跳转到show.jsp
-			request.getRequestDispatcher("show.jsp").forward(request, response);
-		}else{
-			//否则，重新登录
-			response.sendRedirect("login.html");
-//			request.getRequestDispatcher("login.html").forward(request, response);
-		}
-		*/
+
 		//logger.debug(getServletConfig());;
 		String actiontype = request.getParameter("actiontype");
-        System.out.println(actiontype);
 		switch (actiontype) {
 		case "login":
 			// 登录
 			loginCheck(request, response);
 			break;
 		case "pagelist":
-			System.out.println("----------------");
 			// 分页显示
 			try {
 				pageListView(request, response);
-				System.out.println("分页");
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -108,27 +81,30 @@ public class LoginControl extends BaseService {
 	private void loginCheck(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		logger.error(getServletName(), null);
+		
 		String username = request.getParameter("loginName");
 		String password = request.getParameter("loginPass");
+		Customer loginuser = new Customer();
+		loginuser.setUsername(username);
+		loginuser.setPassword(password);
+		//数据库验证
+		CustomerService cService = new CustomerService();
 		try {
-			ICustomerDAO  cusDAO = (ICustomerDAO)DAOFactory.newInstance("ICustomerDAO");
-			Customer cus = cusDAO.findCustomer(username);
-			System.out.println(username);
-			String pwd = cus.getPassword();
-			//System.out.println("233333333");
-			if (pwd.equals(password)) {
+			if (cService.validateCustomer(loginuser)) {
+				//验证通过
+				HttpSession session = request.getSession(true);
+				session.setAttribute("loginuser", loginuser);
 				DishService dishserv = new DishService();
 				int pageNO = 1;
 				//int pageSize = Integerprop.getProperty("pageSize");
 				PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
-				System.out.println("ok");
 				request.setAttribute("dishlist", pagemodel.getList());
 				logger.debug(pagemodel.getTotalrecords());
-				System.out.println(pagemodel.getTotalrecords()+" 全部记录");
 				request.setAttribute("pageModel", pagemodel);
-				request.getRequestDispatcher("show2.jsp").forward(request, response);
+				request.getRequestDispatcher("show.jsp").forward(request, response);
 			}
 			else {
+				//否则重新登录
 				response.sendRedirect("login.html");
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
@@ -154,11 +130,10 @@ public class LoginControl extends BaseService {
 		PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
 		// 跳转到show页面
 		logger.debug(pagemodel.getList());
-		System.out.println(pagemodel.getList().get(1).getDescription()+"   FUCK YOU");
 		request.setAttribute("dishlist", pagemodel.getList());
 		request.setAttribute("pageModel", pagemodel);
 		RequestDispatcher rd = request
-				.getRequestDispatcher("show2.jsp?pageNO=" + pageNO + "&totalpages=" + pagemodel.getTotalPages());
+				.getRequestDispatcher("show.jsp?pageNO=" + pageNO + "&totalpages=" + pagemodel.getTotalPages());
 		rd.forward(request, response);
 
 	}

@@ -3,1079 +3,223 @@
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
-<%@page import="com.cugb.javaee.onlinefoodcourt.utils.*" %>
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<!-- saved from url=(0047)http://www.51meal.com/shop.asp?nowmenuid=500001 -->
-<HTML>
-<HEAD>
-<TITLE>我学我会网上订餐系统</TITLE>
-<META http-equiv=Content-Type content="text/html; charset=utf-8">
-<link rel="stylesheet" href="./css/styles.css" type="text/css" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<SCRIPT language=JavaScript type=text/JavaScript>
-<!--
-	-->
-</SCRIPT>
 
-</HEAD>
-<BODY leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
-	<table cellSpacing=0 cellPadding=0 width=776 align=center border=0>
-		<tr>
-			<td width="220" rowspan="3"></td>
-			<td width="556" height="36"></td>
-		</tr>
-		<tr>
-			<TD
-				style="FONT-SIZE: 24pt; FILTER: blur(add = 1, direction = 120, strength = 5); WIDTH: 100%; COLOR: #000000; FONT-FAMILY: arial; POSITION: relative"
-				noWrap><B><span class="STYLE1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XXXX</span>网上订餐系统</B></TD>
-		</tr>
-		<tr>
-			<td></td>
-		</tr>
-	</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>网上订餐</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link href="css/prettyPhoto.css" rel="stylesheet">
+<link href="css/price-range.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
+<link href="css/responsive.css" rel="stylesheet">
+<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+<link rel="shortcut icon" href="images/ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="144x144"
+	href="images/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114"
+	href="images/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72"
+	href="images/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed"
+	href="images/ico/apple-touch-icon-57-precomposed.png">
+</head>
+<!--/head-->
 
-	<TABLE cellSpacing=0 cellPadding=0 width=776 align=center border=0>
-		<TBODY>
-			<TR>
-				<TD background="images/001.gif" height=42>
-					<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-						<TBODY>
-							<TR>
-								<TD width=0 height=20></TD>
-								<TD align=middle><FONT
-									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT><A
-									href="#" target=_self><FONT
-										style="FONT-SIZE: 13px; COLOR: #000000">网站首页</FONT></A><FONT
-									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT><A
-									href="#" target=_self><FONT
-										style="FONT-SIZE: 13px; COLOR: #000000">关于我们</FONT></A><FONT
-									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT><A
-									href="#" target=_self><FONT
-										style="FONT-SIZE: 13px; COLOR: #000000">定餐帮助</FONT></A><FONT
-									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT><A
-									href="#" target=_self><FONT
-										style="FONT-SIZE: 13px; COLOR: #000000">网上定餐</FONT></A><FONT
-									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT><A
-									href="#" target=_self><FONT
-										style="FONT-SIZE: 13px; COLOR: #000000">客服中心</FONT></A><FONT
-									style="FONT-SIZE: 13px; COLOR: #000000">&nbsp;|&nbsp;</FONT></TD>
-							</TR>
-						</TBODY>
-					</TABLE>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<TABLE cellSpacing=0 cellPadding=0 width=776 align=center border=0>
-		<TBODY>
-			<TR vAlign=top>
-				<TD width=181 background="images/002.gif">
-					<TABLE cellSpacing=0 cellPadding=0 width=181 border=0>
-						<TBODY>
-							<TR>
-								<TD><IMG height=234 src="images/left_top.jpg" width=181></TD>
-							</TR>
-						</TBODY>
-					</TABLE>
-					<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-						<TBODY>
-							<TR>
-								<TD align=middle height=30><FONT color=#000000> <SCRIPT
-											language=javascript src="images/DateTime2.js"></SCRIPT> <SCRIPT
-											language=javascript>
-												tick('cn');
-											</SCRIPT>
-								</FONT></TD>
-							</TR>
-						</TBODY>
-					</TABLE>
-					<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-						<TBODY>
-							<TR>
-								<TD></TD>
-							</TR>
-							<TR>
-								<TD background="images/003.gif" height=4></TD>
-							</TR>
-							<TR>
-								<TD></TD>
-						</TBODY>
-					</TABLE>
-					<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-						<TBODY>
-							<TR>
-								<TD></TD>
-							</TR>
-							<TR>
-								<TD background="images/003.gif" height=4></TD>
-							</TR>
-							<TR>
-								<TD align=middle>
-									<TABLE cellSpacing=0 cellPadding=0 width="94%" border=0>
-										<TBODY>
-											<TR>
-												<TD></TD>
-											</TR>
-										</TBODY>
-									</TABLE>
-								</TD>
-							</TR>
-						</TBODY>
-					</TABLE>
-				</TD>
-				<TD>
-					<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-						<TBODY>
-							<TR>
-								<TD><IMG height=72 src="images/001.jpg" width=595></TD>
-							</TR>
-						</TBODY>
-					</TABLE>
-					<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-						<TBODY>
-							<TR>
-								<TD width="90%">
-									<div class='cnt'>
-										<marquee style="FONT-SIZE: 13px; COLOR: #0000FF"
-											scrollamount='5' direction='left'>
-											<IMG height=15 src="images/tp009.gif" width=15>
-											欢迎您使用我学我会网上订餐系统，祝您用餐愉快！
-										</marquee>
-									</div> &nbsp;&nbsp;
-								</TD>
-							</TR>
-						</TBODY>
-					</TABLE>
-					<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-						<TBODY>
-							<TR>
-								<TD align=right background="images/004.gif" height=19></TD>
-							</TR>
-						</TBODY>
-					</TABLE>
-					<TABLE cellSpacing=0 cellPadding=0 width="96%" align=center
-						border=0>
-						<TBODY>
-							<TR>
-								<TD>
+<body>
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href=""><i class="fa fa-phone"></i>这里应该显示用户名</a></li>
+								<li><a href=""><i class="fa fa-envelope"></i>这里应该显示邮箱</a></li>
+							</ul>
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="me.html">我的</a></li>
+								<li><a href="checkout.html">去下单</a></li>
+								<li><a href="cart.html">我的购物车</a></li>
+								<li><a href="login.html" class="active">登录</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="index.html">首页</a></li>
+								<li class="dropdown"><a href="#">购物</a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="shop.html"></a></li>
+										<li><a href="product-details.html">菜品详情</a></li> 
+										<li><a href="checkout.html">去下单</a></li> 
+										<li><a href="cart.html">购物车</a></li> 
+										<li><a href="login.html" class="active">登录</a></li> 
+                                    </ul>
+                                </li> 
+								<li class="dropdown"><a href="#">动态</i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="blog.html">动态列表</a></li>
+										<li><a href="blog-single.html">个人动态</a></li>
+                                    </ul>
+                                </li> 
+								<li><a href="contact-us.html">联系我们</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="search_box pull-right">
+							<input type="text" placeholder="搜索美味"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+	
+	<section style="margin-top:0px; margin-bottom:50px">
+		<div class="container">
+			<TABLE cellSpacing=2 cellPadding=1 width="100%" align=center border=0>
+				<TBODY>
+					<c:forEach var="currentdish" items="${requestScope.dishlist}"
+						varStatus="status">
+						<c:if test="${status.index%2==0}">
+							<tr>
+						</c:if>
+						<td>
+							<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
+								<TBODY>
+									<TR>
+										<TD vAlign=top width=90 height=90>
+											<A	href=showdetail?dishid=${currentdish.getDishID()}
+												target=_blank><IMG height=100 alt=点击图片查看内容
+												src=${currentdish.getImgURL() } width=100 border=0>
+											</A>
+										</TD>
+										<TD vAlign=top>
+											<TABLE cellSpacing=1 cellPadding=0 width="100%" align=center border=0>
+												<TBODY>
+													<TR>
+														<TD>
+															<A href=# target=_blank>
+																<STRONG>${currentdish.getName()}</STRONG>
+															</A>
+														</TD>
+													</TR>
+													<TR>
+														<TD height=21>
+															<FONT color=#ff0000>现价：人民币${currentdish.getPrice()}元</FONT>
+															<BR> ${currentdish.getDescription()}
+														</TD>
+													</TR>
+												</TBODY>
+											</TABLE>
+										</TD>
+									</TR>
+								</TBODY>
+							</TABLE>
+						</td>
+						<c:if test="${status.index%2!=0}">
+							</tr>
+						</c:if>
+					</c:forEach>
+					<tr>
+						<td height="2">
+							<div align="center">
+								<font color="#000000">&nbsp;共&nbsp;${param.totalpages}&nbsp;页</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<font color="#000000">当前第</font>&nbsp;<font color="#000000">${param.pageNO}</font>&nbsp;
+								<font color="#000000">页</font>
+							</div>
+						</td>
+						<td>
+							<div align="center">
+								<a name="btnTopPage" id="btnTopPage" href="login?actiontype=pagelist&pageNO=1" title="首页">
+									|&lt;&lt;
+								</a>&nbsp;
+								<a name="btnPreviousPage" id="btnPreviousPage"
+									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.prevPageNO}" title="上页">
+									 &lt; 
+								</a>&nbsp; 
+								<a name="btnNextPage" id="btnNextPage"
+									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.nextPageNO}" title="下页">
+									 &gt; 
+								</a>&nbsp; 
+								<a name="btnBottomPage"	id="btnBottomPage"
+									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.bottomPageNO}"
+									title="尾页">
+								 	&gt;&gt;|
+								</a>
+							</div>
+						</td>
+					</tr>
+				</TBODY>
+			</TABLE>
 
-									<TABLE cellSpacing=1 cellPadding=1 width="100%" align=center
-										bgColor=#c0c0c0 border=0>
-										<TBODY>
-											<TR bgColor=#dadada>
+		</div>
+	</section>
 
-												<TD width="100%" align="right"><a href="#"> <img
-														src="images/lcart_cn.gif" border=0 width="97" height="30"></a></TD>
-											</TR>
-										</TBODY>
-									</TABLE> <BR>
-									<TABLE cellSpacing=2 cellPadding=1 width="100%" align=center
-										border=0>
-										<TBODY>
-
-											<%
-											    
-												IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
-												ArrayList<Dish> arr = disDAO.findDishs();
-												 for (int i = 0; i < arr.size(); i++) {
-													if(i % 2 == 0){
-														out.println("<tr>");
-													}
-													Dish dish = arr.get(i);
-													
-													out.println("<td>");
-													out.println("<table border=\"0\" cellpadding=\"2\" cellspacing=\"1\" height=\"100%\">");
-													out.println("<tbody>");
-													out.println("<tr>");
-													out.println("<td height=\"90\" valign=\"top\" width=\"90\">");
-													out.println("<a href=\"#\" target=\"_blank\">");
-													out.println("<img alt=\"点击图片查看内容\" border=\"0\" height=\"80\" src=\""+dish.getImgURL()+"\" width=\"80\"/>");
-													out.println("</a>");
-													out.println("</td>");
-													out.println("<td valign=\"top\">");
-													out.println("<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"1\" width=\"100%\">");
-													out.println("<tbody>");
-													out.println("<tr>");
-													out.println("<td>");
-													out.println("<a href=\"#\" target=\"_blank\">");
-													out.println("<strong>");
-													out.println(dish.getName());
-													out.println("</strong>");
-													out.println("</a>");
-													out.println("</td>");
-													out.println("</tr>");
-													out.println("<tr>");
-													out.println("<td height=\"21\">");
-													out.println("<font color=\"#ff0000\">");
-													out.println("现价：人民币"+String.valueOf(dish.getPrice())+"元");
-													out.println("</font>");
-													out.println("<br>");
-													out.println("<a href=\"#\">");
-													if(dish.getDescription().length() < 20){
-														out.println(dish.getDescription());	
-													}
-													else{
-														out.println(dish.getDescription().substring(0, 20)+"...");
-													}
-													out.println("</a>");
-													out.println("</br>");
-													out.println("</td>");
-													out.println("</tr>");
-													out.println("</tbody>");
-													out.println("</table>");
-													out.println("</td>");
-													out.println("</tr>");
-													out.println("<tr>");
-													out.println("<td height=\"28\">");
-													out.println("编号: "+String.valueOf(dish.getDishID())+"");
-													out.println("</td>");
-													out.println("<td>");
-													out.println("<table border=\"0\" cellpadding=\"0\" cellspacing=\"1\" width=\"145\">");
-													out.println("<tbody>");
-													out.println("<tr>");
-													out.println("<td align=\"middle\" width=\"70\">");
-													out.println("<a href=\"#\">");
-													out.println("<img border=\"0\" height=\"20\" longdesc=\"shoppingCart.html\" src=\"images/buy_cn.gif\" width=\"60\">");
-													out.println("</img>");
-													out.println("</a>");
-													out.println("</td>");
-													out.println("<td align=\"middle\" width=\"70\">");
-													out.println("<a href=\"#\" target=\"_blank\">");
-													out.println("<img border=\"0\" height=\"20\" src=\"images/detail_cn.gif\" width=\"60\"/>");
-													out.println("</a>");
-													out.println("</td>");
-													out.println("</tr>");
-													out.println("</tbody>");
-													out.println("</table>");
-													out.println("</td>");
-													out.println("</tr>");
-													out.println("</tbody>");
-													out.println("</table>");
-													out.println("</td>");
-
-													if(i % 2 == 1){
-														out.println("</tr>");
-													}
-												} 
-											%>
-											<!--
-											<TR>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500047.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href=# target=_blank><STRONG>皮蛋瘦肉粥</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币5元</FONT><BR>
-																					<a href="#">美味可口</a>！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 22</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align="middle" width="70"><a href="#">
-																						<img src="images/buy_cn.gif" border="0"
-																						longdesc="shoppingCart.html" width="60"
-																						height="20">
-																				</a></TD>
-																				<TD align=middle width=70><A href=#
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500046.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href=# target=_blank><STRONG>清炒时蔬</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币5元</FONT><BR>
-																					时令绿色蔬菜！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 21</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href=#> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href=#
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-											</TR>
-											<TR>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500045.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href=# target=_blank><STRONG>炸酱面</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币8元</FONT><BR>
-																					京味小吃！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 20</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href=#> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href=#
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500044.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href=# target=_blank><STRONG>肉丝茄子</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币10元</FONT><BR>
-																					美味可口！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 19</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href=#> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href=#
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-											</TR>
-											<TR>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500043.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href=# target=_blank><STRONG>西红柿炒鸡蛋</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币6元</FONT><BR>
-																					经典搭配！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 18</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href=#> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href=#
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500042.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href=# target=_blank><STRONG>香油抄手</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币4元</FONT><BR>
-																					川味小吃，鲜香可口！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 17</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href=#> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href=#
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-											</TR>
-											<TR>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500041.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href=# target=_blank><STRONG>酸豆角炒肉末盖饭</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币8元</FONT><BR>
-																					开胃可口！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 16</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href=#> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href=#
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500038.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href=# target=_blank><STRONG>创意炒饭</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币7元</FONT><BR>
-																					原料：鸡蛋、胡萝卜、青豆。。。口味适中，非常爽口！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 14</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href=#> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href=#
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-											</TR>
-											<TR>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500036.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href=# target=_blank><STRONG>重庆小面</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币5元</FONT><BR>
-																					正宗重庆街头特色小面！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 12</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href=#> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href=#
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href=#
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500035.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href=# target=_blank><STRONG>米粉汤</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币8元</FONT><BR>
-																					原料：米粉、骨头汤、豆腐、肉丸汤味鲜美，口感极佳！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 10</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href="#"> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href="#"
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-											</TR>
-											<TR>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500034.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>特色炒饭</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币7元</FONT><BR>
-																					原料：蘑菇、鸡蛋、胡萝卜、青椒、绿色蔬菜。口感极好！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 9</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href="#"> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href="#"
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500033.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>木须肉盖饭</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币8元</FONT><BR>
-																					原料：木耳、猪肉、青瓜、鸡蛋。口味适中，营养美味。</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 8</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href="#"> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href="#"
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-											</TR>
-											<TR>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500026.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>木须肉盖饭</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币8元</FONT><BR>
-																					原料：木耳、猪肉、青瓜、鸡蛋。口味清淡，美味营养。</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 7</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href="#"> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href="#"
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500025.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>西红柿打卤面</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币7元</FONT><BR>
-																					配料：西红柿、鸡蛋口味：清淡。</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 6</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href="#"> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href="#"
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-											</TR>
-											<TR>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500024.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>拉面</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币6元</FONT><BR>
-																					配料：牛肉、骨头汤口味：微辣、中辣、超辣。</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 4</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href="#"> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href="#"
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500023.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>刀削面</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币6元</FONT><BR>
-																					配料：青菜、猪肉、海带、骨头汤口味：微辣、中辣、超辣。</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 3</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href="#"> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href="#"
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-											</TR>
-											<TR>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500022.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>青菜肉丝粥</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币4元</FONT><BR>
-																					原料：青菜、肉丝口味清淡，清香可口！</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 2</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href="#"> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><A href="#"
-																					target=_blank> <IMG src="images/detail_cn.gif"
-																						border=0 width="60" height="20"></A></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-												<TD>
-													<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-														<TBODY>
-															<TR>
-																<TD vAlign=top width=90 height=90><A href="#"
-																	target=_blank><IMG height=80 alt=点击图片查看内容
-																		src="images/500008.jpg" width=80 border=0></A></TD>
-																<TD vAlign=top>
-																	<TABLE cellSpacing=1 cellPadding=0 width="100%"
-																		align=center border=0>
-																		<TBODY>
-																			<TR>
-																				<TD><A href="#" target=_blank><STRONG>土豆丝盖饭</STRONG></A></TD>
-																			</TR>
-																			<TR>
-																				<TD height=21><FONT color=#ff0000>现价：人民币7元</FONT><BR>
-																					好好吃哦</TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-															<TR>
-																<TD height=28>编号: 1</TD>
-																<TD>
-																	<TABLE cellSpacing=1 cellPadding=0 width=145 border=0>
-																		<TBODY>
-																			<TR>
-																				<TD align=middle width=70><A href="#"> <IMG
-																						src="images/buy_cn.gif" border=0 width="60"
-																						height="20"></A></TD>
-																				<TD align=middle width=70><IMG
-																					src="images/detail_cn.gif" border=0 width="60"
-																					height="20"></TD>
-																			</TR>
-																		</TBODY>
-																	</TABLE>
-																</TD>
-															</TR>
-														</TBODY>
-													</TABLE>
-												</TD>
-											</TR>
-										-->
-										
-										</TBODY>
-									</TABLE>
-								</TD>
-							</TR>
-						</TBODY>
-					</TABLE>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<TABLE cellSpacing=0 cellPadding=0 width=776 align=center border=0>
-		<TBODY>
-			<TR>
-				<TD background="images/005.gif" height=8></TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<TABLE cellSpacing=0 cellPadding=0 width=776 align=center border=0>
-		<TBODY>
-			<TR>
-				<TD bgColor=#eeeeee>
-					<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-						<TBODY>
-							<TR>
-								<TD align=middle><BR>
-									<P align=center>
-										<FONT color=#000000>Copyright &copy;
-											2010&nbsp;&nbsp;&nbsp;&nbsp; XXXX有限公司所有</FONT>
-									</P>
-									<P align=center></P> <BR> <BR></TD>
-							</TR>
-						</TBODY>
-					</TABLE>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-</BODY>
-</HTML>
+	<footer id="footer"><!--Footer-->				
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2017 JAVA EE课程实践. All rights reserved.</p>
+					<p class="pull-right">Designed by <span>DU/MEN/FAN</span></p>
+				</div>
+			</div>
+		</div>		
+	</footer><!--/Footer-->  
+   
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.scrollUp.min.js"></script>
+	<script src="js/price-range.js"></script>
+	<script src="js/jquery.prettyPhoto.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>

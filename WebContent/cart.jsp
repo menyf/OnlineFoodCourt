@@ -144,7 +144,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						
+						<p>${requestScope.shopcart[0]}  fuck off</p>
 					</tbody>
 				</table>
 			</div>

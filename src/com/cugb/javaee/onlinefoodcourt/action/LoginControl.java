@@ -9,6 +9,7 @@ import com.cugb.javaee.onlinefoodcourt.utils.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
@@ -20,9 +21,10 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import org.apache.catalina.filters.AddDefaultCharsetFilter;
+import org.omg.CORBA.INTERNAL;
 
-import com.cugb.javaee.onlinefoodcourt.bean.Customer;
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
+import com.sun.javafx.collections.MappingChange.Map;
 
 //import edu.cugb.xg.javaee.bean.Dish;
 //import edu.cugb.xg.javaee.biz.DishService;
@@ -170,15 +172,21 @@ public class LoginControl extends BaseService {
     }
     private void addCart(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException{
     	HttpSession session = request.getSession(true);
-    	String Did = request.getParameter("dishid");
-    	Customer user = (Customer) session.getAttribute("loginuser");
+    	String nn = ((String)request.getParameter("number"));
+    	//System.out.println(nn + "fuck you in the cart");
+    	String Did = request.getParameter("dishID");
+    	//System.out.println("YYYYYYYY"+ Did);
     	Dish current = new Dish();
     	IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
     	int id = Integer.parseInt(Did);
     	current = dishdao.findDish(id);
     	request.setAttribute("current", current);
+    	int number = Integer.parseInt(nn);
+    	Map<String, Order> map = (Map<String, Order>) new HashMap<String, Order>(); 
+    	Object[] items = {id,number};
+    	System.out.println(items[0]+" 22222ewqeq");
+    	session.setAttribute("shopcart",items);
     	request.getRequestDispatcher("cart.jsp").forward(request, response);
-    	
     }
 
 	/**

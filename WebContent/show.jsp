@@ -174,7 +174,7 @@ request.setAttribute("pageModel", pagemodel);
 								<TBODY>
 									<TR>
 										<TD vAlign=top width=90 height=90>
-											<A	href=login?actiontype=detail&dishid=${currentdish.getDishID()}>
+											<A	href=logout?actiontype=detail&dishid=${currentdish.getDishID()}>
 												<IMG height=100 alt=点击图片查看内容
 												src=${currentdish.getImgURL() } width=100 border=0>
 											</A>
@@ -184,8 +184,8 @@ request.setAttribute("pageModel", pagemodel);
 												<TBODY>
 													<TR>
 														<TD>
-															<A 	href=login?actiontype=detail&dishid=${currentdish.getDishID()}
-												target=_blank>
+															<A 	href=logout?actiontype=detail&dishid=${currentdish.getDishID()}
+												>
 																<STRONG>${currentdish.getName()}</STRONG>
 															</A>
 														</TD>

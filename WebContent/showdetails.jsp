@@ -39,7 +39,12 @@
 	href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
 <!--/head-->
-
+<script type="text/javascript">
+	function getValue(){
+		
+		alert("hhhh"+document.getElementById("num").value);
+	}
+</script>
 <body>
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
@@ -151,14 +156,15 @@
 								<p>Dish ID: ${requestScope.current.getDishID()}</p>
 								<span>
 									<span>￥： ${requestScope.current.getPrice()}</span>
-									<label>数量:</label>
-									<input type="text" value="1" />										
-								</span>
-								<span class="btn btn-fefault cart">
+									<label>数量:</label>									
+									<form action="logout" method="POST" name="loginForm" onSubmit="return checkUserInfo()">
+										<input type="hidden"  name="dishID" value=${requestScope.current.getDishID()} />
+										<input type="text" name="number" />	
+										<input type="hidden" name="actiontype" value="cart">						
 										<i class="fa fa-shopping-cart"></i>	
-										<a href=login?actiontype=cart&dishid=${requestScope.current.getDishID()}>
-									添加到购物车</a>
-									</span>
+										<button type="submit" class="btn btn-default cart">添加到购物车</button>
+									</form>																			
+								</span>								
 								<p><b>折扣:</b> ${requestScope.current.getDiscount()}</p>
 								<p><b>描述:</b> ${requestScope.current.getDescription()}</p>
 							</div><!--/product-information-->

@@ -4,15 +4,20 @@ import com.cugb.javaee.onlinefoodcourt.test.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.cugb.javaee.onlinefoodcourt.bean.Customer;
+import com.cugb.javaee.onlinefoodcourt.biz.CustomerService;
 import com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO;
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
+
+
 
 /* 门一凡注释
 import edu.cugb.xg.javaee.bean.Users;
@@ -22,7 +27,7 @@ import edu.cugb.xg.javaee.biz.UserService;
 /**
  * Servlet implementation class LoginControl
  */
-@WebServlet("/LoginControl")
+@WebServlet("/loginControl")
 public class LoginControl extends BaseService {
 	private static final long serialVersionUID = 1L;
        
@@ -34,52 +39,60 @@ public class LoginControl extends BaseService {
         // TODO Auto-generated constructor stub
     }
 
+    private void loginCheck(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// step 1 获取用户提交的用户名和口令
+		String username = request.getParameter("loginName");
+		String password = request.getParameter("loginPass");
+		Customer customer = new Customer();
+		customer.setUsername(username);
+		customer.setPassword(password);
+		// step 2 数据库验证用户
+		CustomerService cuService = new CustomerService();
+		RequestDispatcher rd = null;
+		if (cuService.validateCustomer(customer)) {
+			// 验证通过 ，跳转到show.jsp
+			HttpSession session = request.getSession(true);
+			session.setAttribute("loginuser", customer);
+			DishService dishserv = new DishService();
+			// int pageSize = 6;
+			int pageNO = 1;
+			PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
+			request.setAttribute("dishlist", pagemodel.getList());
+			logger.debug(pagemodel.getTotalrecords());
+			request.setAttribute("pageModel", pagemodel);
+			// rd = request.getRequestDispatcher("show.jsp");
+			rd = request.getRequestDispatcher("show.jsp?pageNO=1&totalpages=" + pagemodel.getTotalPages());
+			rd.forward(request, response);
+		} else {
+			// 否则，重新登录
+			response.sendRedirect("login.html");
+			// request.getRequestDispatcher("login.html").forward(request,
+			// response);
+		}
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* 门一凡注释
-		//step 1 获取用户提交的用户名和口令
-		String username = request.getParameter("loginName");
-		String password = request.getParameter("loginPass");
-		Users user = new Users();
-		user.setUsername(username);
-		user.setPassword(password);
-		//step 2 数据库验证用户
-		UserService userserv = new UserService();
-		if(userserv.validateUser(user)){
-			//验证通过 ，跳转到show.jsp
-			request.getRequestDispatcher("show.jsp").forward(request, response);
-		}else{
-			//否则，重新登录
-			response.sendRedirect("login.html");
-//			request.getRequestDispatcher("login.html").forward(request, response);
-		}
-		*/
+
 		//logger.debug(getServletConfig());;
-		logger.error(getServletName(), null);;
-		String username = request.getParameter("loginName");
-		String password = request.getParameter("loginPass");
-		try {
-			ICustomerDAO  cusDAO = (ICustomerDAO)DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
-			
-			Customer cus = cusDAO.findCustomer(username);
-			String pwd = cus.getPassword();
-			
-			if (pwd.equals(password)) {
-				request.getRequestDispatcher("show.jsp").forward(request, response);
-			}
-			else {
-				response.sendRedirect("login.html");
-			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("实例化异常");
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		//logger.error(getServletName(), null);;
+		String actiontype = request.getParameter("actiontype");
+		switch (actiontype) {
+		case "login":
+			// 登录
+			loginCheck(request, response);
+			break;
+		case "pagelist":
+			// 分页显示
+			pageListView(request, response);
+			break;
+		case "detail":
+			// 显示某一个菜品的详细信息
+		case "cart":
+			// 添加到购物车
+		}
 		
 	}
 

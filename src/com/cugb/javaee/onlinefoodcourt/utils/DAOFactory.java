@@ -24,6 +24,7 @@ public class DAOFactory {
 	
 	public static Object newInstance(String interfaceClassName) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
 		String classname = prop.getProperty(interfaceClassName);
+		System.out.println(Class.forName(classname).newInstance());
 		return Class.forName(classname).newInstance();
 	}
 }

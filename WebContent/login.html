@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,18 +19,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-=======
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<!-- saved from url=(0047)http://www.51meal.com/shop.asp?nowmenuid=500001 -->
-<HTML>
-<HEAD>
-<TITLE>我学我会网上订餐系统</TITLE>
-<META http-equiv=Content-Type content="text/html; charset=gb2312">
-<link rel="stylesheet" href="./css/styles.css" type="text/css" />
->>>>>>> dev
-
 	<script language="javascript">
-
 	function checkUserInfo() {
 	 if(document.loginForm.loginName.value==""){
 	    alert("用户名不能为空");
@@ -120,7 +108,7 @@
 										<li><a href="product-details.html">菜品详情</a></li> 
 										<li><a href="checkout.html">去下单</a></li> 
 										<li><a href="cart.html">购物车</a></li> 
-										<li><a href="login2.html" class="active">登录</a></li> 
+										<li><a href="login.html" class="active">登录</a></li> 
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">动态</i></a>
@@ -143,15 +131,16 @@
 		</div><!--/header-bottom-->
 	</header><!--/header-->
 	
-	<section id="form" style="margin-top:0px; margin-bottom:100px"><!--form-->
+	<section id="form" style="margin-top:0px; margin-bottom:120px"><!--form-->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>登录到您的账户</h2>
-						<form action="loginControl" method="POST" name="loginForm" onSubmit="return checkUserInfo()">
+						<form action="login" method="POST" name="loginForm" onSubmit="return checkUserInfo()">
 							<input type="text" placeholder="用户名" name="loginName"/>
-							<input type="password" placeholder="密码" name="loginPass"/>							
+							<input type="password" placeholder="密码" name="loginPass"/>	
+							<input type="hidden" name="actiontype" value="login">						
 							<button type="submit" class="btn btn-default">登录</button>
 						</form>
 					</div><!--/login form-->
@@ -185,11 +174,7 @@
 			</div>
 		</div>
 		
-	</footer><!--/Footer-->
-	
-
-<<<<<<< HEAD
-  
+	</footer><!--/Footer-->  
     <script src="js/jquery.js"></script>
 	<script src="js/price-range.js"></script>
     <script src="js/jquery.scrollUp.min.js"></script>
@@ -198,92 +183,4 @@
     <script src="js/main.js"></script>
 </body>
 </html>
-=======
-						<TABLE cellSpacing=1 cellPadding=1 width="100%" align=center
-							bgColor=#c0c0c0 border=0>
-							<TBODY>
-								<TR bgColor=#dadada>
-									<TD width="100%" align="center">网上点餐系统用户请直接登录</TD>
-								</TR>
-							</TBODY>
-						</TABLE>
-						<BR>
-						</TD>
-					</TR>
-				</TBODY>
-			</TABLE>
-			<!-- 用postForm表单向result.jsp用GET请求提交数据，注意method属性和action属性的设置
-				loginName参数用来保存用户名 
-				loginPass参数用来保存密码
-			-->
-			<form method="POST" name="loginForm" onSubmit="return checkUserInfo()" action="login">
-			<table width="100%" border="0">
-				<tr>
-					<td width="15%">　</td>
-					<td width="12%">　</td>
-					<td width="29%">　</td>
-					<td width="44%">　</td>
-				</tr>
-				<tr>
-					<td>　</td>
-					<td valign="middle" align="center">用户名：</td>
-					<td valign="top"><input type="text" name="loginName" size="19"
-						class="input"></td>
-					<td>　</td>
-				</tr>
-				<tr>
-					<td>　</td>
-					<td valign="middle" align="center">密&nbsp;&nbsp;码：</td>
-					<td valign="top"><input type="password" name="loginPass" size="20"
-						class="input"></td>
-					<td>　</td>
-				</tr>
-				<tr>
-					<td>　</td>
-					<td colspan="2" align="center"><input type="submit"
-						name="Submit" value="login"></td>
-					<td>　</td>
-				</tr>
-				<tr>
-					<td height="33">　</td>
-					<td>　<input type="hidden" name="actiontype" value="login"></td>
-					<td>　</td>
-					<td>　</td>
-				</tr>
-			</table>
-			</form>
-			</TD>
-		</TR>
-	</TBODY>
-</TABLE>
-<TABLE cellSpacing=0 cellPadding=0 width=776 align=center border=0>
-	<TBODY>
-		<TR>
-			<TD background="images/005.gif" height=8></TD>
-		</TR>
-	</TBODY>
-</TABLE>
-<TABLE cellSpacing=0 cellPadding=0 width=776 align=center border=0>
-	<TBODY>
-		<TR>
-			<TD bgColor=#eeeeee>
-			<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-				<TBODY>
-					<TR>
-						<TD align=middle><BR>
-						<P align=center><FONT color=#000000>Copyright &copy;
-						2010&nbsp;&nbsp;&nbsp;&nbsp; XXXX有限公司所有</FONT></P>
-						<P align=center>　</P>
-						<BR>
-						<BR>
-						</TD>
-					</TR>
-				</TBODY>
-			</TABLE>
-			</TD>
-		</TR>
-	</TBODY>
-</TABLE>
-</BODY>
-</HTML>
->>>>>>> dev
+

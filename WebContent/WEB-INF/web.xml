@@ -36,12 +36,12 @@
     </servlet-mapping>  
     
 	<servlet>
-		<servlet-name>loginControl</servlet-name>
+		<servlet-name>login</servlet-name>
 		<servlet-class>com.cugb.javaee.onlinefoodcourt.action.LoginControl</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>loginControl</servlet-name>
-		<url-pattern>/loginControl</url-pattern>
+		<servlet-name>login</servlet-name>
+		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 </web-app>

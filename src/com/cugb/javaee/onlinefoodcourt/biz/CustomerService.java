@@ -15,14 +15,14 @@ import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
 public class CustomerService {
 	ICustomerDAO iCustomerDAO = null;
 	public boolean isExistCustomer(String username) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		iCustomerDAO = (ICustomerDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
+		iCustomerDAO = (ICustomerDAO) DAOFactory.newInstance("ICustomerDAO");
 		Customer customer = iCustomerDAO.findCustomer(username);
 		if(customer != null)
 			return true;
 		else return false;
 	}
 	public boolean validateCustomer(Customer customer) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-		ICustomerDAO iCustomerDAO = (ICustomerDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
+		ICustomerDAO iCustomerDAO = (ICustomerDAO) DAOFactory.newInstance("ICustomerDAO");
 		Customer cus = iCustomerDAO.findCustomer(customer.getUsername());
 		if(cus.getPassword().equals(customer.getPassword()))
 			return true;

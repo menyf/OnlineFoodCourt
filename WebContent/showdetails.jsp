@@ -124,85 +124,48 @@
 	</header><!--/header-->
 	
 	<section style="margin-top:0px; margin-bottom:50px">
-		<div class="container">
-			<TABLE cellSpacing=2 cellPadding=1 width="100%" align=center border=0>
-				<TBODY>
-					<c:forEach var="currentdish" items="${requestScope.dishlist}"
-						varStatus="status">
-						<c:if test="${status.index%2==0}">
-							<tr>
-						</c:if>
-						<td>
-							<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-								<TBODY>
-									<TR>
-										<TD vAlign=top width=90 height=90>
-											<A	href=login?actiontype=detail&dishid=${currentdish.getDishID()}>
-												<IMG height=100 alt=点击图片查看内容
-												src=${currentdish.getImgURL() } width=100 border=0>
-											</A>
-										</TD>
-										<TD vAlign=top>
-											<TABLE cellSpacing=1 cellPadding=0 width="100%" align=center border=0>
-												<TBODY>
-													<TR>
-														<TD>
-															<A 	href=login?actiontype=detail&dishid=${currentdish.getDishID()}
-												target=_blank>
-																<STRONG>${currentdish.getName()}</STRONG>
-															</A>
-														</TD>
-													</TR>
-													<TR>
-														<TD height=21>
-															<FONT color=#ff0000>现价：人民币${currentdish.getPrice()}元</FONT>
-															<BR> ${currentdish.getDescription()}
-														</TD>
-													</TR>
-												</TBODY>
-											</TABLE>
-										</TD>
-									</TR>
-								</TBODY>
-							</TABLE>
-						</td>
-						<c:if test="${status.index%2!=0}">
-							</tr>
-						</c:if>
-					</c:forEach>
-					<tr>
-						<td height="2">
-							<div align="center">
-								<font color="#000000">&nbsp;共&nbsp;${param.totalpages}&nbsp;页</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<font color="#000000">当前第</font>&nbsp;<font color="#000000">${param.pageNO}</font>&nbsp;
-								<font color="#000000">页</font>
+		<div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img src=${requestScope.current.getImgURL()} alt="" />
+								<h3>ZOOM</h3>
 							</div>
-						</td>
-						<td>
-							<div align="center">
-								<a name="btnTopPage" id="btnTopPage" href="login?actiontype=pagelist&pageNO=1" title="首页">
-									|&lt;&lt;
-								</a>&nbsp;
-								<a name="btnPreviousPage" id="btnPreviousPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.prevPageNO}" title="上页">
-									 &lt; 
-								</a>&nbsp; 
-								<a name="btnNextPage" id="btnNextPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.nextPageNO}" title="下页">
-									 &gt; 
-								</a>&nbsp; 
-								<a name="btnBottomPage"	id="btnBottomPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.bottomPageNO}"
-									title="尾页">
-								 	&gt;&gt;|
-								</a>
-							</div>
-						</td>
-					</tr>
-				</TBODY>
-			</TABLE>
+							<div id="similar-product" class="carousel slide" data-ride="carousel">
+								
+								  <!-- Wrapper for slides -->
 
-		</div>
+								  <!-- Controls -->
+								  <a class="left item-control" href="#similar-product" data-slide="prev">
+									<i class="fa fa-angle-left"></i>
+								  </a>
+								  <a class="right item-control" href="#similar-product" data-slide="next">
+									<i class="fa fa-angle-right"></i>
+								  </a>
+							</div>
+
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information"><!--/product-information-->
+								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
+								<h2>${requestScope.current.getName()}</h2>
+								<p>Dish ID: ${requestScope.current.getDishID()}</p>
+								<span>
+									<span>￥： ${requestScope.current.getPrice()}</span>
+									<label>数量:</label>
+									<input type="text" value="1" />										
+								</span>
+								<span class="btn btn-fefault cart">
+										<i class="fa fa-shopping-cart"></i>	
+										<a href=login?actiontype=cart&dishid=${requestScope.current.getDishID()}>
+									添加到购物车</a>
+									</span>
+								<p><b>折扣:</b> ${requestScope.current.getDiscount()}</p>
+								<p><b>描述:</b> ${requestScope.current.getDescription()}</p>
+							</div><!--/product-information-->
+						</div>
+					</div><!--/product-details-->
+					
+	
 	</section>
 
 	<footer id="footer"><!--Footer-->				

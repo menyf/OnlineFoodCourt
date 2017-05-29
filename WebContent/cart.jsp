@@ -123,87 +123,56 @@
 		</div><!--/header-bottom-->
 	</header><!--/header-->
 	
-	<section style="margin-top:0px; margin-bottom:50px">
+	<section id="cart_items">
 		<div class="container">
-			<TABLE cellSpacing=2 cellPadding=1 width="100%" align=center border=0>
-				<TBODY>
-					<c:forEach var="currentdish" items="${requestScope.dishlist}"
-						varStatus="status">
-						<c:if test="${status.index%2==0}">
-							<tr>
-						</c:if>
-						<td>
-							<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-								<TBODY>
-									<TR>
-										<TD vAlign=top width=90 height=90>
-											<A	href=login?actiontype=detail&dishid=${currentdish.getDishID()}>
-												<IMG height=100 alt=点击图片查看内容
-												src=${currentdish.getImgURL() } width=100 border=0>
-											</A>
-										</TD>
-										<TD vAlign=top>
-											<TABLE cellSpacing=1 cellPadding=0 width="100%" align=center border=0>
-												<TBODY>
-													<TR>
-														<TD>
-															<A 	href=login?actiontype=detail&dishid=${currentdish.getDishID()}
-												target=_blank>
-																<STRONG>${currentdish.getName()}</STRONG>
-															</A>
-														</TD>
-													</TR>
-													<TR>
-														<TD height=21>
-															<FONT color=#ff0000>现价：人民币${currentdish.getPrice()}元</FONT>
-															<BR> ${currentdish.getDescription()}
-														</TD>
-													</TR>
-												</TBODY>
-											</TABLE>
-										</TD>
-									</TR>
-								</TBODY>
-							</TABLE>
-						</td>
-						<c:if test="${status.index%2!=0}">
-							</tr>
-						</c:if>
-					</c:forEach>
-					<tr>
-						<td height="2">
-							<div align="center">
-								<font color="#000000">&nbsp;共&nbsp;${param.totalpages}&nbsp;页</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<font color="#000000">当前第</font>&nbsp;<font color="#000000">${param.pageNO}</font>&nbsp;
-								<font color="#000000">页</font>
-							</div>
-						</td>
-						<td>
-							<div align="center">
-								<a name="btnTopPage" id="btnTopPage" href="login?actiontype=pagelist&pageNO=1" title="首页">
-									|&lt;&lt;
-								</a>&nbsp;
-								<a name="btnPreviousPage" id="btnPreviousPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.prevPageNO}" title="上页">
-									 &lt; 
-								</a>&nbsp; 
-								<a name="btnNextPage" id="btnNextPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.nextPageNO}" title="下页">
-									 &gt; 
-								</a>&nbsp; 
-								<a name="btnBottomPage"	id="btnBottomPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.bottomPageNO}"
-									title="尾页">
-								 	&gt;&gt;|
-								</a>
-							</div>
-						</td>
-					</tr>
-				</TBODY>
-			</TABLE>
-
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+			</div>
 		</div>
-	</section>
+	</section> <!--/#cart_items-->
+
+	<section id="do_action">
+		<div class="container">
+			<div class="heading">
+				<h3>What would you like to do next?</h3>
+				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="total_area">
+						<ul>
+							<li>Cart Sub Total <span>$59</span></li>
+							<li>Eco Tax <span>$2</span></li>
+							<li>Shipping Cost <span>Free</span></li>
+							<li>Total <span>$61</span></li>
+						</ul>
+							<a class="btn btn-default update" href="">Update</a>
+							<a class="btn btn-default check_out" href="">Check Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/#do_action-->
 
 	<footer id="footer"><!--Footer-->				
 		<div class="footer-bottom">

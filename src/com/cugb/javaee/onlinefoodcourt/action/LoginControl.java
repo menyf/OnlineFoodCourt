@@ -3,6 +3,7 @@ package com.cugb.javaee.onlinefoodcourt.action;
 import com.cugb.javaee.onlinefoodcourt.test.*;
 import com.cugb.javaee.onlinefoodcourt.bean.*;
 import com.cugb.javaee.onlinefoodcourt.biz.*;
+import com.cugb.javaee.onlinefoodcourt.dao.IDishDAO;
 import com.cugb.javaee.onlinefoodcourt.utils.*;
 
 import java.io.IOException;
@@ -16,6 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
+import org.apache.catalina.filters.AddDefaultCharsetFilter;
 
 import com.cugb.javaee.onlinefoodcourt.bean.Customer;
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
@@ -70,8 +74,24 @@ public class LoginControl extends BaseService {
 			}
 			break;
 		case "detail":
+			System.out.println("oooooo");
+			try {
+				showdetial(request,response);
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 			// 显示某一个菜品的详细信息
 		case "cart":
+			System.out.println("add");
+			try {
+				addCart(request,response);
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 			// 添加到购物车
 		}
 		
@@ -138,7 +158,28 @@ public class LoginControl extends BaseService {
 
 	}
 
-
+    private void showdetial(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException{
+    	System.out.println("oooooo");
+    	String Did = request.getParameter("dishid");
+    	Dish current = new Dish();
+    	IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
+    	int id = Integer.parseInt(Did);
+    	current = dishdao.findDish(id);
+    	request.setAttribute("current", current);
+    	request.getRequestDispatcher("showdetails.jsp").forward(request, response);
+    }
+    private void addCart(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException{
+    	HttpSession session = request.getSession(true);
+    	String Did = request.getParameter("dishid");
+    	Customer user = (Customer) session.getAttribute("loginuser");
+    	Dish current = new Dish();
+    	IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
+    	int id = Integer.parseInt(Did);
+    	current = dishdao.findDish(id);
+    	request.setAttribute("current", current);
+    	request.getRequestDispatcher("cart.jsp").forward(request, response);
+    	
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

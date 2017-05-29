@@ -24,7 +24,7 @@ import com.cugb.javaee.onlinefoodcourt.test.BaseService;
  * 用户注册servlet
  * 2017年5月28日
  */
-@WebServlet("/registerControl")
+@WebServlet("/register")
 public class RegisterControl extends BaseService {
 
 	
@@ -55,6 +55,7 @@ public class RegisterControl extends BaseService {
 				out.print("<script>alert(\"用户已注册!\");</script>");
 				out.write("<script language='javascript'>alert('2333333333');"
 						+ "window.location.href='" + req.getContextPath()+ "/login.html';</script>");
+				System.out.println("233333");
 				//resp.sendRedirect("login.html");
 			}
 			else{

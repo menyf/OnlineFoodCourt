@@ -1,8 +1,14 @@
 package com.cugb.javaee.onlinefoodcourt.action;
 
 import com.cugb.javaee.onlinefoodcourt.test.*;
+import com.cugb.javaee.onlinefoodcourt.bean.*;
+import com.cugb.javaee.onlinefoodcourt.biz.*;
+import com.cugb.javaee.onlinefoodcourt.utils.*;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

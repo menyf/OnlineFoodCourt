@@ -46,6 +46,7 @@ public interface IDishDAO
      * @throws SQLException 执行操作发生任何异常时。
      */
     public ArrayList findDishs() throws SQLException;
+    public ArrayList findDishs(String sql,Object[] params);
     
     /**
      * 查询单一的菜品信息。
@@ -54,5 +55,11 @@ public interface IDishDAO
      * @throws SQLException 执行操作发生任何异常时。
      */
     public Dish findDish(int dishid) throws SQLException;
+    
+    
+    /**
+     *返回菜品总数
+     */
+    public int getTotalDishs(String strsql);
 }
 

@@ -104,7 +104,42 @@ public class baseDAO{
 		}		
 		return obj;
 	}
-	
+	//寻找多用户
+	public ArrayList findObjs(String sql,Object[] params,Class clazz){
+		Connection conn = null;
+		PreparedStatement ps =null;
+		ResultSet rs = null;
+		ArrayList objs = new ArrayList();
+		try {
+			conn = JDBCUtils.getConnection();
+			ps = conn.prepareStatement(sql);
+			if(params != null){//如果查询带分页的多条记录，设定分页参数
+				ParameterMetaData pm = ps.getParameterMetaData();
+				for(int i=1;i<=pm.getParameterCount();i++){
+					ps.setObject(i, params[i-1]);
+				}	
+			}
+			rs = ps.executeQuery();
+			while(rs.next()){
+				Object obj = mappingObj(rs,clazz);
+				objs.add(obj);
+			}
+			JDBCUtils.free(rs, ps, conn);
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}		
+		return objs;
+	}
 	//增删改操作
 	public int modifyObj(String strsql,Object[] params){
 		Connection conn = null;
@@ -128,6 +163,24 @@ public class baseDAO{
 			return 0;
 		}
 		
+	}
+	//查询菜品总数
+	public int getTotalRecords(String sql){
+		int count = 0;
+		try {
+			Connection conn = JDBCUtils.getConnection();
+//			String sql = "select * from dish where dishid=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				count = rs.getInt(1);
+			}
+			JDBCUtils.free(rs, ps, conn);
+		}catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		return count;
 	}
 }
 

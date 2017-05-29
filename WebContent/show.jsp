@@ -3,6 +3,7 @@
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -175,6 +176,7 @@
 										<TBODY>
 
 											<%
+											    
 												IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
 												ArrayList<Dish> arr = disDAO.findDishs();
 												 for (int i = 0; i < arr.size(); i++) {

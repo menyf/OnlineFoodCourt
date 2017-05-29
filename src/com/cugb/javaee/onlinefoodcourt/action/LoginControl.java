@@ -39,7 +39,7 @@ public class LoginControl extends BaseService {
 			e.printStackTrace();
 		}
 	}
-	private int pageSize = 6;
+	private int pageSize = 10;
     /**
      * @see HttpServlet#HttpServlet()
      */

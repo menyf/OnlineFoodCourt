@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import sun.rmi.runtime.Log;
-import sun.util.logging.resources.logging;
-
 
 public class DAOFactory {
 	private static Properties prop = null;

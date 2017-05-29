@@ -2,12 +2,38 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.Customer"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.biz.*"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<%
+
+if(session.getAttribute("pageSize") == null){
+	// 第一次访问该页面
+	session.setAttribute("pageSize", ConfigFactory.readProperty("pageSize"));
+}
+if(request.getParameter("pageNO") == null){
+	request.setAttribute("pageNO", "1");
+}
+else{
+	request.setAttribute("pageNO", request.getParameter("pageNO"));
+}
+
+
+//根据页码生成相应的dishlist
+int pageNO = Integer.parseInt((String)request.getAttribute("pageNO"));
+int pageSize = Integer.parseInt((String)session.getAttribute("pageSize"));
+DishService dishserv = new DishService();
+PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
+request.setAttribute("dishlist", pagemodel.getList());
+request.setAttribute("pageModel", pagemodel); 
+
+
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +74,19 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href=""><i class="fa fa-phone"></i>这里应该显示用户名</a></li>
-								<li><a href=""><i class="fa fa-envelope"></i>这里应该显示邮箱</a></li>
+								<%
+									Customer cus = (Customer) session.getAttribute("loginuser");
+									if(cus == null){
+										out.println("<li><a href=\"\"><i class=\"fa fa-phone\"></i>请登录 用户名</a></li>");
+										out.println("<li><a href=\"\"><i class=\"fa fa-envelope\"></i>请登录 邮箱</a></li>");
+									}
+									else{
+										out.println("<li><a href=\"\"><i class=\"fa fa-phone\"></i>"+cus.getUsername()+"</a></li>");
+										out.println("<li><a href=\"\"><i class=\"fa fa-envelope\"></i>"+cus.getNickname()+"</a></li>");
+									}
+								%>
+								<!-- <li><a href=""><i class="fa fa-phone"></i>这里应该显示用户名</a></li>
+								<li><a href=""><i class="fa fa-envelope"></i>这里应该显示邮箱</a></li> -->
 							</ul>
 						</div>
 					</div>					
@@ -173,26 +210,26 @@
 					<tr>
 						<td height="2">
 							<div align="center">
-								<font color="#000000">&nbsp;共&nbsp;${param.totalpages}&nbsp;页</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<font color="#000000">&nbsp;共&nbsp;${requestScope.pageModel.bottomPageNO}&nbsp;页</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<font color="#000000">当前第</font>&nbsp;<font color="#000000">${param.pageNO}</font>&nbsp;
 								<font color="#000000">页</font>
 							</div>
 						</td>
 						<td>
 							<div align="center">
-								<a name="btnTopPage" id="btnTopPage" href="login?actiontype=pagelist&pageNO=1" title="首页">
+								<a name="btnTopPage" id="btnTopPage" href="show.jsp?pageNO=1" title="首页">
 									|&lt;&lt;
 								</a>&nbsp;
 								<a name="btnPreviousPage" id="btnPreviousPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.prevPageNO}" title="上页">
+									href="show.jsp?pageNO=${requestScope.pageModel.prevPageNO}" title="上页">
 									 &lt; 
 								</a>&nbsp; 
 								<a name="btnNextPage" id="btnNextPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.nextPageNO}" title="下页">
+									href="show.jsp?pageNO=${requestScope.pageModel.nextPageNO}" title="下页">
 									 &gt; 
 								</a>&nbsp; 
 								<a name="btnBottomPage"	id="btnBottomPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.bottomPageNO}"
+									href="show.jsp?pageNO=${requestScope.pageModel.bottomPageNO}"
 									title="尾页">
 								 	&gt;&gt;|
 								</a>

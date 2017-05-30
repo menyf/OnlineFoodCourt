@@ -73,7 +73,7 @@ public class LoginContrler extends HttpServlet {
 			}
 			else {
 				//否则重新登录
-				response.sendRedirect("login.html");
+				response.sendRedirect("login.jsp");
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block

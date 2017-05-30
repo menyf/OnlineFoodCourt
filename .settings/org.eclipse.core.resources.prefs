@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
-encoding//WebContent/login.html=UTF-8
+encoding//WebContent/login.jsp=UTF-8
+encoding//WebContent/me.jsp=UTF-8
 encoding/<project>=UTF-8
 encoding/README.md=UTF-8

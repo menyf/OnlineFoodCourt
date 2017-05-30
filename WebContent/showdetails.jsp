@@ -2,8 +2,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.Customer"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
+<%@page import="java.lang.Math"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -53,8 +55,15 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href=""><i class="fa fa-phone"></i>这里应该显示用户名</a></li>
-								<li><a href=""><i class="fa fa-envelope"></i>这里应该显示邮箱</a></li>
+								<%
+									Customer cus = (Customer) session.getAttribute("loginuser");
+									if(cus == null){
+										out.println("<li><a href=\"\">请登录</a></li>");
+									}
+									else{
+										out.println("<li><a href=\"\"></i>欢迎："+cus.getUsername()+"</a></li>");
+									}
+								%>	
 							</ul>
 						</div>
 					</div>					
@@ -73,10 +82,10 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="me.html">我的</a></li>
+								<li><a href="me.jsp">我的</a></li>
 								<li><a href="checkout.html">去下单</a></li>
 								<li><a href="cart.html">我的购物车</a></li>
-								<li><a href="login.html" class="active">登录</a></li>
+								<li><a href="login.jsp" class="active">登录</a></li>
 							</ul>
 						</div>
 					</div>
@@ -105,7 +114,7 @@
 										<li><a href="product-details.html">菜品详情</a></li> 
 										<li><a href="checkout.html">去下单</a></li> 
 										<li><a href="cart.html">购物车</a></li> 
-										<li><a href="login.html" class="active">登录</a></li> 
+										<li><a href="login.jsp" class="active">登录</a></li> 
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">动态</i></a>
@@ -129,47 +138,85 @@
 	</header><!--/header-->
 	
 	<section style="margin-top:0px; margin-bottom:50px">
-		<div class="product-details"><!--product-details-->
-						<div class="col-sm-5">
-							<div class="view-product">
-								<img src=${requestScope.current.getImgURL()} alt="" />
-								<h3>ZOOM</h3>
-							</div>
-							<div id="similar-product" class="carousel slide" data-ride="carousel">
-								
-								  <!-- Wrapper for slides -->
-
-								  <!-- Controls -->
-								  <a class="left item-control" href="#similar-product" data-slide="prev">
-									<i class="fa fa-angle-left"></i>
-								  </a>
-								  <a class="right item-control" href="#similar-product" data-slide="next">
-									<i class="fa fa-angle-right"></i>
-								  </a>
-							</div>
-
-						</div>
-						<div class="col-sm-7">
-							<div class="product-information"><!--/product-information-->
-								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
-								<h2>${requestScope.current.getName()}</h2>
-								<p>Dish ID: ${requestScope.current.getDishID()}</p>
-								<span>
-									<span>￥： ${requestScope.current.getPrice()}</span>
-									<label>数量:</label>									
-									<form action="logout" method="POST" name="loginForm" onSubmit="return checkUserInfo()">
-										<input type="hidden"  name="dishID" value=${requestScope.current.getDishID()} />
-										<input type="text" name="number" />	
-										<input type="hidden" name="actiontype" value="cart">						
-										<i class="fa fa-shopping-cart"></i>	
-										<button type="submit" class="btn btn-default cart">添加到购物车</button>
-									</form>																			
-								</span>								
-								<p><b>折扣:</b> ${requestScope.current.getDiscount()}</p>
-								<p><b>描述:</b> ${requestScope.current.getDescription()}</p>
-							</div><!--/product-information-->
-						</div>
-					</div><!--/product-details-->
+		<div class="product-details" style="margin-left:200px;"><!--product-details-->
+			<div class="col-sm-5" >
+				<div class="view-product">
+					<img src=${requestScope.current.picSize("400")} alt="" />
+				</div>
+				<div id="similar-product" class="carousel slide" data-ride="carousel">
+					
+					<a class="left item-control" href="#similar-product" data-slide="prev">
+						<i class="fa fa-angle-left"></i>
+					</a>
+					<a class="right item-control" href="#similar-product" data-slide="next">
+						<i class="fa fa-angle-right"></i>
+					 </a>
+				</div>
+			</div>
+			<div class="col-sm-7">
+			<div class="product-information"><!--/product-information-->
+					<img src="images/product-details/new.jpg" class="newarrival" alt="">
+					<h2>${requestScope.current.getName()}</h2>
+					<p>菜品ID: ${requestScope.current.getDishID()}</p>					
+					<p><span style="font-size:20px"><del>￥${requestScope.current.getPrice()}</del></span>
+						&nbsp;&nbsp;<span  style="color:#FE980F;font-size:22px">￥${requestScope.current.getDiscount()}</span></p>
+					<div class="col-sm-2">
+<p style="padding-top:5px;font-size:16px">		数量
+					</p></div><p class="col-sm-2" style="margin-left:-40px">
+															
+									<select class="form-control" name="number">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+									</select>
+					</p>								
+						<form action="logout" method="POST" name="loginForm">
+							<input type="hidden" name="dishID" value="5">
+							<!-- <input type="text" name="number" />	 -->							
+							
+							<input type="hidden" name="actiontype" value="cart">						
+							<i class="fa fa-shopping-cart"></i>	
+							<button type="submit" class="btn btn-default cart">加入购物车</button>
+						</form>																			
+					<p></p>								
+					<p><b>描述:</b>  ${requestScope.current.getDescription()}</p>
+				</div>
+				<%--- 
+				<div class="product-information"><!--/product-information-->
+					<img src="images/product-details/new.jpg" class="newarrival" alt="" />
+					<h2>${requestScope.current.getName()}</h2>
+					<p>菜品ID: ${requestScope.current.getDishID()}</p>					
+					<p><span style="color:#FE980F;font-size:5"><del>￥${requestScope.current.getPrice()}</del></span>
+						&nbsp;&nbsp;<span>￥${requestScope.current.getDiscount()}</span></p>
+					<p>	<label>数量:</label>									
+						<form action="logout" method="POST" name="loginForm">
+							<input type="hidden"  name="dishID" value=${requestScope.current.getDishID()} />
+							<!-- <input type="text" name="number" />	 -->							
+							<p class="col-sm-2">
+									<span>数量</span>						
+									<select class="form-control" name="number">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+									</select>
+							</p>
+							<input type="hidden" name="actiontype" value="cart">						
+							<i class="fa fa-shopping-cart"></i>	
+							<button type="submit" class="btn btn-default cart">加入购物车</button>
+						</form>																			
+					</p>								
+					<p><b>描述:</b> ${requestScope.current.getDescription()}</p>
+				</div>
+				
+				--%><!--/product-information-->
+			</div>
+	</div><!--/product-details-->
 					
 	
 	</section>

@@ -2,8 +2,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.Customer"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.biz.*"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
+<%@page import="java.util.*"  %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -48,8 +51,15 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href=""><i class="fa fa-phone"></i>这里应该显示用户名</a></li>
-								<li><a href=""><i class="fa fa-envelope"></i>这里应该显示邮箱</a></li>
+								<%
+									Customer cus = (Customer) session.getAttribute("loginuser");
+									if(cus == null){
+										out.println("<li><a href=\"\">请登录</a></li>");
+									}
+									else{
+										out.println("<li><a href=\"\"></i>欢迎："+cus.getUsername()+"</a></li>");
+									}
+								%>	
 							</ul>
 						</div>
 					</div>					
@@ -68,10 +78,10 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="me.html">我的</a></li>
+								<li><a href="me.jsp">我的</a></li>
 								<li><a href="checkout.html">去下单</a></li>
 								<li><a href="cart.html">我的购物车</a></li>
-								<li><a href="login.html" class="active">登录</a></li>
+								<li><a href="login.jsp" class="active">登录</a></li>
 							</ul>
 						</div>
 					</div>
@@ -100,7 +110,7 @@
 										<li><a href="product-details.html">菜品详情</a></li> 
 										<li><a href="checkout.html">去下单</a></li> 
 										<li><a href="cart.html">购物车</a></li> 
-										<li><a href="login.html" class="active">登录</a></li> 
+										<li><a href="login.jsp" class="active">登录</a></li> 
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">动态</i></a>
@@ -123,7 +133,7 @@
 		</div><!--/header-bottom-->
 	</header><!--/header-->
 	
-	<section id="cart_items">
+	<section id="cart_items" style="margin-bottom:20px">
 		<div class="container">
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
@@ -132,48 +142,102 @@
 				</ol>
 			</div>
 			<div class="table-responsive cart_info">
-				<table class="table table-condensed">
+				<table class="table table-condensed"  align="center" border="0">
 					<thead>
 						<tr class="cart_menu">
-							<td class="image">Item</td>
-							<td class="description"></td>
-							<td class="price">Price</td>
-							<td class="quantity">Quantity</td>
-							<td class="total">Total</td>
+							<td class="image" width="23%" align="center">菜品</td>
+							<td class="price" width="20%" align="center">价格</td>
+							<td class="quantity" width="18%" align="center">数量</td>
+							<td class="total" width="20%" align="center">总价</td>
+							<td class="total"  width="19%" align="center"></td>
 							<td></td>
 						</tr>
 					</thead>
 					<tbody>
-						<p>${requestScope.shopcart[0]}  fuck off</p>
+						<Table border="0"  align="center">
+						<% 
+						float sum = 0;
+						int counts = 0;
+						Map cart = (Map) session.getAttribute("shopcart");
+						Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
+						while(it.hasNext()){
+							Map.Entry entry = (Map.Entry) it.next();
+							IDishDAO ff = (IDishDAO)DAOFactory.newInstance("IDishDAO");
+							out.println("<tr>");
+							int dishid = (Integer)entry.getKey();
+							int disnumber = (Integer)entry.getValue();
+							counts+=disnumber;
+							Dish cur = ff.findDish(dishid);
+							sum+=disnumber * cur.getPrice();
+							out.println("<td>");
+							out.println("<table border=\"0\" cellpadding=\"75\" cellspacing=\"0\" height=\"100%\">");
+							out.println("<tbody>");
+							out.println("<tr>");							
+							out.println("<td height=\"100\" align=\"center\" valign=\"top\" width=\"25%\">");	
+							out.println("<a href =logout?actiontype=detail&dishid=" + dishid + ">");
+							out.println("<strong>");
+							out.println(cur.getName());
+							out.println("</strong>");
+							out.println("</a>");
+							out.println("<a href =logout?actiontype=detail&dishid=" + dishid + ">");
+							out.println("<img alt=\"点击图片查看内容\" border=\"0\" height=\"100\" src=\""+cur.getImgURL()+"\" width=\"100\"/>");
+							out.println("</a>");
+							out.println("</td>");
+							out.println("<td height=\"21\" align=\"center\" width=\"20%\" >");
+							out.println("<font size=\"5\" color=\"#ff0000\">");
+							out.println("￥:"+String.valueOf(cur.getPrice()));
+							out.println("</font>");
+							out.println("</td>");
+
+							out.println("<td height=\"21\" align=\"center\"  width=\"20%\">");
+							out.println("<font size=\"5\" color=\"#ff0000\">");
+							out.println(disnumber);
+							out.println("</font>");
+							out.println("</td>");
+							
+							out.println("<td height=\"21\" align=\"center\"  width=\"20%\">");
+							out.println("<font size=\"5\" color=\"#ff0000\">");
+							out.print("￥:");
+							out.println(disnumber * cur.getPrice() * cur.getDiscount());
+							out.println("</font>");
+							out.println("</td>");
+							
+							out.println("<td font-size=\"5\" height=\"21\" align=\"center\"  width=\"15%\">");
+                            out.println("<a type = \"submit\" href = logout?actiontype=del&dishid=" + dishid + " class=\"btn btn-default cart\" value = \"我不饿\">删除</a>");
+							out.println("</td>");
+							
+							out.println("</tr>");
+							out.println("</tbody>");
+							out.println("</table>");
+							out.println("</td>");
+						} 
+						
+						
+						%>
+						</Table>
 					</tbody>
 				</table>
 			</div>
-		</div>
-	</section> <!--/#cart_items-->
-
-	<section id="do_action">
-		<div class="container">
-			<div class="heading">
-				<h3>What would you like to do next?</h3>
-				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
-			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="total_area">
-						<ul>
-							<li>Cart Sub Total <span>$59</span></li>
-							<li>Eco Tax <span>$2</span></li>
-							<li>Shipping Cost <span>Free</span></li>
-							<li>Total <span>$61</span></li>
-						</ul>
-							<a class="btn btn-default update" href="">Update</a>
-							<a class="btn btn-default check_out" href="">Check Out</a>
+			<div class="container">
+				<div class="heading">
+					<h3>去买单？</h3>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="total_area">
+							<ul>
+								<li>总数量 <span><%out.println(counts); %></span></li>
+								<li>总&nbsp;&nbsp;&nbsp;&nbsp;价 <span><%out.print("￥：");out.println(sum);%></span></li>
+								<span><a class="btn btn-default check_out" href="">去买单</a></span>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section><!--/#do_action-->
+	</section> <!--/#cart_items-->
 
+	
 	<footer id="footer"><!--Footer-->				
 		<div class="footer-bottom">
 			<div class="container">

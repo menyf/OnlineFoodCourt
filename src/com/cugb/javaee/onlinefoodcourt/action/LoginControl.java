@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
@@ -18,13 +19,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.DefaultCaret;
 import javax.websocket.Session;
 
 import org.apache.catalina.filters.AddDefaultCharsetFilter;
 import org.omg.CORBA.INTERNAL;
 
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
-import com.sun.javafx.collections.MappingChange.Map;
 
 //import edu.cugb.xg.javaee.bean.Dish;
 //import edu.cugb.xg.javaee.biz.DishService;
@@ -36,6 +37,7 @@ import com.sun.javafx.collections.MappingChange.Map;
 public class LoginControl extends BaseService {
 	private static final long serialVersionUID = 1L;
 	private static Properties prop = null;
+	private  Map cart = new HashMap();
 	static{
 		InputStream in = DAOFactory.class.getClassLoader().getResourceAsStream("dao.properties");
 		prop = new Properties();
@@ -94,6 +96,8 @@ public class LoginControl extends BaseService {
 				e.printStackTrace();
 			}
 			break;
+		case "del":
+			delCart(request,response);
 			// 添加到购物车
 		}
 		
@@ -182,13 +186,24 @@ public class LoginControl extends BaseService {
     	current = dishdao.findDish(id);
     	request.setAttribute("current", current);
     	int number = Integer.parseInt(nn);
-    	Map<String, Order> map = (Map<String, Order>) new HashMap<String, Order>(); 
-    	Object[] items = {id,number};
-    	System.out.println(items[0]+" 22222ewqeq");
-    	session.setAttribute("shopcart",items);
+    	if(cart.containsKey(id)){
+    		cart.put(id, (Integer)cart.get(id)+number);
+    	}
+    	else cart.put(id, number);
+    	//Object[] items = {id,number};
+    	//System.out.println(items[0]+" 22222ewqeq");
+    	session.setAttribute("shopcart",cart);
     	request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
-
+    
+    private void delCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	HttpSession session = request.getSession(true);
+    	String Did = request.getParameter("dishid");
+    	System.out.println(Did);
+    	cart.remove(Integer.parseInt(Did));
+    	session.setAttribute("shopcart",cart);
+    	request.getRequestDispatcher("cart.jsp").forward(request, response);
+    }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

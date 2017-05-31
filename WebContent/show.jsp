@@ -264,10 +264,10 @@ System.out.println("pageSize:"+String.valueOf(pageSize));
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<a  href="logout?actiontype=detail&dishid=${currentdish.getDishID()}"><img src="${currentdish.picSize("256")}" alt=""></a>													
+													<a  href="action?actiontype=detail&dishid=${currentdish.getDishID()}"><img src="${currentdish.picSize("256")}" alt=""></a>													
 													<h2>¥${currentdish.getPrice()}</h2>
-													<a href="logout?actiontype=detail&dishid=${currentdish.getDishID()}"><p>${currentdish.getName()}</p></a>
-													<a href="logout?actiontype=detail&dishid=${currentdish.getDishID()}" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i>详情</a>
+													<a href="action?actiontype=detail&dishid=${currentdish.getDishID()}"><p>${currentdish.getName()}</p></a>
+													<a href="action?actiontype=detail&dishid=${currentdish.getDishID()}" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i>详情</a>
 													&nbsp;
 													<a href="#" class="btn btn-default add-to-cart"><i
 														class="fa fa-shopping-cart"></i>购物车</a>

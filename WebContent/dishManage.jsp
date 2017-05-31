@@ -209,7 +209,7 @@
 				<tbody>
 
 					<%
-						IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
+						IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("IDishDAO");
 						ArrayList<Dish> arr = disDAO.findDishs();
 						for(int i = 0; i < arr.size(); i++){
 							Dish dish = arr.get(i);

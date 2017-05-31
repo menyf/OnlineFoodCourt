@@ -3,10 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -201,8 +200,12 @@
 				</thead>
 				<tbody>
 					<%
+						Customer admin = (Customer)session.getAttribute("loginuser") ;
+						if(admin == null || !admin.getUsername().equals(ConfigFactory.readProperty("username"))){
+							response.sendRedirect("login.jsp");
+						}
 						ICustomerDAO cusDAO = (ICustomerDAO) DAOFactory
-								.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
+								.newInstance("ICustomerDAO");
 						ArrayList<Customer> arr = cusDAO.findCustomers();
 						for (int i = 0; i < arr.size(); i++) {
 							Customer cus = arr.get(i);

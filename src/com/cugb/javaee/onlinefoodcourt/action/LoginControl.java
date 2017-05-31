@@ -38,31 +38,25 @@ import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
 public class LoginControl extends BaseService {
 	private static final long serialVersionUID = 1L;
 	private static Properties prop = null;
-	private  Map cart = new HashMap();
-	static{
-		InputStream in = DAOFactory.class.getClassLoader().getResourceAsStream("dao.properties");
-		prop = new Properties();
-		try {
-			prop.load(in);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	private Map cart = new HashMap();
 	private int pageSize = 10;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginControl() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public LoginControl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-		//logger.debug(getServletConfig());;
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// logger.debug(getServletConfig());;
 		String actiontype = request.getParameter("actiontype");
 		switch (actiontype) {
 		case "login":
@@ -81,57 +75,55 @@ public class LoginControl extends BaseService {
 		case "detail":
 			System.out.println("oooooo");
 			try {
-				showdetial(request,response);
+				showdetial(request, response);
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
-			// 显示某一个菜品的详细信息
+		// 显示某一个菜品的详细信息
 		case "cart":
 			System.out.println("add");
 			try {
-				addCart(request,response);
+				addCart(request, response);
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
 		case "del":
-			delCart(request,response);
+			delCart(request, response);
 			// 添加到购物车
 		}
-		
-		
+
 	}
-	
+
 	private void loginCheck(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		logger.error(getServletName(), null);
-		
+
 		String username = request.getParameter("loginName");
 		String password = request.getParameter("loginPass");
 		Customer loginuser = new Customer();
 		loginuser.setUsername(username);
 		loginuser.setPassword(password);
-		//数据库验证
+		// 数据库验证
 		CustomerService cService = new CustomerService();
 		try {
 			if (cService.validateCustomer(loginuser)) {
-				//验证通过
+				// 验证通过
 				HttpSession session = request.getSession(true);
 				session.setAttribute("loginuser", loginuser);
 				DishService dishserv = new DishService();
 				int pageNO = 1;
-				//int pageSize = Integerprop.getProperty("pageSize");
+				// int pageSize = Integerprop.getProperty("pageSize");
 				PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
 				request.setAttribute("dishlist", pagemodel.getList());
 				logger.debug(pagemodel.getTotalrecords());
 				request.setAttribute("pageModel", pagemodel);
 				request.getRequestDispatcher("show.jsp").forward(request, response);
-			}
-			else {
-				//否则重新登录
+			} else {
+				// 否则重新登录
 				response.sendRedirect("login.jsp");
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
@@ -141,15 +133,16 @@ public class LoginControl extends BaseService {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
+		}
+
 	}
-	private void pageListView(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+	private void pageListView(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		// 获取当前页号
-		//logger.debug(request.getParameter("pageNO"));
+		// logger.debug(request.getParameter("pageNO"));
 		int pageNO = Integer.parseInt(request.getParameter("pageNO"));
-		//int pageSize = Integer.parseInt(prop.getProperty("pageSize"));
+		// int pageSize = Integer.parseInt(prop.getProperty("pageSize"));
 		// 分页查询
 		// int pageSize = 6;
 		// 生成pageModel对象
@@ -165,62 +158,68 @@ public class LoginControl extends BaseService {
 
 	}
 
-    private void showdetial(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException{
-    	System.out.println("oooooo");
-    	String Did = request.getParameter("dishid");
-    	Dish current = new Dish();
-    	IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
-    	int id = Integer.parseInt(Did);
-    	current = dishdao.findDish(id);
-    	request.setAttribute("current", current);
-    	request.getRequestDispatcher("showdetails.jsp").forward(request, response);
-    }
-    private void addCart(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException{
-    	HttpSession session = request.getSession(true);
-    	cartitem nc = new cartitem();
-    	if(session.getAttribute("loginuser")==null){
-    		System.out.println("no user");
-    		request.getRequestDispatcher("login.jsp").forward(request, response);
-    	}
-    	else{
-    	String nn = (request.getParameter("number"));
-    	System.out.println(nn + " fuck you in the cart");
-    	String Did = request.getParameter("dishID");
-    	//System.out.println("YYYYYYYY"+ Did);
-    	Dish current = new Dish();
-    	System.out.println(Did + " id");
-    	IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
-    	int id = Integer.parseInt(Did);
-    	current = dishdao.findDish(id);
-    	request.setAttribute("current", current);
-    	int number = Integer.parseInt(nn);
-    	Customer now = (Customer)session.getAttribute("loginuser");
-    	nc.username = now.getUsername();
-    	nc.id = id;
-    	//Object[] cs = new Object[]{now.getUsername(), id};
-    	if(cart.containsKey(nc)){
-    		cart.put(nc, (Integer)cart.get(id)+number);
-    	}
-    	else cart.put(nc, number);
-    	//Object[] items = {id,number};
-    	//System.out.println(items[0]+" 22222ewqeq");
-    	session.setAttribute("shopcart",cart);
-    	request.getRequestDispatcher("cart.jsp").forward(request, response);
-    	}
-    }
-    
-    private void delCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	HttpSession session = request.getSession(true);
-    	String Did = request.getParameter("dishid");
-    	System.out.println(Did);
-    	cart.remove(Integer.parseInt(Did));
-    	session.setAttribute("shopcart",cart);
-    	request.getRequestDispatcher("cart.jsp").forward(request, response);
-    }
+	private void showdetial(HttpServletRequest request, HttpServletResponse response) throws InstantiationException,
+			IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException {
+		System.out.println("oooooo");
+		String Did = request.getParameter("dishid");
+		Dish current = new Dish();
+		IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
+		int id = Integer.parseInt(Did);
+		current = dishdao.findDish(id);
+		request.setAttribute("current", current);
+		request.getRequestDispatcher("showdetails.jsp").forward(request, response);
+	}
+
+	private void addCart(HttpServletRequest request, HttpServletResponse response) throws InstantiationException,
+			IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		cartitem nc = new cartitem();
+		if (session.getAttribute("loginuser") == null) {
+			System.out.println("no user");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		} else {
+			String nn = (request.getParameter("number"));
+			System.out.println(nn + " fuck you in the cart");
+			String Did = request.getParameter("dishID");
+			// System.out.println("YYYYYYYY"+ Did);
+			Dish current = new Dish();
+			System.out.println(Did + " id");
+			IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
+			int id = Integer.parseInt(Did);
+			current = dishdao.findDish(id);
+			request.setAttribute("current", current);
+			int number = Integer.parseInt(nn);
+			Customer now = (Customer) session.getAttribute("loginuser");
+			nc.username = now.getUsername();
+			nc.id = id;
+			// Object[] cs = new Object[]{now.getUsername(), id};
+			if (cart.containsKey(nc)) {
+				cart.put(nc, (Integer) cart.get(id) + number);
+			} else
+				cart.put(nc, number);
+			// Object[] items = {id,number};
+			// System.out.println(items[0]+" 22222ewqeq");
+			session.setAttribute("shopcart", cart);
+			request.getRequestDispatcher("cart.jsp").forward(request, response);
+		}
+	}
+
+	private void delCart(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		String Did = request.getParameter("dishid");
+		System.out.println(Did);
+		cart.remove(Integer.parseInt(Did));
+		session.setAttribute("shopcart", cart);
+		request.getRequestDispatcher("cart.jsp").forward(request, response);
+	}
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

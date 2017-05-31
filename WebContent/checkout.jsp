@@ -198,64 +198,63 @@
 								<p class="cart_total_price">$20</p>
 							</td>
 						</tr> -->
-<%
-Map cart = (Map) session.getAttribute("shopcart");
-Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
-IDishDAO ff = (IDishDAO)DAOFactory.newInstance("IDishDAO");
-float totalPrice = 0.0f;
+					<%
+						Map cart = (Map) session.getAttribute("shopcart");
+						Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
+						IDishDAO ff = (IDishDAO) DAOFactory.newInstance("IDishDAO");
+						float totalPrice = 0.0f;
 
-while(it.hasNext()){
-	Map.Entry entry = (Map.Entry) it.next();
-	int dishid = (Integer)entry.getKey();
-	int disnumber = (Integer)entry.getValue();
-	Dish cur = ff.findDish(dishid);
-	out.println("<tr>");
-	out.println(" <td class=\"cart_product\">");
-	out.println("  <a href=\"\">");
-	out.println("   <img alt=\"\" src=\""+cur.picSize("150")+"\"/>");
-	out.println("  </a>");
-	out.println(" </td>");
-	out.println(" <td class=\"cart_description\">");
-	out.println("  <h4>");
-	out.println("   <a href=\"logout?actiontype=detail&dishid="+String.valueOf(dishid)+"\">");
-	out.println(cur.getName());
-	out.println("   </a>");
-	out.println("  </h4>");
-	out.println("  <p>");
-	out.println("   Web ID: "+String.valueOf(dishid));
-	out.println("  </p>");
-	out.println(" </td>");
-	out.println(" <td class=\"cart_total\">");
-	out.println("  <p class=\"cart_total_price\">");
-	out.println("   <del>¥");
-	out.println(cur.getPrice());
-	out.println("   </del>");
-	out.println("  </p>");
-	out.println(" </td>");
-	out.println(" <td class=\"cart_total\">");
-	out.println("  <p class=\"cart_total_price\" style=\"color: red\">¥");
-	out.println(cur.getDiscount());
-	out.println("  </p>");
-	out.println(" </td>");
-	out.println(" <td class=\"cart_total\">");
-	out.println("  <p class=\"cart_total_price\">");
-	out.println(disnumber);
-	out.println("  </p>");
-	out.println(" </td>");
-	out.println(" <td class=\"cart_total\">");
-	out.println("  <p class=\"cart_total_price\">");
-	out.println("   ¥"+String.valueOf(disnumber*cur.getDiscount()));
-	out.println("  </p>");
-	out.println(" </td>");
-	out.println("</tr>");
-	totalPrice += disnumber*cur.getDiscount();
-	
-}
+						while (it.hasNext()) {
+							Map.Entry entry = (Map.Entry) it.next();
+							int dishid = (Integer) entry.getKey();
+							int disnumber = (Integer) entry.getValue();
+							Dish cur = ff.findDish(dishid);
+							out.println("<tr>");
+							out.println(" <td class=\"cart_product\">");
+							out.println("  <a href=\"\">");
+							out.println("   <img alt=\"\" src=\"" + cur.picSize("150") + "\"/>");
+							out.println("  </a>");
+							out.println(" </td>");
+							out.println(" <td class=\"cart_description\">");
+							out.println("  <h4>");
+							out.println("   <a href=\"action?actiontype=detail&dishid=" + String.valueOf(dishid) + "\">");
+							out.println(cur.getName());
+							out.println("   </a>");
+							out.println("  </h4>");
+							out.println("  <p>");
+							out.println("   Web ID: " + String.valueOf(dishid));
+							out.println("  </p>");
+							out.println(" </td>");
+							out.println(" <td class=\"cart_total\">");
+							out.println("  <p class=\"cart_total_price\">");
+							out.println("   <del>¥");
+							out.println(cur.getPrice());
+							out.println("   </del>");
+							out.println("  </p>");
+							out.println(" </td>");
+							out.println(" <td class=\"cart_total\">");
+							out.println("  <p class=\"cart_total_price\" style=\"color: red\">¥");
+							out.println(cur.getDiscount());
+							out.println("  </p>");
+							out.println(" </td>");
+							out.println(" <td class=\"cart_total\">");
+							out.println("  <p class=\"cart_total_price\">");
+							out.println(disnumber);
+							out.println("  </p>");
+							out.println(" </td>");
+							out.println(" <td class=\"cart_total\">");
+							out.println("  <p class=\"cart_total_price\">");
+							out.println("   ¥" + String.valueOf(disnumber * cur.getDiscount()));
+							out.println("  </p>");
+							out.println(" </td>");
+							out.println("</tr>");
+							totalPrice += disnumber * cur.getDiscount();
 
-%>
-						
-						
-						<tr>
+						}
+					%>
+
+
+					<tr>
 							<td colspan="4">&nbsp;</td>
 							<td colspan="2">
 								<table class="table table-condensed total-result">
@@ -280,12 +279,12 @@ while(it.hasNext()){
 						<div class="shopper-info">
 							<p>收货人信息</p>
 						</div>
-						<form class="form-horizontal" method="post" action="#">
+						<form class="form-horizontal" method="post" action="OrderAdd">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="inputPassword3" class="col-sm-2 control-label">送货地址:</label>
+										<label for="inputPassword3" class="col-sm-2 control-label">送餐地址:</label>
 										<div class="col-sm-8">
-											<textarea name="address" class="form-control" rows="3" placeholder="北京市 海淀区"></textarea>
+											<textarea name="address" class="form-control" rows="3" placeholder="您的送餐地址"></textarea>
 										</div>
 									</div>
 								</div>
@@ -293,7 +292,7 @@ while(it.hasNext()){
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label">联系方式:</label>
 										<div class="col-sm-8">
-											<input name="tel" type="text" class="form-control" id="inputEmail3" placeholder="(+86) 137XXXXXXX">
+											<input name="tel" type="text" class="form-control" id="inputEmail3" placeholder="您的手机号">
 										</div>
 									</div>
 									<div class="form-group">

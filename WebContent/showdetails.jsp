@@ -48,8 +48,10 @@
 	}
 </script>
 <body>
-	<header id="header"><!--header-->
-		<div class="header_top"><!--header_top-->
+	<header id="header">
+		<!--header-->
+		<div class="header_top">
+			<!--header_top-->
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6">
@@ -63,15 +65,17 @@
 									else{
 										out.println("<li><a href=\"\"></i>欢迎："+cus.getUsername()+"</a></li>");
 									}
-								%>	
+								%>
 							</ul>
 						</div>
-					</div>					
+					</div>
 				</div>
 			</div>
-		</div><!--/header_top-->
-		
-		<div class="header-middle"><!--header-middle-->
+		</div>
+		<!--/header_top-->
+
+		<div class="header-middle">
+			<!--header-middle-->
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
@@ -91,98 +95,111 @@
 					</div>
 				</div>
 			</div>
-		</div><!--/header-middle-->
-	
-		<div class="header-bottom"><!--header-bottom-->
+		</div>
+		<!--/header-middle-->
+
+		<div class="header-bottom">
+			<!--header-bottom-->
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-9">
 						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
 							</button>
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="index.html">首页</a></li>
 								<li class="dropdown"><a href="#">购物</a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html"></a></li>
-										<li><a href="product-details.html">菜品详情</a></li> 
-										<li><a href="checkout.html">去下单</a></li> 
-										<li><a href="cart.html">购物车</a></li> 
-										<li><a href="login.jsp" class="active">登录</a></li> 
-                                    </ul>
-                                </li> 
+									<ul role="menu" class="sub-menu">
+										<li><a href="shop.html"></a></li>
+										<li><a href="product-details.html">菜品详情</a></li>
+										<li><a href="checkout.html">去下单</a></li>
+										<li><a href="cart.html">购物车</a></li>
+										<li><a href="login.jsp" class="active">登录</a></li>
+									</ul></li>
 								<li class="dropdown"><a href="#">动态</i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">动态列表</a></li>
+									<ul role="menu" class="sub-menu">
+										<li><a href="blog.html">动态列表</a></li>
 										<li><a href="blog-single.html">个人动态</a></li>
-                                    </ul>
-                                </li> 
+									</ul></li>
 								<li><a href="contact-us.html">联系我们</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="搜索美味"/>
+							<input type="text" placeholder="搜索美味" />
 						</div>
 					</div>
 				</div>
 			</div>
-		</div><!--/header-bottom-->
-	</header><!--/header-->
-	
-	<section style="margin-top:0px; margin-bottom:50px">
-		<div class="product-details" style="margin-left:200px;"><!--product-details-->
-			<div class="col-sm-5" >
+		</div>
+		<!--/header-bottom-->
+	</header>
+	<!--/header-->
+
+	<section style="margin-top: 0px; margin-bottom: 50px">
+		<div class="product-details"
+			style="margin-left: 100px; margin-right: 100px;">
+			<!--product-details-->
+			<div class="col-sm-5">
 				<div class="view-product">
 					<img src=${requestScope.current.picSize("400")} alt="" />
 				</div>
-				<div id="similar-product" class="carousel slide" data-ride="carousel">
-					
-					<a class="left item-control" href="#similar-product" data-slide="prev">
-						<i class="fa fa-angle-left"></i>
+				<div id="similar-product" class="carousel slide"
+					data-ride="carousel">
+
+					<a class="left item-control" href="#similar-product"
+						data-slide="prev"> <i class="fa fa-angle-left"></i>
+					</a> <a class="right item-control" href="#similar-product"
+						data-slide="next"> <i class="fa fa-angle-right"></i>
 					</a>
-					<a class="right item-control" href="#similar-product" data-slide="next">
-						<i class="fa fa-angle-right"></i>
-					 </a>
 				</div>
 			</div>
 			<div class="col-sm-7">
-			<div class="product-information"><!--/product-information-->
+				<div class="product-information">
+					<!--/product-information-->
 					<img src="images/product-details/new.jpg" class="newarrival" alt="">
 					<h2>${requestScope.current.getName()}</h2>
-					<p>菜品ID: ${requestScope.current.getDishID()}</p>					
-					<p><span style="font-size:20px"><del>￥${requestScope.current.getPrice()}</del></span>
-						&nbsp;&nbsp;<span  style="color:#FE980F;font-size:22px">￥${requestScope.current.getDiscount()}</span></p>
+					<p>菜品ID: ${requestScope.current.getDishID()}</p>
+					<p>
+						<span style="font-size: 20px"><del>￥${requestScope.current.getPrice()}</del></span>
+						&nbsp;&nbsp;<span style="color: #FE980F; font-size: 22px">￥${requestScope.current.getDiscount()}</span>
+					</p>
 					<div class="col-sm-2">
-<p style="padding-top:5px;font-size:16px">		数量						
+						<p style="padding-top: 5px; font-size: 16px">数量
 						<form action="logout" method="POST" name="loginForm">
-						</p></div><p class="col-sm-2" style="margin-left:-40px">
-															
-									<select class="form-control" name="number">
-										<option value = "1">1</option>
-										<option value = "2">2</option>
-										<option value = "3">3</option>
-										<option value = "4">4</option>
-										<option value = "5">5</option>
-										<option value = "6">6</option>
-									</select>
-					</p>		
-							<input type="hidden" name="dishID" value=${requestScope.current.getDishID()}>
-							<!-- <input type="text" name="number" />	 -->							
-							
-							<input type="hidden" name="actiontype" value="cart">						
-							<button type="submit" class="btn btn-default cart">
-							<i class="fa fa-shopping-cart fa-lg"></i>&nbsp;&nbsp;&nbsp;加入购物车</button>
-						</form>																			
-					<p></p>								
-					<p><b>描述:</b>  ${requestScope.current.getDescription()}</p>
+							</p>
+					</div>
+					<p class="col-sm-2" style="margin-left: -40px">
+
+						<select class="form-control" name="number">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						</select>
+					</p>
+					<input type="hidden" name="dishID"
+						value=${requestScope.current.getDishID()}>
+					<!-- <input type="text" name="number" />	 -->
+
+					<input type="hidden" name="actiontype" value="cart">
+					<button type="submit" class="btn btn-default cart">
+						<i class="fa fa-shopping-cart fa-lg"></i>&nbsp;&nbsp;&nbsp;加入购物车
+					</button>
+					</form>
+					<p></p>
+					<p>
+						<b>描述:</b> ${requestScope.current.getDescription()}
+					</p>
 				</div>
 				<%--- 
 				<div class="product-information"><!--/product-information-->
@@ -214,24 +231,31 @@
 					<p><b>描述:</b> ${requestScope.current.getDescription()}</p>
 				</div>
 				
-				--%><!--/product-information-->
+				--%>
+				<!--/product-information-->
 			</div>
-	</div><!--/product-details-->
-					
-	
+		</div>
+		<!--/product-details-->
+
+
 	</section>
 
-	<footer id="footer"><!--Footer-->				
+	<footer id="footer">
+		<!--Footer-->
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-					<p class="pull-left">Copyright © 2017 JAVA EE课程实践. All rights reserved.</p>
-					<p class="pull-right">Designed by <span>DU/MEN/FAN</span></p>
+					<p class="pull-left">Copyright © 2017 JAVA EE课程实践. All rights
+						reserved.</p>
+					<p class="pull-right">
+						Designed by <span>DU/MEN/FAN</span>
+					</p>
 				</div>
 			</div>
-		</div>		
-	</footer><!--/Footer-->  
-   
+		</div>
+	</footer>
+	<!--/Footer-->
+
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.scrollUp.min.js"></script>

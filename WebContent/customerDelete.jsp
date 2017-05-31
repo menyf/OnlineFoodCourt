@@ -1,3 +1,4 @@
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.ConfigFactory"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Customer"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.JSPOutput"%>
@@ -219,11 +220,15 @@
 							<p>用户信息</p>
 							<form action="customerDelete.jsp" method="post">
 								<%
-									String username = request.getParameter("username");
-									if(username == null) {
-										response.sendRedirect("customerManage.jsp"); 
+									Customer admin = (Customer)session.getAttribute("loginuser") ;
+									if(admin == null || !admin.getUsername().equals(ConfigFactory.readProperty("username"))){
+										response.sendRedirect("login.jsp");
 									}
-									ICustomerDAO cusDAO = (ICustomerDAO)DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
+									String username = request.getParameter("username");
+									if(username == null){
+										response.sendRedirect("customerManage.jsp");
+									}
+									ICustomerDAO cusDAO = (ICustomerDAO)DAOFactory.newInstance("ICustomerDAO");
 									Customer cus = cusDAO.findCustomer(username);
 									JSPOutput.outputCustomerDelete(out, cus);
 								%>

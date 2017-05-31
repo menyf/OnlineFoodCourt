@@ -176,11 +176,11 @@ public class ActionControl extends BaseService {
 		HttpSession session = request.getSession(true);
 		cartitem nc = new cartitem();
 		if (session.getAttribute("loginuser") == null) {
-			System.out.println("no user");
+			//System.out.println("no user");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else {
 			String nn = (request.getParameter("number"));
-			System.out.println(nn + " fuck you in the cart");
+			//System.out.println(nn + " fuck you in the cart");
 			String Did = request.getParameter("dishID");
 			// System.out.println("YYYYYYYY"+ Did);
 			Dish current = new Dish();
@@ -220,9 +220,22 @@ public class ActionControl extends BaseService {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		String Did = request.getParameter("dishid");
-		System.out.println(Did);
-		cart.remove(Integer.parseInt(Did));
+		System.out.println(Did + "fuck");
+		//cart.remove(Integer.parseInt(Did));
+		Customer now = (Customer) session.getAttribute("loginuser");
 		session.setAttribute("shopcart", cart);
+		Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
+		while(it.hasNext())
+		{
+			Map.Entry entry = (Map.Entry) it.next();
+			cartitem ncin = new cartitem();
+			ncin = (cartitem)entry.getKey();
+			if (ncin.id==Integer.parseInt(Did)&&ncin.username==now.getUsername()) {
+				System.out.println("findout");
+				cart.remove(ncin);
+				break;
+			   } 
+			}
 		request.getRequestDispatcher("cart.jsp").forward(request, response);
 	}
 

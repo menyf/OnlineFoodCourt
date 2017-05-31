@@ -2,12 +2,39 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.Customer"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.biz.*"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<%
+
+if(session.getAttribute("pageSize") == null){
+	// 第一次访问该页面
+	session.setAttribute("pageSize", ConfigFactory.readProperty("pageSize"));
+}
+if(request.getParameter("pageNO") == null){
+	request.setAttribute("pageNO", "1");
+}
+else{
+	request.setAttribute("pageNO", request.getParameter("pageNO"));
+}
+
+
+//根据页码生成相应的dishlist
+int pageNO = Integer.parseInt((String)request.getAttribute("pageNO"));
+int pageSize = Integer.parseInt((String)session.getAttribute("pageSize"));
+DishService dishserv = new DishService();
+PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
+request.setAttribute("dishlist", pagemodel.getList());
+request.setAttribute("pageModel", pagemodel); 
+
+System.out.println("pageSize:"+String.valueOf(pageSize));
+
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +75,19 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href=""><i class="fa fa-phone"></i>这里应该显示用户名</a></li>
-								<li><a href=""><i class="fa fa-envelope"></i>这里应该显示邮箱</a></li>
+								<%
+									Customer cus = (Customer) session.getAttribute("loginuser");
+									if(cus == null){
+										out.println("<li><a href=\"\"><i class=\"fa fa-phone\"></i>请登录 用户名</a></li>");
+										out.println("<li><a href=\"\"><i class=\"fa fa-envelope\"></i>请登录 邮箱</a></li>");
+									}
+									else{
+										out.println("<li><a href=\"\"><i class=\"fa fa-phone\"></i>"+cus.getUsername()+"</a></li>");
+										out.println("<li><a href=\"\"><i class=\"fa fa-envelope\"></i>"+cus.getNickname()+"</a></li>");
+									}
+								%>
+								<!-- <li><a href=""><i class="fa fa-phone"></i>这里应该显示用户名</a></li>
+								<li><a href=""><i class="fa fa-envelope"></i>这里应该显示邮箱</a></li> -->
 							</ul>
 						</div>
 					</div>					
@@ -122,8 +160,8 @@
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
-	
-	<section style="margin-top:0px; margin-bottom:50px">
+	<!-- 
+	 <section style="margin-top:0px; margin-bottom:50px">
 		<div class="container">
 			<TABLE cellSpacing=2 cellPadding=1 width="100%" align=center border=0>
 				<TBODY>
@@ -172,26 +210,26 @@
 					<tr>
 						<td height="2">
 							<div align="center">
-								<font color="#000000">&nbsp;共&nbsp;${param.totalpages}&nbsp;页</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<font color="#000000">&nbsp;共&nbsp;${requestScope.pageModel.bottomPageNO}&nbsp;页</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<font color="#000000">当前第</font>&nbsp;<font color="#000000">${param.pageNO}</font>&nbsp;
 								<font color="#000000">页</font>
 							</div>
 						</td>
 						<td>
 							<div align="center">
-								<a name="btnTopPage" id="btnTopPage" href="login?actiontype=pagelist&pageNO=1" title="首页">
+								<a name="btnTopPage" id="btnTopPage" href="show.jsp?pageNO=1" title="首页">
 									|&lt;&lt;
 								</a>&nbsp;
 								<a name="btnPreviousPage" id="btnPreviousPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.prevPageNO}" title="上页">
+									href="show.jsp?pageNO=${requestScope.pageModel.prevPageNO}" title="上页">
 									 &lt; 
 								</a>&nbsp; 
 								<a name="btnNextPage" id="btnNextPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.nextPageNO}" title="下页">
+									href="show.jsp?pageNO=${requestScope.pageModel.nextPageNO}" title="下页">
 									 &gt; 
 								</a>&nbsp; 
 								<a name="btnBottomPage"	id="btnBottomPage"
-									href="login?actiontype=pagelist&pageNO=${requestScope.pageModel.bottomPageNO}"
+									href="show.jsp?pageNO=${requestScope.pageModel.bottomPageNO}"
 									title="尾页">
 								 	&gt;&gt;|
 								</a>
@@ -203,7 +241,186 @@
 
 		</div>
 	</section>
+  -->
+ 	
+ <section>
+		<div class="container">
+			<div class="row">
+				
+				
+				<div class="col-sm-12 padding-right">
+					<!--features_items-->
+					
+					<div class="category-tab"><!--category-tab-->
+						
+						<div class="tab-content">
 
+
+							<div class="tab-pane fade active in">
+
+								<c:forEach items="${requestScope.dishlist}" var="currentdish"
+									varStatus="status">
+									<div class="col-sm-3">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<a  href="action?actiontype=detail&dishid=${currentdish.getDishID()}"><img src="${currentdish.picSize("256")}" alt=""></a>													
+													<h2>¥${currentdish.getPrice()}</h2>
+													<a href="action?actiontype=detail&dishid=${currentdish.getDishID()}"><p>${currentdish.getName()}</p></a>
+													<a href="action?actiontype=detail&dishid=${currentdish.getDishID()}" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i>详情</a>
+													&nbsp;
+													<a href="#" class="btn btn-default add-to-cart"><i
+														class="fa fa-shopping-cart"></i>购物车</a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+
+
+								<!-- <div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="images/home/gallery1.jpg" alt="">
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											</div>
+											
+										</div>
+									</div>
+								</div> -->
+
+
+							</div>
+
+						</div>
+					</div><!--/category-tab-->
+					
+					<div class="col-sm-12">
+						<table>
+						
+					<tr>
+					<ul class="pager">
+					<li><a name="btnTopPage" id="btnTopPage" href="show.jsp?pageNO=1">首页</a></li>
+    <li><a name="btnPreviousPage" id="btnPreviousPage"
+									href="show.jsp?pageNO=${requestScope.pageModel.prevPageNO}">上一页</a></li>
+    <li class="disabled"><a href="#">${requestScope.pageModel.getPageNO()} / ${requestScope.pageModel.bottomPageNO}
+</a></li>
+    <li><a name="btnNextPage" id="btnNextPage"
+									href="show.jsp?pageNO=${requestScope.pageModel.nextPageNO}" >下一页</a></li>
+    <li><a name="btnBottomPage"	id="btnBottomPage"
+									href="show.jsp?pageNO=${requestScope.pageModel.bottomPageNO}">尾页</a></li>
+</ul>
+					</tr>
+						</table>
+					
+					</div>
+					<%--- 
+				 	<div class="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">recommended items</h2>
+						
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active left">	
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend1.jpg" alt="">
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend2.jpg" alt="">
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend3.jpg" alt="">
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="item next left">	
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend1.jpg" alt="">
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend2.jpg" alt="">
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend3.jpg" alt="">
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							  </a>
+							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							  </a>			
+						</div>
+					</div><!--/recommended_items-->
+					 --%>
+				</div>
+			</div>
+		</div>
+	</section>
+  
 	<footer id="footer"><!--Footer-->				
 		<div class="footer-bottom">
 			<div class="container">

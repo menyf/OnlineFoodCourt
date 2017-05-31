@@ -8,6 +8,10 @@ public class Dish {
 	private String imgURL;
 	private float discount;
 	
+	public String picSize(String pxl){
+		return imgURL.substring(0, 93)+pxl+"x"+pxl;
+	}
+	
 	public int getDishID() {
 		return dishID;
 	}

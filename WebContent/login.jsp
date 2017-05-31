@@ -1,3 +1,14 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.Customer"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,8 +67,15 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href=""><i class="fa fa-phone"></i>这里应该显示用户名</a></li>
-								<li><a href=""><i class="fa fa-envelope"></i>这里应该显示邮箱</a></li>
+								<%
+									Customer cus = (Customer) session.getAttribute("loginuser");
+									if(cus == null){
+										out.println("<li><a href=\"\">请登录</a></li>");
+									}
+									else{
+										out.println("<li><a href=\"\"></i>欢迎："+cus.getUsername()+"</a></li>");
+									}
+								%>	
 							</ul>
 						</div>
 					</div>					
@@ -76,10 +94,10 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="me.html">我的</a></li>
+								<li><a href="me.jsp">我的</a></li>
 								<li><a href="checkout.html">去下单</a></li>
 								<li><a href="cart.html">我的购物车</a></li>
-								<li><a href="login.html" class="active">登录</a></li>
+								<li><a href="login.jsp" class="active">登录</a></li>
 							</ul>
 						</div>
 					</div>
@@ -108,7 +126,7 @@
 										<li><a href="product-details.html">菜品详情</a></li> 
 										<li><a href="checkout.html">去下单</a></li> 
 										<li><a href="cart.html">购物车</a></li> 
-										<li><a href="login.html" class="active">登录</a></li> 
+										<li><a href="login.jsp" class="active">登录</a></li> 
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">动态</i></a>
@@ -151,10 +169,11 @@
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
 						<h2>注册新用户</h2>
-						<form action="registerControl" method="POST" name="registerForm" onSubmit="return checkUserInfo2()">
+						<form action="register" method="POST" name="registerForm" onSubmit="return checkUserInfo2()">
 							<input type="text" placeholder="用户名" name="registerName"/>
 							<input type="email" placeholder="邮箱" name="registerEmail"/>
-							<input type="password" placeholder="密码" name="registerPass"/>
+							<input type="password" placeholder="密码" name="registerPass"/>								
+							<input type="hidden" name="actiontype" value="register">		
 							<button type="submit" class="btn btn-default">注册</button>
 						</form>
 					</div><!--/sign up form-->

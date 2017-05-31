@@ -1,5 +1,5 @@
 package com.cugb.javaee.onlinefoodcourt.action;
-
+import java.lang.Math;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -24,7 +24,7 @@ import com.cugb.javaee.onlinefoodcourt.test.BaseService;
  * 用户注册servlet
  * 2017年5月28日
  */
-@WebServlet("/registerControl")
+@WebServlet("/register")
 public class RegisterControl extends BaseService {
 
 	
@@ -54,7 +54,8 @@ public class RegisterControl extends BaseService {
 				PrintWriter out = resp.getWriter();
 				out.print("<script>alert(\"用户已注册!\");</script>");
 				out.write("<script language='javascript'>alert('2333333333');"
-						+ "window.location.href='" + req.getContextPath()+ "/login.html';</script>");
+						+ "window.location.href='" + req.getContextPath()+ "/login.jsp';</script>");
+				System.out.println("233333");
 				//resp.sendRedirect("login.html");
 			}
 			else{
@@ -63,7 +64,7 @@ public class RegisterControl extends BaseService {
 				cuMySqlImpl.addCustomer(customer);
 				resp.getWriter().print("<script> alert(\"注册成功!\"); </script>");
 				System.out.println("7777777");
-				resp.sendRedirect("login.html");
+				resp.sendRedirect("login.jsp");
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

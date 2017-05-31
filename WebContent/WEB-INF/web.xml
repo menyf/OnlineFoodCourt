@@ -54,4 +54,30 @@
     <servlet-name>OrderAdd</servlet-name>
     <url-pattern>/OrderAdd</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+     <servlet-name>dishModify</servlet-name>
+     <servlet-class>com.cugb.javaee.onlinefoodcourt.action.dishModifyControl</servlet-class>
+   </servlet>
+   <servlet-mapping>
+     <servlet-name>dishModify</servlet-name>
+     <url-pattern>/dishModify</url-pattern>
+   </servlet-mapping>
+   <servlet>
+     <servlet-name>dishAdd</servlet-name>
+     <servlet-class>com.cugb.javaee.onlinefoodcourt.action.DishAddControl</servlet-class>
+   </servlet>
+   <servlet-mapping>
+     <servlet-name>dishAdd</servlet-name>
+     <url-pattern>/dishAdd</url-pattern>
+   </servlet-mapping>
+   <filter>
+     <filter-name>CharFilter</filter-name>
+     <filter-class>com.cugb.javaee.onlinefoodcourt.utils.CharsetFilter</filter-class>
+   </filter>
+   <filter-mapping>
+     <filter-name>CharFilter</filter-name>
+     <url-pattern>/*</url-pattern>
+     <dispatcher>REQUEST</dispatcher>
+   </filter-mapping>
 </web-app>

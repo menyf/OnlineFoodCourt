@@ -183,7 +183,7 @@ public class ActionControl extends BaseService {
 	private void addCart(HttpServletRequest request, HttpServletResponse response) throws InstantiationException,
 			IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		cartitem nc = new cartitem();
+		CartItem nc = new CartItem();
 		if (session.getAttribute("loginuser") == null) {
 			//System.out.println("no user");
 			//request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -209,8 +209,8 @@ public class ActionControl extends BaseService {
 			int flag = 0;
 			while(it.hasNext()){
 			Map.Entry entry = (Map.Entry) it.next();
-			cartitem ncin = new cartitem();
-			ncin = (cartitem)entry.getKey();
+			CartItem ncin = new CartItem();
+			ncin = (CartItem)entry.getKey();
 			if (nc.id==ncin.id&&nc.username==ncin.username) {
 				System.out.println("findout");
 				flag = 1;
@@ -238,8 +238,8 @@ public class ActionControl extends BaseService {
 		while(it.hasNext())
 		{
 			Map.Entry entry = (Map.Entry) it.next();
-			cartitem ncin = new cartitem();
-			ncin = (cartitem)entry.getKey();
+			CartItem ncin = new CartItem();
+			ncin = (CartItem)entry.getKey();
 			if (ncin.id==Integer.parseInt(Did)&&ncin.username==now.getUsername()) {
 				System.out.println("findout");
 				cart.remove(ncin);
@@ -253,7 +253,7 @@ public class ActionControl extends BaseService {
 	private void addOne(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
 		HttpSession session = request.getSession(true);
-		cartitem nc = new cartitem();
+		CartItem nc = new CartItem();
 		if (session.getAttribute("loginuser") == null) {
 			//System.out.println("no user");
 //			request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -278,8 +278,8 @@ public class ActionControl extends BaseService {
 			int flag = 0;
 			while(it.hasNext()){
 			Map.Entry entry = (Map.Entry) it.next();
-			cartitem ncin = new cartitem();
-			ncin = (cartitem)entry.getKey();
+			CartItem ncin = new CartItem();
+			ncin = (CartItem)entry.getKey();
 			if (nc.id==ncin.id&&nc.username==ncin.username) {
 				System.out.println("findout");
 				flag = 1;

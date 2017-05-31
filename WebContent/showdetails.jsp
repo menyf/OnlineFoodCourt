@@ -173,12 +173,12 @@
 					</p>
 					<div class="col-sm-2">
 						<p style="padding-top: 5px; font-size: 16px">数量
-						<form action="logout" method="POST" name="loginForm">
+						<form action="action" method="POST" name="loginForm">
 							</p>
 					</div>
 					<p class="col-sm-2" style="margin-left: -40px">
 
-						<select class="form-control" name="number">
+						<select class="form-control" name="number" >
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>

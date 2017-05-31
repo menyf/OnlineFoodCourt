@@ -222,12 +222,12 @@
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
-							<td class="image" width="15%"></td>
-							<td class="description" width="20%">菜品</td>
-							<td class="price" width="13%">原价</td>
-							<td class="total" width="13%">现价</td>
-							<td class="total" width="13%">数量</td>
-							<td class="total" width="13%">总价</td>
+							<td class="image" ></td>
+							<td class="description">菜品</td>
+							<td class="price" >原价</td>
+							<td class="total" >现价</td>
+							<td class="total" >数量</td>
+							<td class="total" >总价</td>
 							<td></td>
 						</tr>
 					</thead>
@@ -260,7 +260,7 @@ Map cart = (Map) session.getAttribute("shopcart");
 Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
 IDishDAO ff = (IDishDAO)DAOFactory.newInstance("IDishDAO");
 float totalPrice = 0.0f;
-
+int totalNum = 0;
 while(it.hasNext()){
 	Map.Entry entry = (Map.Entry) it.next();
 	cartitem nc = new cartitem();
@@ -271,6 +271,7 @@ while(it.hasNext()){
 	}
 	int dishid = nc.id;
 	int disnumber = (Integer)entry.getValue();
+	totalNum += disnumber;
 	Dish cur = ff.findDish(dishid);
 	out.println("<tr>");
 	out.println(" <td class=\"cart_product\">");
@@ -333,9 +334,9 @@ while(it.hasNext()){
 					<div class="col-sm-6">
 						<div class="total_area">
 							<ul>
-								<li>总数量 <span><%out.println(100.0f); %></span></li>
+								<li>总数量 <span><%out.println(totalNum); %></span></li>
 								<li>总&nbsp;&nbsp;&nbsp;&nbsp;价 <span><%out.print("￥：");out.println(totalPrice);%></span></li>
-								<span><a class="btn btn-default check_out" href="">去买单</a></span>
+								<span><a class="btn btn-default check_out" href="checkout.jsp">去买单</a></span>
 							</ul>
 						</div>
 					</div>

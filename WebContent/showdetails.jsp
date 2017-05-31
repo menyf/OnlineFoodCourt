@@ -138,7 +138,7 @@
 	</header><!--/header-->
 	
 	<section style="margin-top:0px; margin-bottom:50px">
-		<div class="product-details" style="margin-left:200px;"><!--product-details-->
+		<div class="product-details" style="margin-left:100px;margin-right:100px;"><!--product-details-->
 			<div class="col-sm-5" >
 				<div class="view-product">
 					<img src=${requestScope.current.picSize("400")} alt="" />

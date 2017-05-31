@@ -281,7 +281,7 @@ while(it.hasNext()){
 	out.println(" </td>");
 	out.println(" <td class=\"cart_description\">");
 	out.println("  <h4>");
-	out.println("   <a href=\"logout?actiontype=detail&dishid="+String.valueOf(dishid)+"\">");
+	out.println("   <a href=\"action?actiontype=detail&dishid="+String.valueOf(dishid)+"\">");
 	out.println(cur.getName());
 	out.println("   </a>");
 	out.println("  </h4>");
@@ -312,7 +312,7 @@ while(it.hasNext()){
 	out.println("  </p>");
 	out.println(" </td>");
 	out.println(" <td class=\"cart_delete\">");
-	out.println("<a class=\"cart_quantity_delete\" href=\"logout?actiontype=del&dishid="+String.valueOf(dishid)+"\"><i class=\"fa fa-times\"></i></a>");
+	out.println("<a class=\"cart_quantity_delete\" href=\"action?actiontype=del&dishid="+String.valueOf(dishid)+"\"><i class=\"fa fa-times\"></i></a>");
 	out.println(" </td>");
 	out.println("</tr>");
 	totalPrice += disnumber*cur.getDiscount();

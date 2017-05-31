@@ -94,6 +94,14 @@ public class ActionControl extends BaseService {
 			break;
 		case "del":
 			delCart(request, response);
+		    break;
+		case "addone":
+			try {
+				addOne(request, response);
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			// 添加到购物车
 		}
 
@@ -169,6 +177,7 @@ public class ActionControl extends BaseService {
 		current = dishdao.findDish(id);
 		request.setAttribute("current", current);
 		request.getRequestDispatcher("showdetails.jsp").forward(request, response);
+		//response.sendRedirect("showdetails.jsp");
 	}
 
 	private void addCart(HttpServletRequest request, HttpServletResponse response) throws InstantiationException,
@@ -177,7 +186,8 @@ public class ActionControl extends BaseService {
 		cartitem nc = new cartitem();
 		if (session.getAttribute("loginuser") == null) {
 			//System.out.println("no user");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			//request.getRequestDispatcher("login.jsp").forward(request, response);
+			response.sendRedirect("login.jsp"); 
 		} else {
 			String nn = (request.getParameter("number"));
 			//System.out.println(nn + " fuck you in the cart");
@@ -195,7 +205,6 @@ public class ActionControl extends BaseService {
 			nc.id = id;
 			System.out.println(cart.containsKey(nc));
 			System.out.println(nc+"   "+nc.id);
-			// Object[] cs = new Object[]{now.getUsername(), id};
 			Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
 			int flag = 0;
 			while(it.hasNext()){
@@ -212,7 +221,8 @@ public class ActionControl extends BaseService {
 					cart.put(nc, number);
 			}
 			session.setAttribute("shopcart", cart);
-			request.getRequestDispatcher("cart.jsp").forward(request, response);
+			//request.getRequestDispatcher("cart.jsp").forward(request, response);
+		    response.sendRedirect("cart.jsp");   
 		}
 	}
 
@@ -236,9 +246,55 @@ public class ActionControl extends BaseService {
 				break;
 			   } 
 			}
-		request.getRequestDispatcher("cart.jsp").forward(request, response);
+//		request.getRequestDispatcher("cart.jsp").forward(request, response);
+		response.sendRedirect("cart.jsp");
 	}
 
+	private void addOne(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
+		HttpSession session = request.getSession(true);
+		cartitem nc = new cartitem();
+		if (session.getAttribute("loginuser") == null) {
+			//System.out.println("no user");
+//			request.getRequestDispatcher("login.jsp").forward(request, response);
+			response.sendRedirect("login.jsp");
+		} else {
+			//System.out.println(nn + " fuck you in the cart");
+			String Did = request.getParameter("dishid");
+			// System.out.println("YYYYYYYY"+ Did);
+			Dish current = new Dish();
+			System.out.println(Did + " id");
+			IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
+			int id = Integer.parseInt(Did);
+			current = dishdao.findDish(id);
+			request.setAttribute("current", current);
+			Customer now = (Customer) session.getAttribute("loginuser");
+			nc.username = now.getUsername();
+			nc.id = id;
+			System.out.println(cart.containsKey(nc));
+			System.out.println(nc+"   "+nc.id);
+			// Object[] cs = new Object[]{now.getUsername(), id};
+			Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
+			int flag = 0;
+			while(it.hasNext()){
+			Map.Entry entry = (Map.Entry) it.next();
+			cartitem ncin = new cartitem();
+			ncin = (cartitem)entry.getKey();
+			if (nc.id==ncin.id&&nc.username==ncin.username) {
+				System.out.println("findout");
+				flag = 1;
+				cart.put(ncin, (Integer) cart.get(ncin) + 1);
+			   } 
+			}
+			if(flag==0){
+					cart.put(nc, 1);
+			}
+			session.setAttribute("shopcart", cart);
+//			request.getRequestDispatcher("cart.jsp").forward(request, response);
+			response.sendRedirect("cart.jsp");
+		}
+		
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

@@ -270,7 +270,7 @@ System.out.println("pageSize:"+String.valueOf(pageSize));
 													<a href="action?actiontype=detail&dishid=${currentdish.getDishID()}"><p>${currentdish.getName()}</p></a>
 													<a href="action?actiontype=detail&dishid=${currentdish.getDishID()}" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i>详情</a>
 													&nbsp;
-													<a href="#" class="btn btn-default add-to-cart"><i
+													<a href="action?actiontype=addone&dishid=${currentdish.getDishID()}" class="btn btn-default add-to-cart"><i
 														class="fa fa-shopping-cart"></i>购物车</a>
 												</div>
 

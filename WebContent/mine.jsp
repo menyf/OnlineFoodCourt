@@ -147,6 +147,7 @@
 					<li class="active">Shopping Cart</li>
 				</ol>
 			</div>
+
 			<div class="table-responsive cart_info">
 				<%--- <table class="table table-condensed"  align="center" border="0">
 					<thead>
@@ -225,42 +226,23 @@
 					
 				</table>--%>
 				<table class="table table-condensed">
-					<thead>
-						<tr class="cart_menu">
-							<td class="image"></td>
-							<td class="description">菜品</td>
-							<td class="price">原价</td>
-							<td class="total">现价</td>
-							<td class="total">数量</td>
-							<td class="total">总价</td>
-							<td></td>
-						</tr>
-					</thead>
-					<tbody>
+					<%
+						if (cus == null) {
+							out.println("<tr ><a href=\"login.jsp\">去登录?</a></tr>");
+						} else {
+							out.println("<thead>");
+							out.println("<tr class=\"cart_menu\">");
+							out.println("<td class=\"image\"></td>");
+							out.println("<td class=\"description\">菜品</td>");
+							out.println("<td class=\"price\">原价</td>");
+							out.println("<td class=\"total\">现价</td>");
+							out.println("<td class=\"total\">数量</td>");
+							out.println("<td class=\"total\">总价</td>");
+							out.println("<td></td>");
+							out.println("</tr>");
+							out.println("</thead>");
+							out.println("<tbody>");
 
-						<!-- <tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price"><del>$59</del></p>
-							</td>
-							
-							<td class="cart_total">
-								<p class="cart_total_price" style="color: red">$59</p>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">20</p>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$20</p>
-							</td>
-						</tr> -->
-						<%
 							Map cart = (Map) session.getAttribute("shopcart");
 							Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
 							IDishDAO ff = (IDishDAO) DAOFactory.newInstance("IDishDAO");
@@ -322,46 +304,15 @@
 								out.println(" </td>");
 								out.println("</tr>");
 								totalPrice += disnumber * cur.getDiscount();
-
 							}
-						%>
-
-
-
+						}
+					%>
 					</tbody>
 				</table>
-			</div>
-			<div class="container">
-				<div class="heading">
-					<h3>去买单？</h3>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="total_area">
-							<ul>
-								<li>总数量 <span>
-										<%
-											out.println(totalNum);
-										%>
-								</span></li>
-								<li>总&nbsp;&nbsp;&nbsp;&nbsp;价 <span>
-										<%
-											out.print("￥：");
-											out.println(totalPrice);
-										%>
-								</span></li>
-								<span><a class="btn btn-default check_out"
-									href="checkout.jsp">去买单</a></span>
-							</ul>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</section>
 	<!--/#cart_items-->
-
-
 	<footer id="footer">
 		<!--Footer-->
 		<div class="footer-bottom">

@@ -17,13 +17,13 @@ import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
  * Servlet implementation class dishModifyControl
  */
 @WebServlet("/dishModifyControl")
-public class dishModifyControl extends HttpServlet {
+public class DishModifyControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public dishModifyControl() {
+    public DishModifyControl() {
         super();
         // TODO Auto-generated constructor stub
     }

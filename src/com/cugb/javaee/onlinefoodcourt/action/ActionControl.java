@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
@@ -33,9 +34,9 @@ import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
 //import edu.cugb.xg.javaee.utils.PageModel;
 
 /**
- * Servlet implementation class LoginControl
+ * Servlet implementation class ActionControl
  */
-public class LoginControl extends BaseService {
+public class ActionControl extends BaseService {
 	private static final long serialVersionUID = 1L;
 	private static Properties prop = null;
 	private Map cart = new HashMap();
@@ -44,7 +45,7 @@ public class LoginControl extends BaseService {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginControl() {
+	public ActionControl() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -59,19 +60,19 @@ public class LoginControl extends BaseService {
 		// logger.debug(getServletConfig());;
 		String actiontype = request.getParameter("actiontype");
 		switch (actiontype) {
-		case "login":
-			// 登录
-			loginCheck(request, response);
-			break;
-		case "pagelist":
-			// 分页显示
-			try {
-				pageListView(request, response);
-			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
+//		case "login":
+//			// 登录
+//			//loginCheck(request, response);
+//			break;
+//		case "pagelist":
+//			// 分页显示
+//			try {
+//				//pageListView(request, response);
+//			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			break;
 		case "detail":
 			System.out.println("oooooo");
 			try {
@@ -98,68 +99,68 @@ public class LoginControl extends BaseService {
 
 	}
 
-	private void loginCheck(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		logger.error(getServletName(), null);
+//	private void loginCheck(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//		logger.error(getServletName(), null);
+//
+//		String username = request.getParameter("loginName");
+//		String password = request.getParameter("loginPass");
+//		Customer loginuser = new Customer();
+//		loginuser.setUsername(username);
+//		loginuser.setPassword(password);
+//		// 数据库验证
+//		CustomerService cService = new CustomerService();
+//		try {
+//			if (cService.validateCustomer(loginuser)) {
+//				// 验证通过
+//				HttpSession session = request.getSession(true);
+//				session.setAttribute("loginuser", loginuser);
+//				DishService dishserv = new DishService();
+//				int pageNO = 1;
+//				// int pageSize = Integerprop.getProperty("pageSize");
+//				PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
+//				request.setAttribute("dishlist", pagemodel.getList());
+//				logger.debug(pagemodel.getTotalrecords());
+//				request.setAttribute("pageModel", pagemodel);
+//				request.getRequestDispatcher("show.jsp").forward(request, response);
+//			} else {
+//				// 否则重新登录
+//				response.sendRedirect("login.jsp");
+//			}
+//		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			System.out.println("实例化异常");
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//	}
 
-		String username = request.getParameter("loginName");
-		String password = request.getParameter("loginPass");
-		Customer loginuser = new Customer();
-		loginuser.setUsername(username);
-		loginuser.setPassword(password);
-		// 数据库验证
-		CustomerService cService = new CustomerService();
-		try {
-			if (cService.validateCustomer(loginuser)) {
-				// 验证通过
-				HttpSession session = request.getSession(true);
-				session.setAttribute("loginuser", loginuser);
-				DishService dishserv = new DishService();
-				int pageNO = 1;
-				// int pageSize = Integerprop.getProperty("pageSize");
-				PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
-				request.setAttribute("dishlist", pagemodel.getList());
-				logger.debug(pagemodel.getTotalrecords());
-				request.setAttribute("pageModel", pagemodel);
-				request.getRequestDispatcher("show.jsp").forward(request, response);
-			} else {
-				// 否则重新登录
-				response.sendRedirect("login.jsp");
-			}
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("实例化异常");
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	private void pageListView(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-		// 获取当前页号
-		// logger.debug(request.getParameter("pageNO"));
-		int pageNO = Integer.parseInt(request.getParameter("pageNO"));
-		// int pageSize = Integer.parseInt(prop.getProperty("pageSize"));
-		// 分页查询
-		// int pageSize = 6;
-		// 生成pageModel对象
-		DishService dishserv = new DishService();
-		PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
-		// 跳转到show页面
-		logger.debug(pagemodel.getList());
-		request.setAttribute("dishlist", pagemodel.getList());
-		request.setAttribute("pageModel", pagemodel);
-		RequestDispatcher rd = request
-				.getRequestDispatcher("show.jsp?pageNO=" + pageNO + "&totalpages=" + pagemodel.getTotalPages());
-		rd.forward(request, response);
-
-	}
+//	private void pageListView(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+//			IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+//		// 获取当前页号
+//		// logger.debug(request.getParameter("pageNO"));
+//		int pageNO = Integer.parseInt(request.getParameter("pageNO"));
+//		// int pageSize = Integer.parseInt(prop.getProperty("pageSize"));
+//		// 分页查询
+//		// int pageSize = 6;
+//		// 生成pageModel对象
+//		DishService dishserv = new DishService();
+//		PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
+//		// 跳转到show页面
+//		logger.debug(pagemodel.getList());
+//		request.setAttribute("dishlist", pagemodel.getList());
+//		request.setAttribute("pageModel", pagemodel);
+//		RequestDispatcher rd = request
+//				.getRequestDispatcher("show.jsp?pageNO=" + pageNO + "&totalpages=" + pagemodel.getTotalPages());
+//		rd.forward(request, response);
+//
+//	}
 
 	private void showdetial(HttpServletRequest request, HttpServletResponse response) throws InstantiationException,
-			IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException {
+		    IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException {
 		System.out.println("oooooo");
 		String Did = request.getParameter("dishid");
 		Dish current = new Dish();
@@ -192,13 +193,24 @@ public class LoginControl extends BaseService {
 			Customer now = (Customer) session.getAttribute("loginuser");
 			nc.username = now.getUsername();
 			nc.id = id;
+			System.out.println(cart.containsKey(nc));
+			System.out.println(nc+"   "+nc.id);
 			// Object[] cs = new Object[]{now.getUsername(), id};
-			if (cart.containsKey(nc)) {
-				cart.put(nc, (Integer) cart.get(id) + number);
-			} else
-				cart.put(nc, number);
-			// Object[] items = {id,number};
-			// System.out.println(items[0]+" 22222ewqeq");
+			Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
+			int flag = 0;
+			while(it.hasNext()){
+			Map.Entry entry = (Map.Entry) it.next();
+			cartitem ncin = new cartitem();
+			ncin = (cartitem)entry.getKey();
+			if (nc.id==ncin.id&&nc.username==ncin.username) {
+				System.out.println("findout");
+				flag = 1;
+				cart.put(ncin, (Integer) cart.get(ncin) + number);
+			   } 
+			}
+			if(flag==0){
+					cart.put(nc, number);
+			}
 			session.setAttribute("shopcart", cart);
 			request.getRequestDispatcher("cart.jsp").forward(request, response);
 		}

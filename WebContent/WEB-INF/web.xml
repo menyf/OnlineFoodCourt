@@ -38,7 +38,7 @@
   
   <servlet>
     <servlet-name>action</servlet-name>
-    <servlet-class>com.cugb.javaee.onlinefoodcourt.action.LoginControl</servlet-class>
+    <servlet-class>com.cugb.javaee.onlinefoodcourt.action.ActionControl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>action</servlet-name>

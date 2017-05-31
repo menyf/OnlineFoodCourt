@@ -161,25 +161,25 @@
 					<p><span style="font-size:20px"><del>￥${requestScope.current.getPrice()}</del></span>
 						&nbsp;&nbsp;<span  style="color:#FE980F;font-size:22px">￥${requestScope.current.getDiscount()}</span></p>
 					<div class="col-sm-2">
-<p style="padding-top:5px;font-size:16px">		数量
-					</p></div><p class="col-sm-2" style="margin-left:-40px">
+<p style="padding-top:5px;font-size:16px">		数量						
+						<form action="logout" method="POST" name="loginForm">
+						</p></div><p class="col-sm-2" style="margin-left:-40px">
 															
 									<select class="form-control" name="number">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
+										<option value = "1">1</option>
+										<option value = "2">2</option>
+										<option value = "3">3</option>
+										<option value = "4">4</option>
+										<option value = "5">5</option>
+										<option value = "6">6</option>
 									</select>
-					</p>								
-						<form action="logout" method="POST" name="loginForm">
-							<input type="hidden" name="dishID" value="5">
+					</p>		
+							<input type="hidden" name="dishID" value=${requestScope.current.getDishID()}>
 							<!-- <input type="text" name="number" />	 -->							
 							
 							<input type="hidden" name="actiontype" value="cart">						
-							<i class="fa fa-shopping-cart"></i>	
-							<button type="submit" class="btn btn-default cart">加入购物车</button>
+							<button type="submit" class="btn btn-default cart">
+							<i class="fa fa-shopping-cart fa-lg"></i>&nbsp;&nbsp;&nbsp;加入购物车</button>
 						</form>																			
 					<p></p>								
 					<p><b>描述:</b>  ${requestScope.current.getDescription()}</p>

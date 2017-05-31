@@ -23,6 +23,7 @@ import javax.swing.text.DefaultCaret;
 import javax.websocket.Session;
 
 import org.apache.catalina.filters.AddDefaultCharsetFilter;
+import org.eclipse.jdt.internal.compiler.env.IGenericField;
 import org.omg.CORBA.INTERNAL;
 
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
@@ -131,7 +132,7 @@ public class LoginControl extends BaseService {
 			}
 			else {
 				//否则重新登录
-				response.sendRedirect("login.html");
+				response.sendRedirect("login.jsp");
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -176,24 +177,36 @@ public class LoginControl extends BaseService {
     }
     private void addCart(HttpServletRequest request, HttpServletResponse response) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException{
     	HttpSession session = request.getSession(true);
-    	String nn = ((String)request.getParameter("number"));
-    	//System.out.println(nn + "fuck you in the cart");
+    	cartitem nc = new cartitem();
+    	if(session.getAttribute("loginuser")==null){
+    		System.out.println("no user");
+    		request.getRequestDispatcher("login.jsp").forward(request, response);
+    	}
+    	else{
+    	String nn = (request.getParameter("number"));
+    	System.out.println(nn + " fuck you in the cart");
     	String Did = request.getParameter("dishID");
     	//System.out.println("YYYYYYYY"+ Did);
     	Dish current = new Dish();
+    	System.out.println(Did + " id");
     	IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
     	int id = Integer.parseInt(Did);
     	current = dishdao.findDish(id);
     	request.setAttribute("current", current);
     	int number = Integer.parseInt(nn);
-    	if(cart.containsKey(id)){
-    		cart.put(id, (Integer)cart.get(id)+number);
+    	Customer now = (Customer)session.getAttribute("loginuser");
+    	nc.username = now.getUsername();
+    	nc.id = id;
+    	//Object[] cs = new Object[]{now.getUsername(), id};
+    	if(cart.containsKey(nc)){
+    		cart.put(nc, (Integer)cart.get(id)+number);
     	}
-    	else cart.put(id, number);
+    	else cart.put(nc, number);
     	//Object[] items = {id,number};
     	//System.out.println(items[0]+" 22222ewqeq");
     	session.setAttribute("shopcart",cart);
     	request.getRequestDispatcher("cart.jsp").forward(request, response);
+    	}
     }
     
     private void delCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

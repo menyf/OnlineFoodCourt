@@ -218,19 +218,19 @@ System.out.println("pageSize:"+String.valueOf(pageSize));
 						</td>
 						<td>
 							<div align="center">
-								<a name="btnTopPage" id="btnTopPage" href="show.jsp?pageNO=1" title="首页">
+								<a name="btnTopPage" id="btnTopPage" href="index.jsp?pageNO=1" title="首页">
 									|&lt;&lt;
 								</a>&nbsp;
 								<a name="btnPreviousPage" id="btnPreviousPage"
-									href="show.jsp?pageNO=${requestScope.pageModel.prevPageNO}" title="上页">
+									href="index.jsp?pageNO=${requestScope.pageModel.prevPageNO}" title="上页">
 									 &lt; 
 								</a>&nbsp; 
 								<a name="btnNextPage" id="btnNextPage"
-									href="show.jsp?pageNO=${requestScope.pageModel.nextPageNO}" title="下页">
+									href="index.jsp?pageNO=${requestScope.pageModel.nextPageNO}" title="下页">
 									 &gt; 
 								</a>&nbsp; 
 								<a name="btnBottomPage"	id="btnBottomPage"
-									href="show.jsp?pageNO=${requestScope.pageModel.bottomPageNO}"
+									href="index.jsp?pageNO=${requestScope.pageModel.bottomPageNO}"
 									title="尾页">
 								 	&gt;&gt;|
 								</a>
@@ -305,15 +305,15 @@ System.out.println("pageSize:"+String.valueOf(pageSize));
 						
 					<tr>
 					<ul class="pager">
-					<li><a name="btnTopPage" id="btnTopPage" href="show.jsp?pageNO=1">首页</a></li>
+					<li><a name="btnTopPage" id="btnTopPage" href="index.jsp?pageNO=1">首页</a></li>
     <li><a name="btnPreviousPage" id="btnPreviousPage"
-									href="show.jsp?pageNO=${requestScope.pageModel.prevPageNO}">上一页</a></li>
+									href="index.jsp?pageNO=${requestScope.pageModel.prevPageNO}">上一页</a></li>
     <li class="disabled"><a href="#">${requestScope.pageModel.getPageNO()} / ${requestScope.pageModel.bottomPageNO}
 </a></li>
     <li><a name="btnNextPage" id="btnNextPage"
-									href="show.jsp?pageNO=${requestScope.pageModel.nextPageNO}" >下一页</a></li>
+									href="index.jsp?pageNO=${requestScope.pageModel.nextPageNO}" >下一页</a></li>
     <li><a name="btnBottomPage"	id="btnBottomPage"
-									href="show.jsp?pageNO=${requestScope.pageModel.bottomPageNO}">尾页</a></li>
+									href="index.jsp?pageNO=${requestScope.pageModel.bottomPageNO}">尾页</a></li>
 </ul>
 					</tr>
 						</table>

@@ -130,7 +130,7 @@ public class ActionControl extends BaseService {
 //				request.setAttribute("dishlist", pagemodel.getList());
 //				logger.debug(pagemodel.getTotalrecords());
 //				request.setAttribute("pageModel", pagemodel);
-//				request.getRequestDispatcher("show.jsp").forward(request, response);
+//				request.getRequestDispatcher("index.jsp").forward(request, response);
 //			} else {
 //				// 否则重新登录
 //				response.sendRedirect("login.jsp");
@@ -162,7 +162,7 @@ public class ActionControl extends BaseService {
 //		request.setAttribute("dishlist", pagemodel.getList());
 //		request.setAttribute("pageModel", pagemodel);
 //		RequestDispatcher rd = request
-//				.getRequestDispatcher("show.jsp?pageNO=" + pageNO + "&totalpages=" + pagemodel.getTotalPages());
+//				.getRequestDispatcher("index.jsp?pageNO=" + pageNO + "&totalpages=" + pagemodel.getTotalPages());
 //		rd.forward(request, response);
 //
 //	}

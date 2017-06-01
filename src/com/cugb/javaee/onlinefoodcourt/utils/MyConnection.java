@@ -39,7 +39,6 @@ public class MyConnection implements Connection {
 	@Override
 	public void close() throws SQLException {
 		this.connPool.addLast(this);
-//		System.out.println(realConn.toString());
 
 	}
 

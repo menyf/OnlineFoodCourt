@@ -33,7 +33,7 @@ PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
 request.setAttribute("dishlist", pagemodel.getList());
 request.setAttribute("pageModel", pagemodel); 
 
-System.out.println("pageSize为:"+String.valueOf(pageSize));
+
 String headerfile = "";
 if(session.getAttribute("loginuser") == null){
 	 headerfile = "header.jsp";

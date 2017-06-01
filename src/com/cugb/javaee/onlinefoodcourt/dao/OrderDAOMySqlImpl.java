@@ -46,11 +46,19 @@ public class OrderDAOMySqlImpl extends baseDAO implements IOrderDAO {
 	}
 
 	@Override
-	public ArrayList findOrders(String userId) throws SQLException {
+	public ArrayList findOrders(String userId) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		String sql = "select orderid OrderID,  username Username, time Time, count Count, totalprice TotalPrice, paystatus PayStatus,"
 				+ "address Address, tel Tel from Orders where username = \"" + userId + "\" order by time DESC";
-		return findObjs(sql, Order.class);
+		
+		ArrayList<Order> arr = findObjs(sql, Order.class);
+		for(int i = 0; i < arr.size(); i++){
+			Order ord = arr.get(i);
+			IOrderItemDAO orderitemdao = (IOrderItemDAO) DAOFactory.newInstance("IOrderItemDAO");
+			ArrayList<OrderItem> oit = orderitemdao.findOrderItems(ord.getOrderID());
+			arr.get(i).setItems(oit);
+		}
+		return arr;
 	}
 
 }

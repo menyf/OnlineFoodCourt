@@ -59,7 +59,6 @@ public class ActionControl extends BaseService {
 		String actiontype = request.getParameter("actiontype");
 		switch (actiontype) {
 		case "detail":
-			System.out.println("oooooo");
 			try {
 				showdetial(request, response);
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
@@ -69,7 +68,6 @@ public class ActionControl extends BaseService {
 			break;
 		// 显示某一个菜品的详细信息
 		case "cart":
-			System.out.println("add");
 			try {
 				addCart(request, response);
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
@@ -101,7 +99,7 @@ public class ActionControl extends BaseService {
 
 	private void showdetial(HttpServletRequest request, HttpServletResponse response) throws InstantiationException,
 		    IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException {
-		//System.out.println("oooooo");
+	
 		String Did = request.getParameter("dishid");
 		Dish current = new Dish();
 		IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
@@ -121,7 +119,7 @@ public class ActionControl extends BaseService {
 			String nn = (request.getParameter("number"));
 			String Did = request.getParameter("dishID");
 			Dish current = new Dish();
-			//System.out.println(Did + " id");
+		
 			IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
 			int id = Integer.parseInt(Did);
 			current = dishdao.findDish(id);
@@ -137,7 +135,6 @@ public class ActionControl extends BaseService {
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
 			if (nc.id==ncin.id&&nc.username==ncin.username) {
-				System.out.println("findout");
 				flag = 1;
 				cart.put(ncin, (Integer) cart.get(ncin) + number);
 			   } 
@@ -163,7 +160,7 @@ public class ActionControl extends BaseService {
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
 			if (ncin.id==Integer.parseInt(Did)&&ncin.username==now.getUsername()) {
-				//System.out.println("findout");
+			
 				cart.remove(ncin);
 				break;
 			   } 
@@ -217,15 +214,6 @@ public class ActionControl extends BaseService {
 	}
 	private void logOut(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		HttpSession session = request.getSession(true);
-		Customer cus = (Customer)session.getAttribute("loginuser");
-		Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
-		while(it.hasNext()){
-			Map.Entry entry = (Map.Entry) it.next();
-			CartItem ncin = new CartItem();
-			if (cus.getUsername()==ncin.username) {
-				cart.remove(ncin);
-			   } 
-		}
 		session.removeAttribute("loginuser");
 		response.sendRedirect("index.jsp");
 	}

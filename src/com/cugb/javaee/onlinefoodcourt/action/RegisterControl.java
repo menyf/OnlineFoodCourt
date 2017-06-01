@@ -1,5 +1,6 @@
 package com.cugb.javaee.onlinefoodcourt.action;
 import java.lang.Math;
+import java.net.URLEncoder;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -52,19 +53,20 @@ public class RegisterControl extends BaseService {
 			if(cService.isExistCustomer(username)){
 				//如果用户已存在
 				PrintWriter out = resp.getWriter();
-				out.print("<script>alert(\"用户已注册!\");</script>");
-				out.write("<script language='javascript'>alert('2333333333');"
-						+ "window.location.href='" + req.getContextPath()+ "/login.jsp';</script>");
-				System.out.println("233333");
+//				resp.setContentType("text/html;charset=utf-8");
+//				resp.setCharacterEncoding("UTF-8");
+//				out.print("<!DOCTYPE html><html><meta charset=\"utf-8\"><body><script>alert(\"用户已存在\");window.location.href=\"login.jsp\";</script></body></html>");
+				String a = URLEncoder.encode("用户已经存在！", "UTF-8");  
+		        out.print("<script>alert(decodeURIComponent('"+a+"') );window.location.href='login.jsp'</script>"); 
+				
 				//resp.sendRedirect("login.html");
 			}
 			else{
 				//注册成功
 				CustomerDAOMySqlImpl cuMySqlImpl = new CustomerDAOMySqlImpl();
 				cuMySqlImpl.addCustomer(customer);
-				resp.getWriter().print("<script> alert(\"注册成功!\"); </script>");
-				System.out.println("7777777");
-				resp.sendRedirect("login.jsp");
+				String a = URLEncoder.encode("注册成功 请登陆！", "UTF-8");  
+				resp.getWriter().print("<script>alert(decodeURIComponent('"+a+"') );window.location.href='login.jsp'</script>");
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

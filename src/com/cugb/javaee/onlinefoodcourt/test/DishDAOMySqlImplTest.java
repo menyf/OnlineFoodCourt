@@ -47,7 +47,6 @@ public class DishDAOMySqlImplTest {
 	@Test
 	public void testFindDishs() throws SQLException {
 		ArrayList<Dish> arr = disDAO.findDishs();
-		System.out.println(arr.size());
 		assertNotNull(arr);
 	}
 

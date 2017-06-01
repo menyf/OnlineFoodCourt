@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,7 +53,7 @@ public class OrderAddControl extends HttpServlet {
 		Customer cus = (Customer) session.getAttribute("loginuser");
 		java.util.Date today = new java.util.Date();
 		Timestamp timestamp = new Timestamp(today.getTime());
-		String orderID = String.valueOf((new java.util.Date()).getTime())+cus.getUsername();
+		String orderID = String.valueOf((new java.util.Date()).getTime());
 		
 		String address = request.getParameter("address");
 		String tel = request.getParameter("tel");
@@ -74,6 +75,7 @@ public class OrderAddControl extends HttpServlet {
 				if (!nc.username.equals(cuss.getUsername())) {
 					continue;
 				}
+				
 				int dishid = nc.id;
 				int disnumber = (Integer) entry.getValue();
 				
@@ -93,7 +95,6 @@ public class OrderAddControl extends HttpServlet {
 		}
 		
 		//Step2. 
-		System.out.println("送货地址："+address);
 		order.setOrderID(orderID);
 		order.setUsername(cus.getUsername());
 		order.setTime(timestamp);
@@ -116,20 +117,23 @@ public class OrderAddControl extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Customer cuss = (Customer) session.getAttribute("loginuser");
+
 		Iterator<Map.Entry<Integer, Integer>> itt = cart.entrySet().iterator();
 		while(itt.hasNext())
 		{
-			Customer cuss = (Customer) session.getAttribute("loginuser");
+			
+			//Iterator<Map.Entry<Integer, Integer>> itt2 = (Iterator<Entry<Integer, Integer>>) itt.next();
 			Map.Entry entry = (Map.Entry) itt.next();
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
 			if (ncin.username==cuss.getUsername()) {
-				//System.out.println("findout");
-				cart.remove(ncin);
-			} 
+				itt.remove();
+			}
+			//itt = itt2;
+			//response.sendRedirect("mine.jsp");
 		}
 		
-//		request.getRequestDispatcher("mine.jsp").forward(request, response);
 		response.sendRedirect("mine.jsp");
 	}
 

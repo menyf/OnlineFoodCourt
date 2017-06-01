@@ -35,8 +35,11 @@ public interface IOrderDAO {
 	 * 
 	 * @return
 	 * @throws SQLException
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public ArrayList findOrders(String userId) throws SQLException;
+	public ArrayList findOrders(String userId) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException;
 
 	/**
 	 * 

@@ -1,6 +1,6 @@
 package com.cugb.javaee.onlinefoodcourt.bean;
 
-public class CarItem{
+public class CartItem{
   public String username;
   public int id;
 }

@@ -1,4 +1,4 @@
-<%@page import="com.cugb.javaee.onlinefoodcourt.bean.cartitem"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.CartItem"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
@@ -255,74 +255,75 @@
 								<p class="cart_total_price">$20</p>
 							</td>
 						</tr> -->
-<%
-Map cart = (Map) session.getAttribute("shopcart");
-Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
-IDishDAO ff = (IDishDAO)DAOFactory.newInstance("IDishDAO");
-float totalPrice = 0.0f;
-int totalNum = 0;
-while(it.hasNext()){
-	Map.Entry entry = (Map.Entry) it.next();
-	cartitem nc = new cartitem();
-	nc = (cartitem)entry.getKey();
-	Customer cuss = (Customer)session.getAttribute("loginuser");
-	if(!nc.username.equals(cuss.getUsername())){
-		continue;
-	}
-	int dishid = nc.id;
-	int disnumber = (Integer)entry.getValue();
-	totalNum += disnumber;
-	Dish cur = ff.findDish(dishid);
-	out.println("<tr>");
-	out.println(" <td class=\"cart_product\">");
-	out.println("  <a href=\"\">");
-	out.println("   <img alt=\"\" src=\""+cur.picSize("150")+"\"/>");
-	out.println("  </a>");
-	out.println(" </td>");
-	out.println(" <td class=\"cart_description\">");
-	out.println("  <h4>");
-	out.println("   <a href=\"action?actiontype=detail&dishid="+String.valueOf(dishid)+"\">");
-	out.println(cur.getName());
-	out.println("   </a>");
-	out.println("  </h4>");
-	out.println("  <p>");
-	out.println("   Web ID: "+String.valueOf(dishid));
-	out.println("  </p>");
-	out.println(" </td>");
-	out.println(" <td class=\"cart_total\">");
-	out.println("  <p class=\"cart_total_price\">");
-	out.println("   <del>¥");
-	out.println(cur.getPrice());
-	out.println("   </del>");
-	out.println("  </p>");
-	out.println(" </td>");
-	out.println(" <td class=\"cart_total\">");
-	out.println("  <p class=\"cart_total_price\" style=\"color: red\">¥");
-	out.println(cur.getDiscount());
-	out.println("  </p>");
-	out.println(" </td>");
-	out.println(" <td class=\"cart_total\">");
-	out.println("  <p class=\"cart_total_price\">");
-	out.println(disnumber);
-	out.println("  </p>");
-	out.println(" </td>");
-	out.println(" <td class=\"cart_total\">");
-	out.println("  <p class=\"cart_total_price\">");
-	out.println("   ¥"+String.valueOf(disnumber*cur.getDiscount()));
-	out.println("  </p>");
-	out.println(" </td>");
-	out.println(" <td class=\"cart_delete\">");
-	out.println("<a class=\"cart_quantity_delete\" href=\"action?actiontype=del&dishid="+String.valueOf(dishid)+"\"><i class=\"fa fa-times\"></i></a>");
-	out.println(" </td>");
-	out.println("</tr>");
-	totalPrice += disnumber*cur.getDiscount();
-	
-}
+						<%
+							Map cart = (Map) session.getAttribute("shopcart");
+							Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
+							IDishDAO ff = (IDishDAO) DAOFactory.newInstance("IDishDAO");
+							float totalPrice = 0.0f;
+							int totalNum = 0;
+							while (it.hasNext()) {
+								Map.Entry entry = (Map.Entry) it.next();
+								CartItem nc = new CartItem();
+								nc = (CartItem) entry.getKey();
+								Customer cuss = (Customer) session.getAttribute("loginuser");
+								if (!nc.username.equals(cuss.getUsername())) {
+									continue;
+								}
+								int dishid = nc.id;
+								int disnumber = (Integer) entry.getValue();
+								totalNum += disnumber;
+								Dish cur = ff.findDish(dishid);
+								out.println("<tr>");
+								out.println(" <td class=\"cart_product\">");
+								out.println("  <a href=\"\">");
+								out.println("   <img alt=\"\" src=\"" + cur.picSize("150") + "\"/>");
+								out.println("  </a>");
+								out.println(" </td>");
+								out.println(" <td class=\"cart_description\">");
+								out.println("  <h4>");
+								out.println("   <a href=\"action?actiontype=detail&dishid=" + String.valueOf(dishid) + "\">");
+								out.println(cur.getName());
+								out.println("   </a>");
+								out.println("  </h4>");
+								out.println("  <p>");
+								out.println("   Web ID: " + String.valueOf(dishid));
+								out.println("  </p>");
+								out.println(" </td>");
+								out.println(" <td class=\"cart_total\">");
+								out.println("  <p class=\"cart_total_price\">");
+								out.println("   <del>¥");
+								out.println(cur.getPrice());
+								out.println("   </del>");
+								out.println("  </p>");
+								out.println(" </td>");
+								out.println(" <td class=\"cart_total\">");
+								out.println("  <p class=\"cart_total_price\" style=\"color: red\">¥");
+								out.println(cur.getDiscount());
+								out.println("  </p>");
+								out.println(" </td>");
+								out.println(" <td class=\"cart_total\">");
+								out.println("  <p class=\"cart_total_price\">");
+								out.println(disnumber);
+								out.println("  </p>");
+								out.println(" </td>");
+								out.println(" <td class=\"cart_total\">");
+								out.println("  <p class=\"cart_total_price\">");
+								out.println("   ¥" + String.valueOf(disnumber * cur.getDiscount()));
+								out.println("  </p>");
+								out.println(" </td>");
+								out.println(" <td class=\"cart_delete\">");
+								out.println(
+										"<a class=\"cart_quantity_delete\" style=\"margin-right:10px\" href=\"action?actiontype=del&dishid="
+												+ String.valueOf(dishid) + "\"><i class=\"fa fa-times\"></i></a>");
+								out.println(" </td>");
+								out.println("</tr>");
+								totalPrice += disnumber * cur.getDiscount();
 
-%>
-						
-						
-						
+							}
+						%>
+
+
+
 					</tbody>
 				</table>
 			</div>

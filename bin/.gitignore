@@ -1,8 +1,5 @@
 /build/
 .DS_Store
 .classpath
-<<<<<<< HEAD
-/src/
-=======
 /bin/
->>>>>>> dev
+/.settings/

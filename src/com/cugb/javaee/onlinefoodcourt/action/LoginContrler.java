@@ -63,13 +63,13 @@ public class LoginContrler extends HttpServlet {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("loginuser", loginuser);
 				session.setAttribute("admin", true);
-				request.getRequestDispatcher("show.jsp").forward(request, response);
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			} else if (cService.validateCustomer(loginuser)) {
 				//普通用户 验证通过
 				HttpSession session = request.getSession(true);
 				session.setAttribute("loginuser", loginuser);
 				session.setAttribute("admin", false);
-				request.getRequestDispatcher("show.jsp").forward(request, response);
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 			else {
 				//否则重新登录

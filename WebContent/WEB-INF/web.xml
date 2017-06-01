@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>OnlineFoodCourt</display-name>
   <welcome-file-list>
-    <welcome-file>show.jsp</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   <resource-ref>
     <description>JNDI DataSource</description>
@@ -54,4 +54,30 @@
     <servlet-name>OrderAdd</servlet-name>
     <url-pattern>/OrderAdd</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+     <servlet-name>dishModify</servlet-name>
+     <servlet-class>com.cugb.javaee.onlinefoodcourt.action.DishModifyControl</servlet-class>
+   </servlet>
+   <servlet-mapping>
+     <servlet-name>dishModify</servlet-name>
+     <url-pattern>/dishModify</url-pattern>
+   </servlet-mapping>
+   <servlet>
+     <servlet-name>dishAdd</servlet-name>
+     <servlet-class>com.cugb.javaee.onlinefoodcourt.action.DishAddControl</servlet-class>
+   </servlet>
+   <servlet-mapping>
+     <servlet-name>dishAdd</servlet-name>
+     <url-pattern>/dishAdd</url-pattern>
+   </servlet-mapping>
+   <filter>
+     <filter-name>CharFilter</filter-name>
+     <filter-class>com.cugb.javaee.onlinefoodcourt.utils.CharsetFilter</filter-class>
+   </filter>
+   <filter-mapping>
+     <filter-name>CharFilter</filter-name>
+     <url-pattern>/*</url-pattern>
+     <dispatcher>REQUEST</dispatcher>
+   </filter-mapping>
 </web-app>

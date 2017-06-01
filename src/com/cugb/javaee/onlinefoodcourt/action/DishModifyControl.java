@@ -14,16 +14,16 @@ import com.cugb.javaee.onlinefoodcourt.dao.IDishDAO;
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
 
 /**
- * Servlet implementation class dishModifyControl
+ * Servlet implementation class DishModifyControl
  */
-@WebServlet("/dishModifyControl")
-public class dishModifyControl extends HttpServlet {
+@WebServlet("/DishModifyControl")
+public class DishModifyControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public dishModifyControl() {
+    public DishModifyControl() {
         super();
         // TODO Auto-generated constructor stub
     }

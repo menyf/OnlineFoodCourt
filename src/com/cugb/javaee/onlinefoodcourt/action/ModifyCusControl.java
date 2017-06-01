@@ -41,7 +41,7 @@ public class ModifyCusControl extends BaseService {
 		try {
 			ICustomerDAO iCustomerDAO = (ICustomerDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
 			iCustomerDAO.modifyCustomer(customer);
-			resp.sendRedirect("show.jsp");
+			resp.sendRedirect("index.jsp");
 			
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block

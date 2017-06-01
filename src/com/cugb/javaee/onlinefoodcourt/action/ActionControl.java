@@ -102,71 +102,13 @@ public class ActionControl extends BaseService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			break;
+		case "goCart":
+			goCart(request,response);
 			// 添加到购物车
 		}
 
 	}
-
-//	private void loginCheck(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		logger.error(getServletName(), null);
-//
-//		String username = request.getParameter("loginName");
-//		String password = request.getParameter("loginPass");
-//		Customer loginuser = new Customer();
-//		loginuser.setUsername(username);
-//		loginuser.setPassword(password);
-//		// 数据库验证
-//		CustomerService cService = new CustomerService();
-//		try {
-//			if (cService.validateCustomer(loginuser)) {
-//				// 验证通过
-//				HttpSession session = request.getSession(true);
-//				session.setAttribute("loginuser", loginuser);
-//				DishService dishserv = new DishService();
-//				int pageNO = 1;
-//				// int pageSize = Integerprop.getProperty("pageSize");
-//				PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
-//				request.setAttribute("dishlist", pagemodel.getList());
-//				logger.debug(pagemodel.getTotalrecords());
-//				request.setAttribute("pageModel", pagemodel);
-//				request.getRequestDispatcher("show.jsp").forward(request, response);
-//			} else {
-//				// 否则重新登录
-//				response.sendRedirect("login.jsp");
-//			}
-//		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			System.out.println("实例化异常");
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//	}
-
-//	private void pageListView(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-//			IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-//		// 获取当前页号
-//		// logger.debug(request.getParameter("pageNO"));
-//		int pageNO = Integer.parseInt(request.getParameter("pageNO"));
-//		// int pageSize = Integer.parseInt(prop.getProperty("pageSize"));
-//		// 分页查询
-//		// int pageSize = 6;
-//		// 生成pageModel对象
-//		DishService dishserv = new DishService();
-//		PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
-//		// 跳转到show页面
-//		logger.debug(pagemodel.getList());
-//		request.setAttribute("dishlist", pagemodel.getList());
-//		request.setAttribute("pageModel", pagemodel);
-//		RequestDispatcher rd = request
-//				.getRequestDispatcher("show.jsp?pageNO=" + pageNO + "&totalpages=" + pagemodel.getTotalPages());
-//		rd.forward(request, response);
-//
-//	}
-
 	private void showdetial(HttpServletRequest request, HttpServletResponse response) throws InstantiationException,
 		    IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException {
 		System.out.println("oooooo");
@@ -177,7 +119,6 @@ public class ActionControl extends BaseService {
 		current = dishdao.findDish(id);
 		request.setAttribute("current", current);
 		request.getRequestDispatcher("showdetails.jsp").forward(request, response);
-		//response.sendRedirect("showdetails.jsp");
 	}
 
 	private void addCart(HttpServletRequest request, HttpServletResponse response) throws InstantiationException,
@@ -185,14 +126,10 @@ public class ActionControl extends BaseService {
 		HttpSession session = request.getSession(true);
 		cartitem nc = new cartitem();
 		if (session.getAttribute("loginuser") == null) {
-			//System.out.println("no user");
-			//request.getRequestDispatcher("login.jsp").forward(request, response);
 			response.sendRedirect("login.jsp"); 
 		} else {
 			String nn = (request.getParameter("number"));
-			//System.out.println(nn + " fuck you in the cart");
 			String Did = request.getParameter("dishID");
-			// System.out.println("YYYYYYYY"+ Did);
 			Dish current = new Dish();
 			System.out.println(Did + " id");
 			IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
@@ -221,7 +158,6 @@ public class ActionControl extends BaseService {
 					cart.put(nc, number);
 			}
 			session.setAttribute("shopcart", cart);
-			//request.getRequestDispatcher("cart.jsp").forward(request, response);
 		    response.sendRedirect("cart.jsp");   
 		}
 	}
@@ -231,7 +167,6 @@ public class ActionControl extends BaseService {
 		HttpSession session = request.getSession(true);
 		String Did = request.getParameter("dishid");
 		System.out.println(Did + "fuck");
-		//cart.remove(Integer.parseInt(Did));
 		Customer now = (Customer) session.getAttribute("loginuser");
 		session.setAttribute("shopcart", cart);
 		Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
@@ -246,7 +181,6 @@ public class ActionControl extends BaseService {
 				break;
 			   } 
 			}
-//		request.getRequestDispatcher("cart.jsp").forward(request, response);
 		response.sendRedirect("cart.jsp");
 	}
 
@@ -255,13 +189,9 @@ public class ActionControl extends BaseService {
 		HttpSession session = request.getSession(true);
 		cartitem nc = new cartitem();
 		if (session.getAttribute("loginuser") == null) {
-			//System.out.println("no user");
-//			request.getRequestDispatcher("login.jsp").forward(request, response);
 			response.sendRedirect("login.jsp");
 		} else {
-			//System.out.println(nn + " fuck you in the cart");
 			String Did = request.getParameter("dishid");
-			// System.out.println("YYYYYYYY"+ Did);
 			Dish current = new Dish();
 			System.out.println(Did + " id");
 			IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
@@ -273,7 +203,6 @@ public class ActionControl extends BaseService {
 			nc.id = id;
 			System.out.println(cart.containsKey(nc));
 			System.out.println(nc+"   "+nc.id);
-			// Object[] cs = new Object[]{now.getUsername(), id};
 			Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
 			int flag = 0;
 			while(it.hasNext()){
@@ -290,10 +219,18 @@ public class ActionControl extends BaseService {
 					cart.put(nc, 1);
 			}
 			session.setAttribute("shopcart", cart);
-//			request.getRequestDispatcher("cart.jsp").forward(request, response);
 			response.sendRedirect("cart.jsp");
 		}
 		
+	}
+	private void goCart(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		HttpSession session = request.getSession(true);
+		if(session.getAttribute("loginuser")==null){
+			response.sendRedirect("login.jsp");
+		}
+		else{
+			response.sendRedirect("cart.jsp");
+		}
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

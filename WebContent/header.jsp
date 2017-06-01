@@ -18,7 +18,7 @@
 								<%
 									Customer cuss = (Customer) session.getAttribute("loginuser");
 									if(cuss == null){
-										out.println("<li><a href=\"\">请登录</a></li>");
+										out.println("<li><a href=\"login.jsp\">请登录</a></li>");
 									}
 									else{
 										out.println("<li><a href=\"\"></i>欢迎："+cuss.getUsername()+"</a></li>");
@@ -42,13 +42,13 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="me.jsp">我的</a></li>
+								<!-- <li><a href="me.jsp">我的</a></li> -->
 								<!-- <li><a href="checkout.jsp">去下单</a></li>-->
 								<li><a href="action?actiontype=goCart">我的购物车</a></li>
 								<%
 									//Customer cus = (Customer) session.getAttribute("loginuser");
 									if(cuss == null){
-										out.println("<li><a href=\"\">请登录</a></li>");
+										out.println("<li><a href=\"login.jsp\">请登录</a></li>");
 									}
 									else{
 										out.println("<li><a href=\"action?actiontype=logOut\"></i>注销</a></li>");
@@ -94,13 +94,15 @@
 								%>	 
                                     </ul>
                                 </li> 
-								<li class="dropdown"><a href="#">动态</i></a>
+								<li><a href="mine.jsp">我的订单</a></li>
+								<li><a href="me.jsp">修改信息</a></li>
+								<li class="dropdown"><a href="#">联系作者</i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="index.jsp">动态列表</a></li>
-										<li><a href="index.jsp">个人动态</a></li>
+                                        <li><a href="mailto:menyifan0001@gmail.com">门一凡</a></li>
+										<li><a href="mailto:dukanghui@gmail.com">杜康晖</a></li>
+										<li><a href="mailto:fanleehao@gmail.com">樊利豪</a></li>
                                     </ul>
                                 </li> 
-								<li><a href="index.jsp">联系我们</a></li>
 							</ul>
 						</div>
 					</div>

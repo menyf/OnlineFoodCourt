@@ -83,11 +83,11 @@
                                     </ul>
                                 </li> 
 								<li><a href="customerManage.jsp">用户管理</a></li>
-								<li class="dropdown"><a href="#">作者信息</i></a>
+								<li class="dropdown"><a href="#">联系作者</i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="https://menyifan.com">门一凡</a></li>
-										<li><a href="blog-single.jsp">杜康晖</a></li>
-										<li><a href="blog-single.jsp">樊利豪</a></li>
+                                        <li><a href="mailto:menyifan0001@gmail.com">门一凡</a></li>
+										<li><a href="mailto:dukanghui@gmail.com">杜康晖</a></li>
+										<li><a href="mailto:fanleehao@gmail.com">樊利豪</a></li>
                                     </ul>
                                 </li> 
 								

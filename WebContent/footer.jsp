@@ -25,7 +25,7 @@
 								</div>
 							</a>
 							<p>食尚潮流</p>
-							<h2>1 JUNE 2017</h2>
+							<h2>13 MAY 2016</h2>
 						</div>
 					</div>
 
@@ -40,7 +40,7 @@
 								</div>
 							</a>
 							<p>服务至上</p>
-							<h2>1 JUNE 2017</h2>
+							<h2>16 DECEMBER 2016</h2>
 						</div>
 					</div>
 
@@ -55,7 +55,7 @@
 								</div>
 							</a>
 							<p>专业品牌</p>
-							<h2>1 JUNE 2017</h2>
+							<h2>24 JANUARY 2017</h2>
 						</div>
 					</div>
 
@@ -138,6 +138,74 @@
 			</div>
 		</div>
 	</div>-->
+	<div class="footer-widget">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-2">
+					<div class="single-widget">
+						<h2>用户帮助</h2>
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="">服务中心</a></li>
+							<li><a href="">常见问题</a></li>
+							<li><a href="">在线客服</a></li>
+							<!-- <li><a href="">Change Location</a></li>
+							<li><a href="">FAQ’s</a></li> -->
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="single-widget">
+						<h2>商务合作</h2>
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="">我要加盟</a></li>
+							<li><a href="">加盟指南</a></li>
+							<li><a href="">市场合作</a></li>
+							<li><a href="">开放平台</a></li>
+							
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="single-widget">
+						<h2>关于我们</h2>
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="">饱了么介绍</a></li>
+							<li><a href="">加入我们</a></li>
+							<li><a href="">联系我们</a></li>
+							<li><a href="">规则中心</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="single-widget">
+						<h2>作者介绍</h2>
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="">中国地质大学（北京）</a></li>
+							<li><a href="">门一凡</a></li>
+							<li><a href="">杜康晖</a></li>
+							<li><a href="">樊利豪</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-3 col-sm-offset-1">
+					<div class="single-widget">
+						<h2>最新资讯 一手掌握</h2>
+						<form action="#" class="searchform">
+							<input type="text" placeholder="您的邮箱地址">
+							<button type="submit" class="btn btn-default">
+								<i class="fa fa-arrow-circle-o-right"></i>
+							</button>
+							<p>
+								我们绝不会泄露您的个人信息 <br>您可以随时取消订阅
+							</p>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
 <footer id="footer"><!--Footer-->				
 		<div class="footer-bottom">
 			<div class="container">

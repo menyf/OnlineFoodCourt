@@ -33,7 +33,23 @@ PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
 request.setAttribute("dishlist", pagemodel.getList());
 request.setAttribute("pageModel", pagemodel); 
 
-System.out.println("pageSize:"+String.valueOf(pageSize));
+System.out.println("pageSize为:"+String.valueOf(pageSize));
+String headerfile = "";
+if(session.getAttribute("loginuser") == null){
+	 headerfile = "header.jsp";
+}
+else{
+	Customer cusx = (Customer) session.getAttribute("loginuser");
+	String adminUsername = ConfigFactory.readProperty("username");
+	if(cusx.getUsername().equals(adminUsername) ){
+		headerfile="headerAdmin.jsp";
+		//<jsp:include page="headerAdmin.jsp"></jsp:include>										
+	}
+	else{
+		 headerfile = "header.jsp";
+		//<jsp:include page="header.jsp"></jsp:include>
+	}
+}
 
 %>
 
@@ -69,89 +85,9 @@ System.out.println("pageSize:"+String.valueOf(pageSize));
 <!--/head-->
 
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
-	<!-- 
-	 <section style="margin-top:0px; margin-bottom:50px">
-		<div class="container">
-			<TABLE cellSpacing=2 cellPadding=1 width="100%" align=center border=0>
-				<TBODY>
-					<c:forEach var="currentdish" items="${requestScope.dishlist}"
-						varStatus="status">
-						<c:if test="${status.index%2==0}">
-							<tr>
-						</c:if>
-						<td>
-							<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-								<TBODY>
-									<TR>
-										<TD vAlign=top width=90 height=90>
-											<A	href=showdetail?dishid=${currentdish.getDishID()}
-												target=_blank><IMG height=100 alt=点击图片查看内容
-												src=${currentdish.getImgURL() } width=100 border=0>
-											</A>
-										</TD>
-										<TD vAlign=top>
-											<TABLE cellSpacing=1 cellPadding=0 width="100%" align=center border=0>
-												<TBODY>
-													<TR>
-														<TD>
-															<A href=# target=_blank>
-																<STRONG>${currentdish.getName()}</STRONG>
-															</A>
-														</TD>
-													</TR>
-													<TR>
-														<TD height=21>
-															<FONT color=#ff0000>现价：人民币${currentdish.getPrice()}元</FONT>
-															<BR> ${currentdish.getDescription()}
-														</TD>
-													</TR>
-												</TBODY>
-											</TABLE>
-										</TD>
-									</TR>
-								</TBODY>
-							</TABLE>
-						</td>
-						<c:if test="${status.index%2!=0}">
-							</tr>
-						</c:if>
-					</c:forEach>
-					<tr>
-						<td height="2">
-							<div align="center">
-								<font color="#000000">&nbsp;共&nbsp;${requestScope.pageModel.bottomPageNO}&nbsp;页</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<font color="#000000">当前第</font>&nbsp;<font color="#000000">${param.pageNO}</font>&nbsp;
-								<font color="#000000">页</font>
-							</div>
-						</td>
-						<td>
-							<div align="center">
-								<a name="btnTopPage" id="btnTopPage" href="index.jsp?pageNO=1" title="首页">
-									|&lt;&lt;
-								</a>&nbsp;
-								<a name="btnPreviousPage" id="btnPreviousPage"
-									href="index.jsp?pageNO=${requestScope.pageModel.prevPageNO}" title="上页">
-									 &lt; 
-								</a>&nbsp; 
-								<a name="btnNextPage" id="btnNextPage"
-									href="index.jsp?pageNO=${requestScope.pageModel.nextPageNO}" title="下页">
-									 &gt; 
-								</a>&nbsp; 
-								<a name="btnBottomPage"	id="btnBottomPage"
-									href="index.jsp?pageNO=${requestScope.pageModel.bottomPageNO}"
-									title="尾页">
-								 	&gt;&gt;|
-								</a>
-							</div>
-						</td>
-					</tr>
-				</TBODY>
-			</TABLE>
 
-		</div>
-	</section>
-  -->
+ 	<jsp:include page="<%= headerfile %>"></jsp:include>
+ 
  	
  <section>
 		<div class="container">

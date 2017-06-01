@@ -217,15 +217,6 @@ public class ActionControl extends BaseService {
 	}
 	private void logOut(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		HttpSession session = request.getSession(true);
-		Customer cus = (Customer)session.getAttribute("loginuser");
-		Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
-		while(it.hasNext()){
-			Map.Entry entry = (Map.Entry) it.next();
-			CartItem ncin = new CartItem();
-			if (cus.getUsername()==ncin.username) {
-				cart.remove(ncin);
-			   } 
-		}
 		session.removeAttribute("loginuser");
 		response.sendRedirect("index.jsp");
 	}

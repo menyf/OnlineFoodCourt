@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -74,6 +75,7 @@ public class OrderAddControl extends HttpServlet {
 				if (!nc.username.equals(cuss.getUsername())) {
 					continue;
 				}
+				
 				int dishid = nc.id;
 				int disnumber = (Integer) entry.getValue();
 				
@@ -117,20 +119,25 @@ public class OrderAddControl extends HttpServlet {
 			e.printStackTrace();
 		}
 		Customer cuss = (Customer) session.getAttribute("loginuser");
+
 		Iterator<Map.Entry<Integer, Integer>> itt = cart.entrySet().iterator();
 		while(itt.hasNext())
 		{
 			
+			//Iterator<Map.Entry<Integer, Integer>> itt2 = (Iterator<Entry<Integer, Integer>>) itt.next();
+			System.out.println(10001);
 			Map.Entry entry = (Map.Entry) itt.next();
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
+			System.out.println(cuss.getUsername()+" "+ncin.username);
+			System.out.println();
 			if (ncin.username==cuss.getUsername()) {
-				//System.out.println("findout");
-				cart.remove(ncin);
+				itt.remove();
 			}
+			//itt = itt2;
+			//response.sendRedirect("mine.jsp");
 		}
 		
-//		request.getRequestDispatcher("mine.jsp").forward(request, response);
 		response.sendRedirect("mine.jsp");
 	}
 

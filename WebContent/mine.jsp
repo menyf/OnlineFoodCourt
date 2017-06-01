@@ -228,7 +228,7 @@
 				<table class="table table-condensed">
 					<%
 						if (cus == null) {
-							out.println("<tr ><a href=\"login.jsp\">去登录?</a></tr>");
+							out.println("<tr >还没登录？<a href=\"login.jsp\">去登录</a></tr>");
 						} else {
 							out.println("<thead>");
 							out.println("<tr class=\"cart_menu\">");

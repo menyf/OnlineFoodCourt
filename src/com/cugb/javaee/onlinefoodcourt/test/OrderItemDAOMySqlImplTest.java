@@ -24,7 +24,6 @@ public class OrderItemDAOMySqlImplTest {
 	public void test() throws SQLException {
 		String oid = "1496294184681manyfun711";
 		ArrayList<OrderItem> oit = orderitemdao.findOrderItems(oid);
-		System.out.println(oit.size());
 		
 	}
 

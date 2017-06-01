@@ -30,7 +30,6 @@ public class JDBCUtils {
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 			myds = (DataSource)envCtx.lookup("jndi/OnlineFoodCourt");
 		} catch (NamingException e) {
-			System.out.println("lookup失败");
 			e.printStackTrace();
 		}
 	}
@@ -38,7 +37,6 @@ public class JDBCUtils {
 	public static Connection getConnection() throws SQLException{
 		Connection conn = null;
 		conn = myds.getConnection();
-		System.out.println("正在生成: "+conn);
 		return conn;
 	}
 	===== JNDI结束 ===== */

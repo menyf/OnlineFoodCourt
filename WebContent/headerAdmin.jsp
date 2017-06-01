@@ -13,7 +13,7 @@
 								<%
 									Customer cus = (Customer) session.getAttribute("loginuser");
 									String adminUsername = ConfigFactory.readProperty("username");
-									System.out.println("用户名为:"+adminUsername+" " + cus.getUsername());
+									
 									if(cus.getUsername().equals(adminUsername) ){
 										out.println("<li><a href=\"\"></i>欢迎管理员："+cus.getUsername()+"</a></li>");
 									}

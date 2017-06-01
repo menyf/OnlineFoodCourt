@@ -95,7 +95,6 @@ public class OrderAddControl extends HttpServlet {
 		}
 		
 		//Step2. 
-		System.out.println("送货地址："+address);
 		order.setOrderID(orderID);
 		order.setUsername(cus.getUsername());
 		order.setTime(timestamp);
@@ -125,12 +124,9 @@ public class OrderAddControl extends HttpServlet {
 		{
 			
 			//Iterator<Map.Entry<Integer, Integer>> itt2 = (Iterator<Entry<Integer, Integer>>) itt.next();
-			System.out.println(10001);
 			Map.Entry entry = (Map.Entry) itt.next();
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
-			System.out.println(cuss.getUsername()+" "+ncin.username);
-			System.out.println();
 			if (ncin.username==cuss.getUsername()) {
 				itt.remove();
 			}

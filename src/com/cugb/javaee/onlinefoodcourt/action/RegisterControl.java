@@ -60,7 +60,6 @@ public class RegisterControl extends BaseService {
 		        out.print("<script>alert(decodeURIComponent('"+a+"') );window.location.href='login.jsp'</script>"); 
 				
 				//resp.sendRedirect("login.html");
-				System.out.println("html");
 			}
 			else{
 				//注册成功

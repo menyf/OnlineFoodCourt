@@ -70,7 +70,6 @@ public class OrderDAOMySqlImplTest{
 		ArrayList<Order> arrayList = null;
 		arrayList = orderdao.findOrders("1001");
 		for(Order order: arrayList){
-			System.out.println(order.getTime().toString()+" 个数为："+order.getItems().size());
 		}
 		
 		

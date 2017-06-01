@@ -238,7 +238,6 @@
 									
 									ICustomerDAO cusDAO = (ICustomerDAO)DAOFactory.newInstance("ICustomerDAO");
 									Customer cus = cusDAO.findCustomer(username);
-									System.out.println(cus.getUsername()+" : "+cus.getPassword());
 									JSPOutput.outputCustomerDelete(out, cus);
 								%>
 

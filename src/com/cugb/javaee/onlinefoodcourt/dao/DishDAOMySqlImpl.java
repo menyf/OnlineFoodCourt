@@ -54,7 +54,6 @@ public class DishDAOMySqlImpl extends baseDAO implements IDishDAO {
 	public Dish findMaxDish() throws SQLException {
 		String sql = "select dishid DishID, name Name, price Price, description Description, imgurl ImgURL, discount Discount from Dish where dishid = (select max(dishid) from Dish)";
 		return (Dish) findObj(sql, null,  Dish.class);
-//		System.out.println((int) arr.get(0));
 //		return (int) arr.get(0);
 //		return findObjs(sql, int);
 	}

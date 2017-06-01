@@ -30,14 +30,11 @@ public class DishService {
 	 * @throws InstantiationException 
 	 */
 	public PageModel<Dish> findDish4PageList(int pageNO,int pageSize) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
-		System.out.println(pageNO + "   8978977999");
 		dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
 		String strsql = "select dishid DishID, name Name, price Price, description Description, imgurl ImgURL, discount Discount from Dish limit ?,?";
 		int actualpageNO = (pageNO-1)*pageSize;
 		Object[] params = {actualpageNO,pageSize};
 		ArrayList<Dish> dishlist = dishdao.findDishs(strsql, params);
-		System.out.println(dishlist.get(1).getDishID()+"图片地址");
-		System.out.println(dishlist.size()+"数组大小");
 //		PageModel<Dish> pagemodel = new PageModel<Dish>();
 //		pagemodel.setList(dishlist);
 //		pagemodel.setPageNO(pageNO);

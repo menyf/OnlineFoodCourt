@@ -46,7 +46,6 @@ public class CustomerDAOMySqlImplTest {
 //	@Test
 //	public void testFindCustomer() throws SQLException {
 //		Customer cus = cusDAO.findCustomer("root");
-//		System.out.println(cus.getPassword());
 //		assertEquals("admin", cus.getPassword());
 //	}
 

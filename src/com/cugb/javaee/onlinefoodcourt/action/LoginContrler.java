@@ -77,7 +77,6 @@ public class LoginContrler extends HttpServlet {
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.println("实例化异常");
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

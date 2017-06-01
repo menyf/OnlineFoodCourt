@@ -28,6 +28,7 @@ import org.eclipse.jdt.internal.compiler.env.IGenericField;
 import org.omg.CORBA.INTERNAL;
 
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
+import com.sun.xml.internal.ws.resources.HttpserverMessages;
 
 //import edu.cugb.xg.javaee.bean.Dish;
 //import edu.cugb.xg.javaee.biz.DishService;
@@ -105,14 +106,18 @@ public class ActionControl extends BaseService {
 			break;
 		case "goCart":
 			goCart(request,response);
+			break;
 			// 添加到购物车
+		case "logOut":
+			logOut(request,response);
+			break;
 		}
 
 	}
 
 	private void showdetial(HttpServletRequest request, HttpServletResponse response) throws InstantiationException,
 		    IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException {
-		System.out.println("oooooo");
+		//System.out.println("oooooo");
 		String Did = request.getParameter("dishid");
 		Dish current = new Dish();
 		IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
@@ -232,6 +237,22 @@ public class ActionControl extends BaseService {
 		else{
 			response.sendRedirect("cart.jsp");
 		}
+	}
+	private void logOut(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		HttpSession session = request.getSession(true);
+		Customer cus = (Customer)session.getAttribute("loginuser");
+		Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry entry = (Map.Entry) it.next();
+			CartItem ncin = new CartItem();
+			if (cus.getUsername()==ncin.username) {
+				//System.out.println("findout");
+				//flag = 1;
+				cart.remove(ncin);
+			   } 
+		}
+		session.removeAttribute("loginuser");
+		response.sendRedirect("index.jsp");
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

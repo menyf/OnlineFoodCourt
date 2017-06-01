@@ -87,8 +87,8 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="me.jsp">我的</a></li>
-								<li><a href="checkout.html">去下单</a></li>
-								<li><a href="cart.html">我的购物车</a></li>
+								<!--  <li><a href="checkout.html">去下单</a></li>-->
+								<li><a href="action?actiontype=goCart">我的购物车</a></li>
 								<li><a href="login.jsp" class="active">登录</a></li>
 							</ul>
 						</div>
@@ -113,13 +113,13 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html">首页</a></li>
-								<li class="dropdown"><a href="#">购物</a>
+								<li><a href="show.jsp">首页</a></li>
+								<li class="dropdown"><a href="show.jsp">购物</a>
 									<ul role="menu" class="sub-menu">
 										<li><a href="shop.html"></a></li>
 										<li><a href="product-details.html">菜品详情</a></li>
-										<li><a href="checkout.html">去下单</a></li>
-										<li><a href="cart.html">购物车</a></li>
+										<!-- <li><a href="checkout.html">去下单</a></li> -->
+										<li><a href="action?actiontype=goCart">购物车</a></li>
 										<li><a href="login.jsp" class="active">登录</a></li>
 									</ul></li>
 								<li class="dropdown"><a href="#">动态</i></a>
@@ -240,27 +240,6 @@
 
 	</section>
 
-	<footer id="footer">
-		<!--Footer-->
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<p class="pull-left">Copyright © 2017 JAVA EE课程实践. All rights
-						reserved.</p>
-					<p class="pull-right">
-						Designed by <span>DU/MEN/FAN</span>
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!--/Footer-->
-
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/price-range.js"></script>
-	<script src="js/jquery.prettyPhoto.js"></script>
-	<script src="js/main.js"></script>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

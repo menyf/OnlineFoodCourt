@@ -16,12 +16,12 @@
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
 								<%
-									Customer cus = (Customer) session.getAttribute("loginuser");
-									if(cus == null){
+									Customer cuss = (Customer) session.getAttribute("loginuser");
+									if(cuss == null){
 										out.println("<li><a href=\"\">请登录</a></li>");
 									}
 									else{
-										out.println("<li><a href=\"\"></i>欢迎："+cus.getUsername()+"</a></li>");
+										out.println("<li><a href=\"\"></i>欢迎："+cuss.getUsername()+"</a></li>");
 									}
 								%>	
 							</ul>
@@ -43,9 +43,18 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="me.jsp">我的</a></li>
-								<li><a href="checkout.jsp">去下单</a></li>
-								<li><a href="cart.jsp">我的购物车</a></li>
-								<li><a href="login.jsp" class="active">登录</a></li>
+								<!-- <li><a href="checkout.jsp">去下单</a></li>-->
+								<li><a href="action?actiontype=goCart">我的购物车</a></li>
+								<%
+									//Customer cus = (Customer) session.getAttribute("loginuser");
+									if(cuss == null){
+										out.println("<li><a href=\"\">请登录</a></li>");
+									}
+									else{
+										out.println("<li><a href=\"action?actiontype=logOut\"></i>注销</a></li>");
+									}
+								%>	
+								<!--  <li><a href="login.jsp" class="active">登录</a></li>-->
 							</ul>
 						</div>
 					</div>
@@ -71,19 +80,27 @@
 								<li class="dropdown"><a href="#">购物</a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.jsp"></a></li>
-										<li><a href="product-details.jsp">菜品详情</a></li> 
-										<li><a href="checkout.jsp">去下单</a></li> 
-										<li><a href="cart.jsp">购物车</a></li> 
-										<li><a href="login.jsp" class="active">登录</a></li> 
+										<li><a href="index.jsp">菜品详情</a></li> 
+										<!--<li><a href="checkout.jsp">去下单</a></li>--> 
+										<li><a href="action?actiontype=goCart">购物车</a></li> 
+										<%
+									//Customer cus = (Customer) session.getAttribute("loginuser");
+									if(cuss == null){
+										out.println("<li><a href=\"\">请登录</a></li>");
+									}
+									else{
+										out.println("<li><a href=\"action?actiontype=logOut\"></i>注销</a></li>");
+									}
+								%>	 
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">动态</i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.jsp">动态列表</a></li>
-										<li><a href="blog-single.jsp">个人动态</a></li>
+                                        <li><a href="index.jsp">动态列表</a></li>
+										<li><a href="index.jsp">个人动态</a></li>
                                     </ul>
                                 </li> 
-								<li><a href="contact-us.jsp">联系我们</a></li>
+								<li><a href="index.jsp">联系我们</a></li>
 							</ul>
 						</div>
 					</div>

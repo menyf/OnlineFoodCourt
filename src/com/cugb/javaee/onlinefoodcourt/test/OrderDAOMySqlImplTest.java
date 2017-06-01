@@ -67,12 +67,12 @@ public class OrderDAOMySqlImplTest{
 	@Test
 	public void testFindOrders() throws SQLException {
 		//fail("Not yet implemented");
-//		ArrayList<Order> arrayList = null;
-//		arrayList = orderdao.findOrders("men");
-//		for(Order order: arrayList){
-//			System.out.println(order.getTime().toString());
-//		}
-		System.out.println((new java.util.Date()).getTime());
+		ArrayList<Order> arrayList = null;
+		arrayList = orderdao.findOrders("men");
+		for(Order order: arrayList){
+			System.out.println(order.getTime().toString()+" "+order.getItems().get(1).getDishID());
+		}
+		//System.out.println((new java.util.Date()).getTime());
 		
 	}
 }

@@ -257,6 +257,7 @@
 							int totalNum = 0;
 							for(Order order:arr) {							
 								out.println("<tr>");
+								
 								out.println(" <td class=\"cart_product\">");
 								out.println("  <a href=\"\">");
 								out.println("  <h4>");

@@ -33,6 +33,23 @@ PageModel<Dish> pagemodel = dishserv.findDish4PageList(pageNO, pageSize);
 request.setAttribute("dishlist", pagemodel.getList());
 request.setAttribute("pageModel", pagemodel); 
 
+System.out.println("pageSize为:"+String.valueOf(pageSize));
+String headerfile = "";
+if(session.getAttribute("loginuser") == null){
+	 headerfile = "header.jsp";
+}
+else{
+	Customer cusx = (Customer) session.getAttribute("loginuser");
+	String adminUsername = ConfigFactory.readProperty("username");
+	if(cusx.getUsername().equals(adminUsername) ){
+		headerfile="headerAdmin.jsp";
+		//<jsp:include page="headerAdmin.jsp"></jsp:include>										
+	}
+	else{
+		 headerfile = "header.jsp";
+		//<jsp:include page="header.jsp"></jsp:include>
+	}
+}
 
 %>
 
@@ -68,180 +85,9 @@ request.setAttribute("pageModel", pagemodel);
 <!--/head-->
 
 <body>
-	<header id="header"><!--header-->
-		<div class="header_top"><!--header_top-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="contactinfo">
-							<ul class="nav nav-pills">
-								<%
-									Customer cus = (Customer) session.getAttribute("loginuser");
-									if(cus == null){
-										out.println("<li><a href=\"\"><i class=\"fa fa-phone\"></i>请登录 用户名</a></li>");
-										out.println("<li><a href=\"\"><i class=\"fa fa-envelope\"></i>请登录 邮箱</a></li>");
-									}
-									else{
-										out.println("<li><a href=\"\"><i class=\"fa fa-phone\"></i>"+cus.getUsername()+"</a></li>");
-										out.println("<li><a href=\"\"><i class=\"fa fa-envelope\"></i>"+cus.getNickname()+"</a></li>");
-									}
-								%>
-								<!-- <li><a href=""><i class="fa fa-phone"></i>这里应该显示用户名</a></li>
-								<li><a href=""><i class="fa fa-envelope"></i>这里应该显示邮箱</a></li> -->
-							</ul>
-						</div>
-					</div>					
-				</div>
-			</div>
-		</div><!--/header_top-->
-		
-		<div class="header-middle"><!--header-middle-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
-						</div>
-					</div>
-					<div class="col-sm-8">
-						<div class="shop-menu pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href="me.html">我的</a></li>
-								<li><a href="checkout.html">去下单</a></li>
-								<li><a href="cart.html">我的购物车</a></li>
-								<li><a href="login.html" class="active">登录</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header-middle-->
-	
-		<div class="header-bottom"><!--header-bottom-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-9">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html">首页</a></li>
-								<li class="dropdown"><a href="#">购物</a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html"></a></li>
-										<li><a href="product-details.html">菜品详情</a></li> 
-										<li><a href="checkout.html">去下单</a></li> 
-										<li><a href="cart.html">购物车</a></li> 
-										<li><a href="login.html" class="active">登录</a></li> 
-                                    </ul>
-                                </li> 
-								<li class="dropdown"><a href="#">动态</i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">动态列表</a></li>
-										<li><a href="blog-single.html">个人动态</a></li>
-                                    </ul>
-                                </li> 
-								<li><a href="contact-us.html">联系我们</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="搜索美味"/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header-bottom-->
-	</header><!--/header-->
-	<!-- 
-	 <section style="margin-top:0px; margin-bottom:50px">
-		<div class="container">
-			<TABLE cellSpacing=2 cellPadding=1 width="100%" align=center border=0>
-				<TBODY>
-					<c:forEach var="currentdish" items="${requestScope.dishlist}"
-						varStatus="status">
-						<c:if test="${status.index%2==0}">
-							<tr>
-						</c:if>
-						<td>
-							<TABLE height="100%" cellSpacing=1 cellPadding=2 border=0>
-								<TBODY>
-									<TR>
-										<TD vAlign=top width=90 height=90>
-											<A	href=showdetail?dishid=${currentdish.getDishID()}
-												target=_blank><IMG height=100 alt=点击图片查看内容
-												src=${currentdish.getImgURL() } width=100 border=0>
-											</A>
-										</TD>
-										<TD vAlign=top>
-											<TABLE cellSpacing=1 cellPadding=0 width="100%" align=center border=0>
-												<TBODY>
-													<TR>
-														<TD>
-															<A href=# target=_blank>
-																<STRONG>${currentdish.getName()}</STRONG>
-															</A>
-														</TD>
-													</TR>
-													<TR>
-														<TD height=21>
-															<FONT color=#ff0000>现价：人民币${currentdish.getPrice()}元</FONT>
-															<BR> ${currentdish.getDescription()}
-														</TD>
-													</TR>
-												</TBODY>
-											</TABLE>
-										</TD>
-									</TR>
-								</TBODY>
-							</TABLE>
-						</td>
-						<c:if test="${status.index%2!=0}">
-							</tr>
-						</c:if>
-					</c:forEach>
-					<tr>
-						<td height="2">
-							<div align="center">
-								<font color="#000000">&nbsp;共&nbsp;${requestScope.pageModel.bottomPageNO}&nbsp;页</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<font color="#000000">当前第</font>&nbsp;<font color="#000000">${param.pageNO}</font>&nbsp;
-								<font color="#000000">页</font>
-							</div>
-						</td>
-						<td>
-							<div align="center">
-								<a name="btnTopPage" id="btnTopPage" href="index.jsp?pageNO=1" title="首页">
-									|&lt;&lt;
-								</a>&nbsp;
-								<a name="btnPreviousPage" id="btnPreviousPage"
-									href="index.jsp?pageNO=${requestScope.pageModel.prevPageNO}" title="上页">
-									 &lt; 
-								</a>&nbsp; 
-								<a name="btnNextPage" id="btnNextPage"
-									href="index.jsp?pageNO=${requestScope.pageModel.nextPageNO}" title="下页">
-									 &gt; 
-								</a>&nbsp; 
-								<a name="btnBottomPage"	id="btnBottomPage"
-									href="index.jsp?pageNO=${requestScope.pageModel.bottomPageNO}"
-									title="尾页">
-								 	&gt;&gt;|
-								</a>
-							</div>
-						</td>
-					</tr>
-				</TBODY>
-			</TABLE>
 
-		</div>
-	</section>
-  -->
+ 	<jsp:include page="<%= headerfile %>"></jsp:include>
+ 
  	
  <section>
 		<div class="container">
@@ -421,22 +267,6 @@ request.setAttribute("pageModel", pagemodel);
 		</div>
 	</section>
   
-	<footer id="footer"><!--Footer-->				
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<p class="pull-left">Copyright © 2017 JAVA EE课程实践. All rights reserved.</p>
-					<p class="pull-right">Designed by <span>DU/MEN/FAN</span></p>
-				</div>
-			</div>
-		</div>		
-	</footer><!--/Footer-->  
-   
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/price-range.js"></script>
-	<script src="js/jquery.prettyPhoto.js"></script>
-	<script src="js/main.js"></script>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

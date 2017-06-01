@@ -57,94 +57,7 @@
 </head><!--/head-->
 
 <body>
-	<header id="header"><!--header-->
-		<div class="header_top"><!--header_top-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="contactinfo">
-							<ul class="nav nav-pills">
-								<%
-									Customer cus = (Customer) session.getAttribute("loginuser");
-									if(cus == null){
-										out.println("<li><a href=\"\">请登录</a></li>");
-									}
-									else{
-										out.println("<li><a href=\"\"></i>欢迎："+cus.getUsername()+"</a></li>");
-									}
-								%>	
-							</ul>
-						</div>
-					</div>					
-				</div>
-			</div>
-		</div><!--/header_top-->
-		
-		<div class="header-middle"><!--header-middle-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
-						</div>
-					</div>
-					<div class="col-sm-8">
-						<div class="shop-menu pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href="me.jsp">我的</a></li>
-								<li><a href="checkout.html">去下单</a></li>
-								<li><a href="shopcart.html">我的购物车</a></li>
-								<li><a href="login.jsp" class="active">登录</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header-middle-->
-	
-		<div class="header-bottom"><!--header-bottom-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-9">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.jsp">首页</a></li>
-								<li class="dropdown"><a href="#">购物</a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html"></a></li>
-										<li><a href="product-details.html">菜品详情</a></li> 
-										<li><a href="checkout.html">去下单</a></li> 
-										<li><a href="cart.html">购物车</a></li> 
-										<li><a href="login.html" class="active">登录</a></li> 
-                                    </ul>
-                                </li> 
-								<li class="dropdown"><a href="#">动态</i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">动态列表</a></li>
-										<li><a href="blog-single.html">个人动态</a></li>
-                                    </ul>
-                                </li> 
-								<li><a href="contact-us.html">联系我们</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="搜索美味"/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header-bottom-->
-	</header><!--/header-->
+	<jsp:include page="header.jsp"></jsp:include>
 	
 	<section id="form" style="margin-top:0px; margin-bottom:100px"><!--form-->
 		<div class="container">
@@ -155,6 +68,9 @@
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
 						<h2>修改我的信息</h2>
+						<%
+									Customer cus = (Customer) session.getAttribute("loginuser");
+						%>
 						<form action="modifyCusControl" method="POST" name="modifyCusForm" onSubmit="return checkInfo()">
 							<%out.println("<input type=\"text\" disabled=\"true\" value=\"" + cus.getUsername()+"\"/>");%>
 							<input type="email" placeholder="邮箱" name="modifyEmail"/>

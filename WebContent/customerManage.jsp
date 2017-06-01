@@ -37,7 +37,7 @@
 </head>
 <!--/head-->
 <body>
-	<header id="header"> <!--header-->
+	<%-- <header id="header"> <!--header-->
 	<div class="header_top">
 		<!--header_top-->
 		<div class="container">
@@ -165,7 +165,9 @@
 	</div>
 	<!--/header-bottom--> </header>
 	<!--/header-->
+--%>
 
+<jsp:include page="headerAdmin.jsp"></jsp:include>
 	<section id="cart_items">
 	<div class="container">
 		<div class="breadcrumbs">
@@ -194,7 +196,7 @@
 					<tr>
 						<th>用户名</th>
 						<th>密码</th>
-						<th>昵称</th>
+						<th>邮箱</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -388,29 +390,7 @@
 		</div>
 	</div>
 
-	<div class="footer-bottom">
-		<div class="container">
-			<div class="row">
-				<p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights
-					reserved.</p>
-				<p class="pull-right">
-					Designed by <span><a target="_blank"
-						href="http://www.themeum.com">Themeum</a></span>
-				</p>
-			</div>
-		</div>
-	</div>
-
-	</footer>
-	<!--/Footer-->
-
-
-
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/jquery.prettyPhoto.js"></script>
-	<script src="js/main.js"></script>
+	<jsp:include page="footer.jsp"></jsp:include>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-<%@page import="com.cugb.javaee.onlinefoodcourt.bean.cartitem"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.CartItem"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
@@ -250,8 +250,8 @@
 							int totalNum = 0;
 							while (it.hasNext()) {
 								Map.Entry entry = (Map.Entry) it.next();
-								cartitem nc = new cartitem();
-								nc = (cartitem) entry.getKey();
+								CartItem nc = new CartItem();
+								nc = (CartItem) entry.getKey();
 								Customer cuss = (Customer) session.getAttribute("loginuser");
 								if (!nc.username.equals(cuss.getUsername())) {
 									continue;

@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<script type="text/javascript" src="fckeditor.js"></script>
+	</head>
+
+	<body>
+		<form>
+			标题:<input type="text" name="title"/><br>
+			内容:<textarea name="content"></textarea><br>		
+			<input type="submit"/>
+		</form>
+
+			<script type="text/javascript">
+				var fck = new FCKeditor( "content" );
+				fck.BasePath = "./";
+				fck.ToolbarSet = "itcastbbs";
+				fck.Width = "600";
+				fck.Height = "400";
+				fck.ReplaceTextarea();
+			</script>
+	</body>
+</html>
+
+

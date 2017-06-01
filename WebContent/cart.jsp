@@ -273,33 +273,8 @@
 	</section>
 	<!--/#cart_items-->
 
-<<<<<<< HEAD
-
-	<footer id="footer">
-		<!--Footer-->
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<p class="pull-left">Copyright © 2017 JAVA EE课程实践. All rights
-						reserved.</p>
-					<p class="pull-right">
-						Designed by <span>DU/MEN/FAN</span>
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!--/Footer-->
-
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/price-range.js"></script>
-	<script src="js/jquery.prettyPhoto.js"></script>
-	<script src="js/main.js"></script>
-=======
 	
 <jsp:include page="footer.jsp"></jsp:include>
->>>>>>> a77f5f99fe2ab3a4988425df1c455f4817137f01
+
 </body>
 </html>

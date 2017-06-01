@@ -52,7 +52,7 @@ public class OrderAddControl extends HttpServlet {
 		Customer cus = (Customer) session.getAttribute("loginuser");
 		java.util.Date today = new java.util.Date();
 		Timestamp timestamp = new Timestamp(today.getTime());
-		String orderID = String.valueOf((new java.util.Date()).getTime())+cus.getUsername();
+		String orderID = String.valueOf((new java.util.Date()).getTime());
 		
 		String address = request.getParameter("address");
 		String tel = request.getParameter("tel");
@@ -116,17 +116,18 @@ public class OrderAddControl extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Customer cuss = (Customer) session.getAttribute("loginuser");
 		Iterator<Map.Entry<Integer, Integer>> itt = cart.entrySet().iterator();
 		while(itt.hasNext())
 		{
-			Customer cuss = (Customer) session.getAttribute("loginuser");
+			
 			Map.Entry entry = (Map.Entry) itt.next();
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
 			if (ncin.username==cuss.getUsername()) {
 				//System.out.println("findout");
 				cart.remove(ncin);
-			} 
+			}
 		}
 		
 //		request.getRequestDispatcher("mine.jsp").forward(request, response);

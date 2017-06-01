@@ -65,14 +65,14 @@ public class OrderDAOMySqlImplTest{
 	}*/
 
 	@Test
-	public void testFindOrders() throws SQLException {
+	public void testFindOrders() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		//fail("Not yet implemented");
-//		ArrayList<Order> arrayList = null;
-//		arrayList = orderdao.findOrders("men");
-//		for(Order order: arrayList){
-//			System.out.println(order.getTime().toString());
-//		}
-		System.out.println((new java.util.Date()).getTime());
+		ArrayList<Order> arrayList = null;
+		arrayList = orderdao.findOrders("1001");
+		for(Order order: arrayList){
+			System.out.println(order.getTime().toString()+" 个数为："+order.getItems().size());
+		}
+		
 		
 	}
 }

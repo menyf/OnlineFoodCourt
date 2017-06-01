@@ -18,8 +18,7 @@ public class OrderItemDAOMySqlImpl extends baseDAO implements IOrderItemDAO {
 	@Override
 	public ArrayList findOrderItems(String orderId) throws SQLException {
 		// TODO Auto-generated method stub
-		String sql = "select dishid DishID, orderid OrderID, count Count, finalPrice FinalPrice from OrderItem where orderid = ?";
-		Object[] params = {orderId};
+		String sql = "select dishid DishID, orderid OrderID, count Count, finalPrice FinalPrice from OrderItem where orderid = '"+orderId+"'";
 		return findObjs(sql, OrderItem.class);
 	}
 

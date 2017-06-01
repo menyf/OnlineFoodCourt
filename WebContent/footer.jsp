@@ -125,7 +125,7 @@
 					<div class="single-widget">
 						<h2>作者介绍</h2>
 						<ul class="nav nav-pills nav-stacked">
-							<li><a href="">中国地质大学（北京）</a></li>
+							<li><a href="https://github.com/menyf/OnlineFoodCourt">访问本项目Github仓库</a></li>
 							<li><a href="">门一凡</a></li>
 							<li><a href="">杜康晖</a></li>
 							<li><a href="">樊利豪</a></li>

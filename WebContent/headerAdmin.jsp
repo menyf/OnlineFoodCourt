@@ -29,7 +29,7 @@
 							<ul class="nav navbar-nav">
 								<li><a href=""><i class="fa fa-weibo"></i></a></li>
 								<li><a href=""><i class="fa fa-renren"></i></a></li>
-								<li><a href=""><i class="fa fa-github"></i></a></li>
+								<li><a href="https://github.com/menyf/OnlineFoodCourt"><i class="fa fa-github"></i></a></li>
 								
 							</ul>
 						</div>

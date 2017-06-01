@@ -137,7 +137,7 @@ public class ActionControl extends BaseService {
 			String nn = (request.getParameter("number"));
 			String Did = request.getParameter("dishID");
 			Dish current = new Dish();
-			System.out.println(Did + " id");
+			//System.out.println(Did + " id");
 			IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
 			int id = Integer.parseInt(Did);
 			current = dishdao.findDish(id);
@@ -146,8 +146,8 @@ public class ActionControl extends BaseService {
 			Customer now = (Customer) session.getAttribute("loginuser");
 			nc.username = now.getUsername();
 			nc.id = id;
-			System.out.println(cart.containsKey(nc));
-			System.out.println(nc+"   "+nc.id);
+			//System.out.println(cart.containsKey(nc));
+			//System.out.println(nc+"   "+nc.id);
 			Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
 			int flag = 0;
 			while(it.hasNext()){
@@ -199,7 +199,7 @@ public class ActionControl extends BaseService {
 		} else {
 			String Did = request.getParameter("dishid");
 			Dish current = new Dish();
-			System.out.println(Did + " id");
+			//System.out.println(Did + " id");
 			IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
 			int id = Integer.parseInt(Did);
 			current = dishdao.findDish(id);
@@ -207,8 +207,8 @@ public class ActionControl extends BaseService {
 			Customer now = (Customer) session.getAttribute("loginuser");
 			nc.username = now.getUsername();
 			nc.id = id;
-			System.out.println(cart.containsKey(nc));
-			System.out.println(nc+"   "+nc.id);
+			//System.out.println(cart.containsKey(nc));
+			//System.out.println(nc+"   "+nc.id);
 			Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
 			int flag = 0;
 			while(it.hasNext()){
@@ -216,7 +216,7 @@ public class ActionControl extends BaseService {
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
 			if (nc.id==ncin.id&&nc.username==ncin.username) {
-				System.out.println("findout");
+				//System.out.println("findout");
 				flag = 1;
 				cart.put(ncin, (Integer) cart.get(ncin) + 1);
 			   } 

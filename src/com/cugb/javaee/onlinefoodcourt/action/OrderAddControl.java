@@ -85,7 +85,7 @@ public class OrderAddControl extends HttpServlet {
 				oit.setFinalPrice(cur.getDiscount());
 				oit.setOrderID(orderID);
 				arr.add(oit);
-				cart.remove(nc);
+				//cart.remove(nc);
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -117,7 +117,17 @@ public class OrderAddControl extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
+		while(it.hasNext())
+		{
+			Customer cuss = (Customer) session.getAttribute("loginuser");
+			Map.Entry entry = (Map.Entry) it.next();
+			CartItem ncin = new CartItem();
+			ncin = (CartItem)entry.getKey();
+			if (ncin.username==cuss.getUsername()) {
+				//System.out.println("findout");
+				cart.remove(ncin);
+			} 
+		}
 		
 //		request.getRequestDispatcher("mine.jsp").forward(request, response);
 		response.sendRedirect("mine.jsp");

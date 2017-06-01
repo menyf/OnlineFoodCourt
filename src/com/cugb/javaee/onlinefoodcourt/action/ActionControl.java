@@ -30,9 +30,6 @@ import org.omg.CORBA.INTERNAL;
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
 import com.sun.xml.internal.ws.resources.HttpserverMessages;
 
-//import edu.cugb.xg.javaee.bean.Dish;
-//import edu.cugb.xg.javaee.biz.DishService;
-//import edu.cugb.xg.javaee.utils.PageModel;
 
 /**
  * Servlet implementation class ActionControl
@@ -61,19 +58,6 @@ public class ActionControl extends BaseService {
 		// logger.debug(getServletConfig());;
 		String actiontype = request.getParameter("actiontype");
 		switch (actiontype) {
-//		case "login":
-//			// 登录
-//			//loginCheck(request, response);
-//			break;
-//		case "pagelist":
-//			// 分页显示
-//			try {
-//				//pageListView(request, response);
-//			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			break;
 		case "detail":
 			System.out.println("oooooo");
 			try {
@@ -146,8 +130,6 @@ public class ActionControl extends BaseService {
 			Customer now = (Customer) session.getAttribute("loginuser");
 			nc.username = now.getUsername();
 			nc.id = id;
-			//System.out.println(cart.containsKey(nc));
-			//System.out.println(nc+"   "+nc.id);
 			Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
 			int flag = 0;
 			while(it.hasNext()){
@@ -172,7 +154,6 @@ public class ActionControl extends BaseService {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		String Did = request.getParameter("dishid");
-		System.out.println(Did + "fuck");
 		Customer now = (Customer) session.getAttribute("loginuser");
 		session.setAttribute("shopcart", cart);
 		Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
@@ -199,7 +180,6 @@ public class ActionControl extends BaseService {
 		} else {
 			String Did = request.getParameter("dishid");
 			Dish current = new Dish();
-			//System.out.println(Did + " id");
 			IDishDAO dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
 			int id = Integer.parseInt(Did);
 			current = dishdao.findDish(id);
@@ -207,8 +187,6 @@ public class ActionControl extends BaseService {
 			Customer now = (Customer) session.getAttribute("loginuser");
 			nc.username = now.getUsername();
 			nc.id = id;
-			//System.out.println(cart.containsKey(nc));
-			//System.out.println(nc+"   "+nc.id);
 			Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
 			int flag = 0;
 			while(it.hasNext()){
@@ -216,7 +194,6 @@ public class ActionControl extends BaseService {
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
 			if (nc.id==ncin.id&&nc.username==ncin.username) {
-				//System.out.println("findout");
 				flag = 1;
 				cart.put(ncin, (Integer) cart.get(ncin) + 1);
 			   } 
@@ -246,8 +223,6 @@ public class ActionControl extends BaseService {
 			Map.Entry entry = (Map.Entry) it.next();
 			CartItem ncin = new CartItem();
 			if (cus.getUsername()==ncin.username) {
-				//System.out.println("findout");
-				//flag = 1;
 				cart.remove(ncin);
 			   } 
 		}

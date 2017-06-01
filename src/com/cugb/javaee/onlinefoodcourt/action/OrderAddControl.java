@@ -116,11 +116,11 @@ public class OrderAddControl extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		while(it.hasNext())
+		Iterator<Map.Entry<Integer, Integer>> itt = cart.entrySet().iterator();
+		while(itt.hasNext())
 		{
 			Customer cuss = (Customer) session.getAttribute("loginuser");
-			Map.Entry entry = (Map.Entry) it.next();
+			Map.Entry entry = (Map.Entry) itt.next();
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
 			if (ncin.username==cuss.getUsername()) {

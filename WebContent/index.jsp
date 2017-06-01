@@ -101,16 +101,16 @@ System.out.println("pageSize:"+String.valueOf(pageSize));
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+							<a href="index.jsp"><img src="images/home/logo.png" alt="" /></a>
 						</div>
 					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="me.html">我的</a></li>
-								<li><a href="checkout.html">去下单</a></li>
-								<li><a href="cart.html">我的购物车</a></li>
-								<li><a href="login.html" class="active">登录</a></li>
+								<li><a href="me.jsp">我的</a></li>
+								<li><a href="checkout.jsp">去下单</a></li>
+								<li><a href="cart.jsp">我的购物车</a></li>
+								<li><a href="login.jsp" class="active">登录</a></li>
 							</ul>
 						</div>
 					</div>
@@ -132,23 +132,23 @@ System.out.println("pageSize:"+String.valueOf(pageSize));
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html">首页</a></li>
+								<li><a href="index.jsp">首页</a></li>
 								<li class="dropdown"><a href="#">购物</a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html"></a></li>
-										<li><a href="product-details.html">菜品详情</a></li> 
-										<li><a href="checkout.html">去下单</a></li> 
-										<li><a href="cart.html">购物车</a></li> 
-										<li><a href="login.html" class="active">登录</a></li> 
+                                        <li><a href="shop.jsp"></a></li>
+										<li><a href="product-details.jsp">菜品详情</a></li> 
+										<li><a href="checkout.jsp">去下单</a></li> 
+										<li><a href="cart.jsp">购物车</a></li> 
+										<li><a href="login.jsp" class="active">登录</a></li> 
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">动态</i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">动态列表</a></li>
-										<li><a href="blog-single.html">个人动态</a></li>
+                                        <li><a href="blog.jsp">动态列表</a></li>
+										<li><a href="blog-single.jsp">个人动态</a></li>
                                     </ul>
                                 </li> 
-								<li><a href="contact-us.html">联系我们</a></li>
+								<li><a href="contact-us.jsp">联系我们</a></li>
 							</ul>
 						</div>
 					</div>

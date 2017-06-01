@@ -85,6 +85,7 @@ public class OrderAddControl extends HttpServlet {
 				oit.setFinalPrice(cur.getDiscount());
 				oit.setOrderID(orderID);
 				arr.add(oit);
+				cart.remove(nc);
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -115,6 +116,7 @@ public class OrderAddControl extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 		
 //		request.getRequestDispatcher("mine.jsp").forward(request, response);

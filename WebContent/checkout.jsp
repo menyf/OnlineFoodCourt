@@ -143,8 +143,11 @@
 							out.println(" </td>");
 							out.println("</tr>");
 							totalPrice += disnumber * cur.getDiscount();
-
 						}
+						if(totalPrice == 0.0f){
+							response.sendRedirect("cart.jsp");
+						}
+						
 					%>
 
 

@@ -81,9 +81,9 @@ public class JSPOutput {
 		out.println("</div>");
 		out.println("<div class=\"form-group\">");
 		out.println(" <label for=\"exampleInputPassword1\">");
-		out.println("  价格");
+		out.println("  原价");
 		out.println(" </label>");
-		out.println(" <input class=\"form-control\" name=\"price\" placeholder=\"价格\" type=\"text\" value=\""
+		out.println(" <input class=\"form-control\" name=\"price\" placeholder=\"原价\" type=\"text\" value=\""
 				+ String.valueOf(dish.getPrice()) + "\">");
 		out.println(" </input>");
 		out.println("</div>");
@@ -107,7 +107,7 @@ public class JSPOutput {
 		out.println("</div>");
 		out.println("<div class=\"form-group\">");
 		out.println(" <label for=\"exampleInputPassword1\">");
-		out.println("  菜品折扣");
+		out.println("  优惠价");
 		out.println(" </label>");
 		out.println(" <input class=\"form-control\" name=\"discount\" placeholder=\"1.00\" type=\"text\" value=\""
 				+ String.valueOf(dish.getDiscount()) + "\">");
@@ -126,9 +126,9 @@ public class JSPOutput {
 		out.println("</div>");
 		out.println("<div class=\"form-group\">");
 		out.println(" <label for=\"exampleInputPassword1\">");
-		out.println("  价格");
+		out.println("  原价");
 		out.println(" </label>");
-		out.println(" <input class=\"form-control\" name=\"price\" placeholder=\"价格\" type=\"text\" \">");
+		out.println(" <input class=\"form-control\" name=\"price\" placeholder=\"原价\" type=\"text\" \">");
 		out.println(" </input>");
 		out.println("</div>");
 		out.println("<div class=\"form-group\">");
@@ -150,7 +150,7 @@ public class JSPOutput {
 		out.println("</div>");
 		out.println("<div class=\"form-group\">");
 		out.println(" <label for=\"exampleInputPassword1\">");
-		out.println("  菜品折扣");
+		out.println("  优惠价");
 		out.println(" </label>");
 		out.println(" <input class=\"form-control\" name=\"discount\" placeholder=\"1.00\" type=\"text\" value=\"\">");
 		out.println(" </input>");
@@ -179,10 +179,10 @@ public class JSPOutput {
 		out.println("</div>");
 		out.println("<div class=\"form-group\">");
 		out.println(" <label for=\"exampleInputPassword1\">");
-		out.println("  价格");
+		out.println("  原价");
 		out.println(" </label>");
 		out.println(
-				" <input class=\"form-control\" name=\"price\" placeholder=\"价格\" readonly=\"true\" type=\"text\" value=\""
+				" <input class=\"form-control\" name=\"price\" placeholder=\"原价\" readonly=\"true\" type=\"text\" value=\""
 						+ String.valueOf(dish.getPrice()) + "\">");
 		out.println(" </input>");
 		out.println("</div>");
@@ -207,7 +207,7 @@ public class JSPOutput {
 		out.println("</div>");
 		out.println("<div class=\"form-group\">");
 		out.println(" <label for=\"exampleInputPassword1\">");
-		out.println("  菜品折扣");
+		out.println("  优惠价");
 		out.println(" </label>");
 		out.println(
 				" <input class=\"form-control\" name=\"discount\" readonly=\"true\" placeholder=\"1.00\" type=\"text\" value=\""

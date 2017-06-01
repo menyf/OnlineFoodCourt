@@ -87,14 +87,18 @@
 						<div class="shopper-info">
 						 <br>
 							<p>菜品信息</p>
-							<form action="dishDelete.jsp" method="post">
+							<%
+							Customer admin = (Customer)session.getAttribute("loginuser") ;
+							if(admin == null || !admin.getUsername().equals(ConfigFactory.readProperty("username"))){
+								response.sendRedirect("login.jsp");
+							}
+							String id = request.getParameter("dishid");
+							if(id == null) response.sendRedirect("dishManage.jsp");
+							%>
+							<form action="dishDelete.jsp?dishid=<%=id %>" method="post">
 								<%
-									Customer admin = (Customer)session.getAttribute("loginuser") ;
-									if(admin == null || !admin.getUsername().equals(ConfigFactory.readProperty("username"))){
-										response.sendRedirect("login.jsp");
-									}
-									String id = request.getParameter("dishid");
-									if(id == null) response.sendRedirect("dishManage.jsp");
+									
+									
 									IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
 									Dish dish = disDAO.findDish(Integer.parseInt(id));
 									JSPOutput.outputDishDelete(out, dish);

@@ -4,6 +4,8 @@
 <%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.CartItem"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.Customer"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -206,7 +208,15 @@
 
 						while (it.hasNext()) {
 							Map.Entry entry = (Map.Entry) it.next();
-							int dishid = (Integer) entry.getKey();
+							/* int dishid = (Integer) entry.getKey();
+							int disnumber = (Integer) entry.getValue(); */
+							CartItem nc = new CartItem();
+							nc = (CartItem) entry.getKey();
+							Customer cuss = (Customer) session.getAttribute("loginuser");
+							if (!nc.username.equals(cuss.getUsername())) {
+								continue;
+							}
+							int dishid = nc.id;
 							int disnumber = (Integer) entry.getValue();
 							Dish cur = ff.findDish(dishid);
 							out.println("<tr>");

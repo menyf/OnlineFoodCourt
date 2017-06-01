@@ -14,11 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.cugb.javaee.onlinefoodcourt.bean.CartItem;
 import com.cugb.javaee.onlinefoodcourt.bean.Customer;
 import com.cugb.javaee.onlinefoodcourt.bean.Dish;
 import com.cugb.javaee.onlinefoodcourt.bean.Order;
 import com.cugb.javaee.onlinefoodcourt.bean.OrderItem;
 import com.cugb.javaee.onlinefoodcourt.dao.IDishDAO;
+import com.cugb.javaee.onlinefoodcourt.dao.IOrderDAO;
 import com.cugb.javaee.onlinefoodcourt.utils.DAOFactory;
 
 /**
@@ -50,7 +52,7 @@ public class OrderAddControl extends HttpServlet {
 		Customer cus = (Customer) session.getAttribute("loginuser");
 		java.util.Date today = new java.util.Date();
 		Timestamp timestamp = new Timestamp(today.getTime());
-		String orderID = timestamp.toString()+cus.getUsername();
+		String orderID = String.valueOf((new java.util.Date()).getTime())+cus.getUsername();
 		
 		String address = request.getParameter("address");
 		String tel = request.getParameter("tel");
@@ -65,8 +67,16 @@ public class OrderAddControl extends HttpServlet {
 			try {
 				ff = (IDishDAO)DAOFactory.newInstance("IDishDAO");
 				Map.Entry entry = (Map.Entry) it.next();
-				int dishid = (Integer)entry.getKey();
-				int disnumber = (Integer)entry.getValue();
+				
+				CartItem nc = new CartItem();
+				nc = (CartItem) entry.getKey();
+				Customer cuss = (Customer) session.getAttribute("loginuser");
+				if (!nc.username.equals(cuss.getUsername())) {
+					continue;
+				}
+				int dishid = nc.id;
+				int disnumber = (Integer) entry.getValue();
+				
 				Dish cur = ff.findDish(dishid);
 				count += disnumber;
 				OrderItem oit = new OrderItem();
@@ -82,7 +92,7 @@ public class OrderAddControl extends HttpServlet {
 		}
 		
 		//Step2. 
-		
+		System.out.println("送货地址："+address);
 		order.setOrderID(orderID);
 		order.setUsername(cus.getUsername());
 		order.setTime(timestamp);
@@ -94,8 +104,21 @@ public class OrderAddControl extends HttpServlet {
 		order.updateCount();
 		order.updateTotalPrice();
 		
+		IOrderDAO orderdao;
+		try {
+			orderdao = (IOrderDAO) DAOFactory.newInstance("IOrderDAO");
+			orderdao.addOrder(order);
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		request.getRequestDispatcher("mine.jsp").forward(request, response);
+		
+//		request.getRequestDispatcher("mine.jsp").forward(request, response);
+		response.sendRedirect("mine.jsp");
 	}
 
 	/**

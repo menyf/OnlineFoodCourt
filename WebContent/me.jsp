@@ -116,7 +116,7 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="show.jsp">首页</a></li>
+								<li><a href="index.jsp">首页</a></li>
 								<li class="dropdown"><a href="#">购物</a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html"></a></li>

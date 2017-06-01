@@ -163,7 +163,7 @@ public class ActionControl extends BaseService {
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
 			if (ncin.id==Integer.parseInt(Did)&&ncin.username==now.getUsername()) {
-				System.out.println("findout");
+				//System.out.println("findout");
 				cart.remove(ncin);
 				break;
 			   } 

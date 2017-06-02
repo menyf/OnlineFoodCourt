@@ -45,6 +45,22 @@ public class DishService {
 //		return dishdao.findDishs(strsql, params);
 	}
 	
+	public PageModel<Dish> findDish5PageList(int pageNO,int pageSize,String str) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+		dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
+		String strsql = "select dishid DishID, name Name, price Price, description Description, imgurl ImgURL, discount Discount from Dish where name like '%?%' limit ?, ?";
+		int actualpageNO = (pageNO-1)*pageSize;
+		Object[] params = {str,actualpageNO,pageSize};
+		ArrayList<Dish> dishlist = dishdao.findDishs(strsql, params);
+//		PageModel<Dish> pagemodel = new PageModel<Dish>();
+//		pagemodel.setList(dishlist);
+//		pagemodel.setPageNO(pageNO);
+//		pagemodel.setPageSize(pageSize);
+//		pagemodel.setTotalrecords(getTotalDishs());
+		PageModel<Dish> pagemodel = new PageModel<Dish>(pageSize,pageNO,getTotalDishs(),dishlist);
+		return pagemodel;
+//		return dishdao.findDishs(strsql, params);
+	}
+	
 	public int getTotalDishs() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
 		dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
 		String strsql = "select count(*) from Dish";

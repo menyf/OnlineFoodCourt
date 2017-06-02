@@ -1,5 +1,7 @@
+<%@page import="java.net.URLDecoder"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.lang.*"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Customer"%>
@@ -7,6 +9,7 @@
 <%@page import="com.cugb.javaee.onlinefoodcourt.biz.*"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.ConfigFactory" %>
+<%@page import="java.net.URLEncoder" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -28,7 +31,9 @@ else{
 //根据页码生成相应的dishlist
 int pageNO = Integer.parseInt((String)request.getAttribute("pageNO"));
 int pageSize = Integer.parseInt((String)session.getAttribute("pageSize"));
-String str = request.getParameter("q");
+String str = request.getParameter("query");
+
+
 if(str==null){
 	response.sendRedirect("index.jsp");
 }

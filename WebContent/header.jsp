@@ -128,9 +128,14 @@
 					</div> -->
 				<div class="col-sm-3">
 					<div class="search_box pull-right">
-						<input type="text" placeholder="来点什么？" id="query" oninput="$('#search').attr('href', 'search.jsp?q='+this.value)">&nbsp; <a href="search.jsp?q="
-							class="btn btn-default get" style="margin-top: 0px" id="search"><i
-							class="fa fa-search"></i> 搜索 </a>
+					<form action="action" method="post" >
+					<input type="text" placeholder="来点什么？" name="query" >&nbsp; 
+						<button class="btn btn-default get" style="margin-top: 0px" id="search"><i
+							class="fa fa-search"></i> 搜索 </button>
+							<input type="hidden" name="actiontype" value="search">
+							<input type="hidden" name="pageNO" value="1">
+					</form>
+						
 					</div>
 				</div>
 			</div>

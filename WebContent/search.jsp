@@ -31,13 +31,14 @@ else{
 //根据页码生成相应的dishlist
 int pageNO = Integer.parseInt((String)request.getAttribute("pageNO"));
 int pageSize = Integer.parseInt((String)session.getAttribute("pageSize"));
-String str = request.getParameter("qs");
+String str = request.getParameter("query");
 
 
 if(str==null){
 	response.sendRedirect("index.jsp");
 }
-DishService dishserv = new DishService();
+PageModel<Dish> pagemodel = (PageModel) request.getAttribute("pageModel");
+//DishService dishserv = new DishService();
 //PageModel<Dish> pagemodel = dishserv.findDish5PageList(pageNO, pageSize,str);
 //request.setAttribute("pageModel", pagemodel); 
 //request.setAttribute("dishlist", pagemodel.getList());
@@ -111,8 +112,16 @@ else{
 						<div class="tab-content">
 
 
-							<div class="tab-pane fade active in">
-
+							<div class="tab-pane fade active in" align=center>
+                                <%
+                                if(pagemodel.getList().size()==0)
+                                {
+                                    out.println("<div style = \"height:450px; padding-top:50px;\">");
+                                	out.println("<font style=\"font-size:22px;\">未找到符合您口味的食物...去尝试搜索其他美味吧！</font><br />");
+                                	out.println("<img src=\"images/404/404.jpg\" width=\"450px\" height=\"250px\" style = \"margin-top:50px;\">");
+                                    out.println("</div>");
+                                } 
+                                %>  
 								<c:forEach items="${requestScope.dishlist}" var="currentdish"
 									varStatus="status">
 									<div class="col-sm-3">

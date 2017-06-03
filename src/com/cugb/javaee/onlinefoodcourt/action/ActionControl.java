@@ -38,6 +38,7 @@ import com.sun.xml.internal.ws.resources.HttpserverMessages;
  */
 public class ActionControl extends BaseService {
 	private static final long serialVersionUID = 1L;
+	private String searchTH;
 	private static Properties prop = null;
 	private Map cart = new HashMap();
 	private int pageSize = 10;
@@ -117,22 +118,33 @@ public class ActionControl extends BaseService {
 	}
 
 	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, NumberFormatException, InstantiationException, IllegalAccessException, ClassNotFoundException{
-		String kw = request.getParameter("query");
-		
-		
+		String In = request.getParameter("query");
+		String kw;
+		if(In.equals("-1")){
+			kw = searchTH;
+		}
+		else{
+			System.out.println(In+" this is In");
+			searchTH = In;
+			kw = searchTH;
+		}
 		// 获取当前页号
 		int pageNO = Integer.parseInt(request.getParameter("pageNO"));
+		System.out.println(pageNO + "now page");
 		// int pageSize = Integer.parseInt(prop.getProperty("pageSize"));
 		// 分页查询
 		 String pageSize = ConfigFactory.readProperty("pageSize");
 		// 生成pageModel对象
 		DishService dishserv = new DishService();
+		System.out.println(kw + "  111");
 		PageModel<Dish> pagemodel = dishserv.findDish5PageList(pageNO, Integer.parseInt(pageSize), kw);
 		// 跳转到show页面
 		// logger.debug(pagemodel.getList());
 		request.setAttribute("dishlist", pagemodel.getList());
-		System.out.println(pagemodel.getList().size());
+		System.out.println(pagemodel.getTotalPages() + " 总页数");
+		System.out.println(pagemodel.getList().size() + "大小");
 		request.setAttribute("pageModel", pagemodel);
+		request.setAttribute("qs", kw);
 		RequestDispatcher rd = request
 				.getRequestDispatcher("search.jsp?pageNO=" + pageNO + "&totalpages=" + pagemodel.getTotalPages());
 		rd.forward(request, response);

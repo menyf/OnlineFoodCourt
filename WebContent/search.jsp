@@ -31,16 +31,16 @@ else{
 //根据页码生成相应的dishlist
 int pageNO = Integer.parseInt((String)request.getAttribute("pageNO"));
 int pageSize = Integer.parseInt((String)session.getAttribute("pageSize"));
-String str = request.getParameter("query");
+String str = request.getParameter("qs");
 
 
 if(str==null){
 	response.sendRedirect("index.jsp");
 }
 DishService dishserv = new DishService();
-PageModel<Dish> pagemodel = dishserv.findDish5PageList(pageNO, pageSize,str);
-request.setAttribute("dishlist", pagemodel.getList());
-request.setAttribute("pageModel", pagemodel); 
+//PageModel<Dish> pagemodel = dishserv.findDish5PageList(pageNO, pageSize,str);
+//request.setAttribute("pageModel", pagemodel); 
+//request.setAttribute("dishlist", pagemodel.getList());
 
 
 String headerfile = "";
@@ -159,15 +159,15 @@ else{
 						
 					<tr>
 					<ul class="pager">
-					<li><a name="btnTopPage" id="btnTopPage" href="index.jsp?pageNO=1">首页</a></li>
+					<li><a name="btnTopPage" id="btnTopPage" href="action?actiontype=search&pageNO=1&query=-1" >首页</a></li>
     <li><a name="btnPreviousPage" id="btnPreviousPage"
-									href="index.jsp?pageNO=${requestScope.pageModel.prevPageNO}">上一页</a></li>
-    <li class="disabled"><a href="#">${requestScope.pageModel.getPageNO()} / ${requestScope.pageModel.bottomPageNO}
+									href="action?actiontype=search&pageNO=${requestScope.pageModel.prevPageNO}&query=-1" >上一页</a></li>
+    <li class="disabled"><a href="#">${requestScope.pageNO} / ${requestScope.pageModel.bottomPageNO}
 </a></li>
     <li><a name="btnNextPage" id="btnNextPage"
-									href="index.jsp?pageNO=${requestScope.pageModel.nextPageNO}" >下一页</a></li>
+									href="action?actiontype=search&pageNO=${requestScope.pageModel.nextPageNO}&query=-1"  >下一页</a></li>
     <li><a name="btnBottomPage"	id="btnBottomPage"
-									href="index.jsp?pageNO=${requestScope.pageModel.bottomPageNO}">尾页</a></li>
+									href="action?actiontype=search&pageNO=${requestScope.pageModel.bottomPageNO}&query=-1" >尾页</a></li>
 </ul>
 					</tr>
 						</table>

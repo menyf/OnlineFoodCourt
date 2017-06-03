@@ -59,7 +59,7 @@ public class DishService {
 //		pagemodel.setPageNO(pageNO);
 //		pagemodel.setPageSize(pageSize);
 //		pagemodel.setTotalrecords(getTotalDishs());
-		PageModel<Dish> pagemodel = new PageModel<Dish>(pageSize,pageNO,getTotalDishs(),dishlist);
+		PageModel<Dish> pagemodel = new PageModel<Dish>(pageSize,pageNO,getPerDishs(str),dishlist);
 		return pagemodel;
 //		return dishdao.findDishs(strsql, params);
 	}
@@ -67,6 +67,12 @@ public class DishService {
 	public int getTotalDishs() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
 		dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
 		String strsql = "select count(*) from Dish";
+		return dishdao.getTotalDishs(strsql);
+	}
+	
+	public int getPerDishs(String str) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+		dishdao = (IDishDAO) DAOFactory.newInstance("IDishDAO");
+		String strsql = "select count(*) from Dish where name like '%"+str+"%'";
 		return dishdao.getTotalDishs(strsql);
 	}
 	

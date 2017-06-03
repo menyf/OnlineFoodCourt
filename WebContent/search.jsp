@@ -31,7 +31,7 @@ else{
 //根据页码生成相应的dishlist
 int pageNO = Integer.parseInt((String)request.getAttribute("pageNO"));
 int pageSize = Integer.parseInt((String)session.getAttribute("pageSize"));
-String str = request.getParameter("qs");
+String str = request.getParameter("query");
 
 
 if(str==null){

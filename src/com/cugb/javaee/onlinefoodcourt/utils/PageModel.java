@@ -63,7 +63,9 @@ public class PageModel<T> {
 	 * @return
 	 */
 	public int getBottomPageNO(){
+		if(getTotalPages()>=1)
 		return getTotalPages();
+		else return 1;
 	}
 
 	public int getTotalrecords() {

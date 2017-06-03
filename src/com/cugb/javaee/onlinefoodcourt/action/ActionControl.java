@@ -8,6 +8,8 @@ import com.cugb.javaee.onlinefoodcourt.utils.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -93,10 +95,51 @@ public class ActionControl extends BaseService {
 		case "logOut":
 			logOut(request,response);
 			break;
+		case "search":
+			try {
+				search(request, response);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 		}
 
 	}
 
+	private void search(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, NumberFormatException, InstantiationException, IllegalAccessException, ClassNotFoundException{
+		String kw = request.getParameter("query");
+		
+		
+		// 获取当前页号
+		int pageNO = Integer.parseInt(request.getParameter("pageNO"));
+		// int pageSize = Integer.parseInt(prop.getProperty("pageSize"));
+		// 分页查询
+		 String pageSize = ConfigFactory.readProperty("pageSize");
+		// 生成pageModel对象
+		DishService dishserv = new DishService();
+		PageModel<Dish> pagemodel = dishserv.findDish5PageList(pageNO, Integer.parseInt(pageSize), kw);
+		// 跳转到show页面
+		// logger.debug(pagemodel.getList());
+		request.setAttribute("dishlist", pagemodel.getList());
+		System.out.println(pagemodel.getList().size());
+		request.setAttribute("pageModel", pagemodel);
+		RequestDispatcher rd = request
+				.getRequestDispatcher("search.jsp?pageNO=" + pageNO + "&totalpages=" + pagemodel.getTotalPages());
+		rd.forward(request, response);
+	
+		
+	}
+	
 	private void showdetial(HttpServletRequest request, HttpServletResponse response) throws InstantiationException,
 		    IllegalAccessException, ClassNotFoundException, SQLException, ServletException, IOException {
 	

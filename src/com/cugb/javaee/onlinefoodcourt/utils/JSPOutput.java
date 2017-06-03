@@ -14,14 +14,14 @@ public class JSPOutput {
 	public static void outputDish(JspWriter out, Dish dish) throws IOException {
 		out.println("<tr>");
 		out.println(" <td class=\"cart_product\" width=\"100\">");
-		out.println("  <a href=\"#\">");
+		out.println("  <a href=\"action?actiontype=detail&dishid="+String.valueOf(dish.getDishID())+"\">");
 		out.println("   <img alt=\"\" src=\"" + dish.getImgURL().replace("80x80", "110x110") + "\">");
 		out.println("   </img>");
 		out.println("  </a>");
 		out.println(" </td>");
 		out.println(" <td class=\"cart_description\">");
 		out.println("  <h4>");
-		out.println("   <a href=\"\">");
+		out.println("   <a href=\"action?actiontype=detail&dishid="+String.valueOf(dish.getDishID())+"\">");
 		out.println(dish.getName());
 		out.println("   </a>");
 		out.println("  </h4>");

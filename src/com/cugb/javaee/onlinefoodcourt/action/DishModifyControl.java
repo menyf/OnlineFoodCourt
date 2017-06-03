@@ -52,7 +52,7 @@ public class DishModifyControl extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		response.sendRedirect("details?dishid="+String.valueOf(dish.getDishID()));
+		response.sendRedirect("action?actiontype=detail&dishid="+String.valueOf(dish.getDishID()));
 	}
 
 	/**

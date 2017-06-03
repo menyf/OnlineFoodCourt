@@ -25,7 +25,7 @@ public class DishDAOMySqlImpl extends baseDAO implements IDishDAO {
 	@Override
 	public int modifyDish(Dish dish) throws SQLException {
 		String sql = "update Dish set name = ?, price = ?, description = ?, imgurl = ?, discount = ? where dishid = ?";
-		Object[] params = {dish.getName(),dish.getName(), dish.getDescription(), dish.getImgURL(), dish.getDiscount(), dish.getDishID()};
+		Object[] params = {dish.getName(),dish.getPrice(), dish.getDescription(), dish.getImgURL(), dish.getDiscount(), dish.getDishID()};
 		return modifyObj(sql, params);
 	}
 

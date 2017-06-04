@@ -181,15 +181,15 @@ public class ActionControl extends BaseService {
 			request.setAttribute("current", current);
 			int number = Integer.parseInt(nn);
 			Customer now = (Customer) session.getAttribute("loginuser");
-			nc.username = now.getUsername();
-			nc.id = id;
+			nc.setUsername(now.getUsername());
+			nc.setId(id);
 			Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
 			int flag = 0;
 			while(it.hasNext()){
 			Map.Entry entry = (Map.Entry) it.next();
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
-			if (nc.id==ncin.id&&nc.username==ncin.username) {
+			if (nc.getId()==ncin.getId()&&nc.getUsername()==ncin.getUsername()) {
 				flag = 1;
 				cart.put(ncin, (Integer) cart.get(ncin) + number);
 			   } 
@@ -214,7 +214,7 @@ public class ActionControl extends BaseService {
 			Map.Entry entry = (Map.Entry) it.next();
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
-			if (ncin.id==Integer.parseInt(Did)&&ncin.username==now.getUsername()) {
+			if (ncin.getId()==Integer.parseInt(Did)&&ncin.getUsername()==now.getUsername()) {
 			
 				cart.remove(ncin);
 				break;
@@ -237,15 +237,15 @@ public class ActionControl extends BaseService {
 			current = dishdao.findDish(id);
 			request.setAttribute("current", current);
 			Customer now = (Customer) session.getAttribute("loginuser");
-			nc.username = now.getUsername();
-			nc.id = id;
+			nc.setUsername(now.getUsername());
+			nc.setId(id);
 			Iterator<Map.Entry<Integer, Integer>> it = cart.entrySet().iterator();
 			int flag = 0;
 			while(it.hasNext()){
 			Map.Entry entry = (Map.Entry) it.next();
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
-			if (nc.id==ncin.id&&nc.username==ncin.username) {
+			if (nc.getId()==ncin.getId()&&nc.getUsername()==ncin.getUsername()) {
 				flag = 1;
 				cart.put(ncin, (Integer) cart.get(ncin) + 1);
 			   } 

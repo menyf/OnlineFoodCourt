@@ -33,10 +33,10 @@ public class ModifyCusControl extends BaseService {
 		customer = (Customer) session.getAttribute("loginuser");
 		
 		String password = req.getParameter("modifyPass");
-		String nickname = req.getParameter("modifyEmail");
+		String email = req.getParameter("modifyEmail");
 		
 		customer.setPassword(password);
-		customer.setNickname(nickname);		
+		customer.setEmail(email);		
 				
 		try {
 			ICustomerDAO iCustomerDAO = (ICustomerDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");

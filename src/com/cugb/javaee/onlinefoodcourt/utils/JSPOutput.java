@@ -226,7 +226,7 @@ public class JSPOutput {
 		  out.println(cus.getPassword());
 		  out.println(" </td>");
 		  out.println(" <td>");
-		  out.println(cus.getNickname());
+		  out.println(cus.getEmail());
 		  out.println(" </td>");
 		  out.println(" <td width=\"50\">");
 		  out.println("  <a class=\"cart_quantity_delete\" href=\"customerDelete.jsp?username="+cus.getUsername()+"\">");
@@ -262,7 +262,7 @@ public class JSPOutput {
 		out.println(" </label>");
 		out.println(
 				" <input class=\"form-control\" name=\"dishID\" placeholder=\"昵称\" readonly=\"true\" type=\"email\" value=\""
-						+ cus.getNickname() + "\">");
+						+ cus.getEmail() + "\">");
 		out.println(" </input>");
 		out.println("</div>");
 	}

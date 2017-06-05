@@ -25,7 +25,7 @@ public class CustomerDAOMySqlImplTest {
 		Customer cus = new Customer();
 		cus.setUsername("1003");
 		cus.setPassword("admin");
-		cus.setNickname("cus1003");
+		cus.setEmail("cus1003");
 		assertEquals(1, cusDAO.addCustomer(cus));
 	}
 

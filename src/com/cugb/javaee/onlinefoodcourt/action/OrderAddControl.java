@@ -72,11 +72,11 @@ public class OrderAddControl extends HttpServlet {
 				CartItem nc = new CartItem();
 				nc = (CartItem) entry.getKey();
 				Customer cuss = (Customer) session.getAttribute("loginuser");
-				if (!nc.username.equals(cuss.getUsername())) {
+				if (!nc.getUsername().equals(cuss.getUsername())) {
 					continue;
 				}
 				
-				int dishid = nc.id;
+				int dishid = nc.getId();
 				int disnumber = (Integer) entry.getValue();
 				
 				Dish cur = ff.findDish(dishid);
@@ -127,7 +127,7 @@ public class OrderAddControl extends HttpServlet {
 			Map.Entry entry = (Map.Entry) itt.next();
 			CartItem ncin = new CartItem();
 			ncin = (CartItem)entry.getKey();
-			if (ncin.username==cuss.getUsername()) {
+			if (ncin.getUsername()==cuss.getUsername()) {
 				itt.remove();
 			}
 			//itt = itt2;

@@ -41,11 +41,11 @@ public class RegisterControl extends BaseService {
 		//获取参数
 		String username = req.getParameter("registerName");
 		String password = req.getParameter("registerPass");
-		String nickname = req.getParameter("registerEmail");
+		String email = req.getParameter("registerEmail");
 		Customer customer = new Customer();
 		customer.setUsername(username);
 		customer.setPassword(password);
-		customer.setNickname(nickname);
+		customer.setEmail(email);
 		//判断是否冲突后，将用户存储到数据库中
 		CustomerService cService = new CustomerService();
 		RequestDispatcher rd = null;

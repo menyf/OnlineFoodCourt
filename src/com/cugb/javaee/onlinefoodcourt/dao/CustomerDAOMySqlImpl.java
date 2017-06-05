@@ -10,7 +10,7 @@ public class CustomerDAOMySqlImpl extends baseDAO implements ICustomerDAO {
 	@Override
 	public int addCustomer(Customer customer) throws SQLException {
 		String sql = "insert into Customer values(?, ?, ?)";
-		Object[] params = {customer.getUsername(), customer.getPassword(), customer.getNickname()};
+		Object[] params = {customer.getUsername(), customer.getPassword(), customer.getEmail()};
 		return modifyObj(sql, params);
 	}
 
@@ -23,20 +23,20 @@ public class CustomerDAOMySqlImpl extends baseDAO implements ICustomerDAO {
 
 	@Override
 	public int modifyCustomer(Customer customer) throws SQLException {
-		String sql = "update Customer set password = ?, nickname = ? where username = ?";
-		Object[] params = {customer.getPassword(), customer.getNickname(), customer.getUsername()} ;
+		String sql = "update Customer set password = ?, email = ? where username = ?";
+		Object[] params = {customer.getPassword(), customer.getEmail(), customer.getUsername()} ;
 		return modifyObj(sql, params);
 	}
 
 	@Override
 	public ArrayList findCustomers() throws SQLException {
-		String sql = "select username Username, nickname Nickname, password Password from Customer";
+		String sql = "select username Username, email Email, password Password from Customer";
 		return findObjs(sql, Customer.class);
 	}
 
 	@Override
 	public Customer findCustomer(String string) throws SQLException {
-		String sql = "select username Username, password Password, nickname Nickname from Customer where username = ?";
+		String sql = "select username Username, password Password, email Email from Customer where username = ?";
 		Object[] params = {string};
 		return (Customer) findObj(sql, params, Customer.class);
 	}

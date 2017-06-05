@@ -94,9 +94,11 @@
 							float totalPrice = 0.0f;
 							int totalNum = 0;
 							for(Order order:arr) {							
+
 								out.println("<tr align=\"center\">");
 								out.println(" <td class=\"description\">");
 								/* out.println("  <a href=\"\">"); */
+
 								out.println("  <h4>");
 								out.println(order.getOrderID());
 								out.println("  </h4>");

@@ -68,10 +68,12 @@ public class OrderDAOMySqlImplTest{
 	public void testFindOrders() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		//fail("Not yet implemented");
 		ArrayList<Order> arrayList = null;
+
 		arrayList = orderdao.findOrders("1001");
 		for(Order order: arrayList){
 		}
 		
+
 		
 	}
 }

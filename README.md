@@ -13,7 +13,7 @@
 
 - [Manyfun](https://github.com/menyf) [个人主页](https://menyifan.com) [CONT@CT](mailto:menyifan0001@gmail.com)
 - [Fanleehao](https://github.com/fanleehao)
-- [TerransForce](https://github.com/TerransForce)
+- [TerransForce](https://github.com/TerransForce) [个人主页](https://terransforce.github.io)
 
 
 ## 鸣谢

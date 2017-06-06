@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="fckeditor.js"></script>
+		<!--
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		-->
+		<script type="text/javascript">
+		</script>
+	</head>
+
+	<body>
+
+		<form>
+			内容：
+			<textarea name="content">xxxxxx</textarea>
+			<!--
+			<html:textarea name="content"><html:textarea>
+			-->
+
+		<script type="text/javascript">
+			var oFCKeditor = new FCKeditor( 'content' ) ;
+			oFCKeditor.BasePath	= "./" ; // 一定要以'/'结尾
+			oFCKeditor.Height	= 300 ;
+			oFCKeditor.Width	= 700 ;
+			oFCKeditor.ToolbarSet = "itcastbbs";
+			oFCKeditor.Value	= '初始值' ;
+			// 根据以上的配置生成并且显示一个FckEditor编辑器
+			// oFCKeditor.Create() ;
+			// 使用FCkeditor替换指定的Textarea
+			oFCKeditor.ReplaceTextarea();
+		</script>
+		
+		<input type="submit" value="提交"/>
+	</form>
+	</body>
+
+</html>

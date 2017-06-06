@@ -43,9 +43,15 @@ public class DishAddControl extends HttpServlet {
 		dish.setName(request.getParameter("name"));
 		IDishDAO disDAO = null;
 		try {
+<<<<<<< HEAD
 			disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
 			disDAO.addDish(dish);
 			response.sendRedirect("details?dishid="+String.valueOf(disDAO.findMaxDish().getDishID()));
+=======
+			disDAO = (IDishDAO) DAOFactory.newInstance("IDishDAO");
+			disDAO.addDish(dish);
+			response.sendRedirect("action?actiontype=detail&dishid="+String.valueOf(disDAO.findMaxDish().getDishID()));
+>>>>>>> master
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

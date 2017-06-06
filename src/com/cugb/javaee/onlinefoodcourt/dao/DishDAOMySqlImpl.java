@@ -41,6 +41,22 @@ public class DishDAOMySqlImpl extends baseDAO implements IDishDAO {
 		Object[] params = {dishid};
 		return (Dish) findObj(sql, params,  Dish.class);
 	}
+	@Override
+	public ArrayList<Dish> findDishs(String sql,Object[] params){
+		return  this.findObjs(sql, params, Dish.class);
+	}
+	
+	public int getTotalDishs(String strsql) {
+		return getTotalRecords(strsql);
+	}
+
+	@Override
+	public Dish findMaxDish() throws SQLException {
+		String sql = "select dishid DishID, name Name, price Price, description Description, imgurl ImgURL, discount Discount from Dish where dishid = (select max(dishid) from Dish)";
+		return (Dish) findObj(sql, null,  Dish.class);
+//		return (int) arr.get(0);
+//		return findObjs(sql, int);
+	}
 
 	@Override
 	public Dish findMaxDish() throws SQLException {

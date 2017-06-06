@@ -3,8 +3,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
+<<<<<<< HEAD
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
+=======
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.*"%>
+>>>>>>> master
 <%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -48,6 +53,7 @@ function giveURL()
 </head>
 <!--/head-->
 <body>
+<<<<<<< HEAD
 	<header id="header"> <!--header-->
 	<div class="header_top">
 		<!--header_top-->
@@ -176,6 +182,9 @@ function giveURL()
 	</div>
 	<!--/header-bottom--> </header>
 	<!--/header-->
+=======
+	<jsp:include page="headerAdmin.jsp"></jsp:include>
+>>>>>>> master
 
 	<section id="cart_items">
 	<div class="container">
@@ -217,6 +226,13 @@ function giveURL()
 							<p>菜品信息</p>
 							<form action="dishModify" method="post">
 								<%
+<<<<<<< HEAD
+=======
+								Customer admin = (Customer)session.getAttribute("loginuser") ;
+								if(admin == null || !admin.getUsername().equals(ConfigFactory.readProperty("username"))){
+									response.sendRedirect("login.jsp");
+								}
+>>>>>>> master
 									String id = request.getParameter("dishid");
 									if(id == null) response.sendRedirect("dishManage.jsp");
 									IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
@@ -291,6 +307,7 @@ function giveURL()
 	</section>
 	<!--/#cart_items-->
 
+<<<<<<< HEAD
 
 
 	<footer id="footer"> <!--Footer-->
@@ -471,6 +488,9 @@ function giveURL()
 	<script src="js/jquery.scrollUp.min.js"></script>
 	<script src="js/jquery.prettyPhoto.js"></script>
 	<script src="js/main.js"></script>
+=======
+<jsp:include page="footer.jsp"></jsp:include>
+>>>>>>> master
 
 </body>
 </html>

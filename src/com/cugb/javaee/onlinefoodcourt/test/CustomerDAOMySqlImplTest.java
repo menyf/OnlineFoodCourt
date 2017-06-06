@@ -25,7 +25,7 @@ public class CustomerDAOMySqlImplTest {
 		Customer cus = new Customer();
 		cus.setUsername("1003");
 		cus.setPassword("admin");
-		cus.setNickname("cus1003");
+		cus.setEmail("cus1003");
 		assertEquals(1, cusDAO.addCustomer(cus));
 	}
 
@@ -46,7 +46,6 @@ public class CustomerDAOMySqlImplTest {
 //	@Test
 //	public void testFindCustomer() throws SQLException {
 //		Customer cus = cusDAO.findCustomer("root");
-//		System.out.println(cus.getPassword());
 //		assertEquals("admin", cus.getPassword());
 //	}
 

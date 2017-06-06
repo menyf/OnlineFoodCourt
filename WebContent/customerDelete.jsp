@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Customer"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.JSPOutput"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
+=======
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.ConfigFactory"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.Customer"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.JSPOutput"%>
+>>>>>>> master
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
@@ -39,7 +46,11 @@
 </head>
 <!--/head-->
 <body>
+<<<<<<< HEAD
 	<header id="header"> <!--header-->
+=======
+	<%---<header id="header"> <!--header-->
+>>>>>>> master
 	<div class="header_top">
 		<!--header_top-->
 		<div class="container">
@@ -167,7 +178,13 @@
 	</div>
 	<!--/header-bottom--> </header>
 	<!--/header-->
+<<<<<<< HEAD
 
+=======
+ --%>
+ 
+ 	<jsp:include page="headerAdmin.jsp"></jsp:include>
+>>>>>>> master
 	<section id="cart_items">
 	<div class="container">
 		<div class="breadcrumbs">
@@ -217,6 +234,7 @@
 						<div class="shopper-info">
 							<br>
 							<p>用户信息</p>
+<<<<<<< HEAD
 							<form action="customerDelete.jsp" method="post">
 								<%
 									String username = request.getParameter("username");
@@ -224,6 +242,25 @@
 										response.sendRedirect("customerManage.jsp"); 
 									}
 									ICustomerDAO cusDAO = (ICustomerDAO)DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
+=======
+							<%
+							Customer admin = (Customer)session.getAttribute("loginuser") ;
+							if(admin == null || !admin.getUsername().equals(ConfigFactory.readProperty("username"))){
+								response.sendRedirect("login.jsp");
+							}
+							
+							String username = request.getParameter("username");
+							
+							if(username == null){
+								response.sendRedirect("customerManage.jsp");
+							}
+							
+							%>
+							<form action="customerDelete.jsp?username=<%=username %>" method="post">
+								<%
+									
+									ICustomerDAO cusDAO = (ICustomerDAO)DAOFactory.newInstance("ICustomerDAO");
+>>>>>>> master
 									Customer cus = cusDAO.findCustomer(username);
 									JSPOutput.outputCustomerDelete(out, cus);
 								%>
@@ -265,6 +302,7 @@
 
 
 
+<<<<<<< HEAD
 	<footer id="footer"> <!--Footer-->
 	<div class="footer-top">
 		<div class="container">
@@ -443,6 +481,11 @@
 	<script src="js/jquery.scrollUp.min.js"></script>
 	<script src="js/jquery.prettyPhoto.js"></script>
 	<script src="js/main.js"></script>
+=======
+	
+
+	<jsp:include page="footer.jsp"></jsp:include>
+>>>>>>> master
 
 </body>
 </html>

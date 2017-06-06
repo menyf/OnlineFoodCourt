@@ -3,8 +3,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
+<<<<<<< HEAD
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
+=======
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.*"%>
+>>>>>>> master
 <%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -38,6 +43,7 @@
 </head>
 <!--/head-->
 <body>
+<<<<<<< HEAD
 	<header id="header"> <!--header-->
 	<div class="header_top">
 		<!--header_top-->
@@ -166,6 +172,9 @@
 	</div>
 	<!--/header-bottom--> </header>
 	<!--/header-->
+=======
+	<jsp:include page="headerAdmin.jsp"></jsp:include>
+>>>>>>> master
 
 	<section id="cart_items">
 	<div class="container">
@@ -214,10 +223,25 @@
 						<div class="shopper-info">
 						 <br>
 							<p>菜品信息</p>
+<<<<<<< HEAD
 							<form action="dishDelete.jsp" method="post">
 								<%
 									String id = request.getParameter("dishid");
 									if(id == null) response.sendRedirect("dishManage.jsp");
+=======
+							<%
+							Customer admin = (Customer)session.getAttribute("loginuser") ;
+							if(admin == null || !admin.getUsername().equals(ConfigFactory.readProperty("username"))){
+								response.sendRedirect("login.jsp");
+							}
+							String id = request.getParameter("dishid");
+							if(id == null) response.sendRedirect("dishManage.jsp");
+							%>
+							<form action="dishDelete.jsp?dishid=<%=id %>" method="post">
+								<%
+									
+									
+>>>>>>> master
 									IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
 									Dish dish = disDAO.findDish(Integer.parseInt(id));
 									JSPOutput.outputDishDelete(out, dish);
@@ -300,6 +324,7 @@
 
 
 
+<<<<<<< HEAD
 	<footer id="footer"> <!--Footer-->
 	<div class="footer-top">
 		<div class="container">
@@ -478,6 +503,11 @@
 	<script src="js/jquery.scrollUp.min.js"></script>
 	<script src="js/jquery.prettyPhoto.js"></script>
 	<script src="js/main.js"></script>
+=======
+	
+
+	<jsp:include page="footer.jsp"></jsp:include>
+>>>>>>> master
 
 </body>
 </html>

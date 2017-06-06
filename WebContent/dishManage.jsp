@@ -37,6 +37,7 @@
 </head>
 <!--/head-->
 <body>
+<<<<<<< HEAD
 	<header id="header">
 		<!--header-->
 		<div class="header_top">
@@ -169,6 +170,9 @@
 		<!--/header-bottom-->
 	</header>
 	<!--/header-->
+=======
+	<jsp:include page="headerAdmin.jsp"></jsp:include>
+>>>>>>> master
 
 	<section id="cart_items">
 		<div class="container">
@@ -209,7 +213,11 @@
 				<tbody>
 
 					<%
+<<<<<<< HEAD
 						IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("com.cugb.javaee.onlinefoodcourt.dao.IDishDAO");
+=======
+						IDishDAO disDAO = (IDishDAO) DAOFactory.newInstance("IDishDAO");
+>>>>>>> master
 						ArrayList<Dish> arr = disDAO.findDishs();
 						for(int i = 0; i < arr.size(); i++){
 							Dish dish = arr.get(i);
@@ -253,6 +261,7 @@
 
 
 
+<<<<<<< HEAD
 	<footer id="footer">
 		<!--Footer-->
 		<div class="footer-top">
@@ -432,6 +441,10 @@
 	<script src="js/jquery.scrollUp.min.js"></script>
 	<script src="js/jquery.prettyPhoto.js"></script>
 	<script src="js/main.js"></script>
+=======
+
+		<jsp:include page="footer.jsp"></jsp:include>
+>>>>>>> master
 
 </body>
 </html>

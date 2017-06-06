@@ -3,10 +3,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
+<<<<<<< HEAD
 <%@page import="com.cugb.javaee.onlinefoodcourt.utils.DAOFactory"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
 <%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
 
+=======
+<%@page import="com.cugb.javaee.onlinefoodcourt.utils.*"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.bean.Dish"%>
+<%@page import="com.cugb.javaee.onlinefoodcourt.dao.*"%>
+>>>>>>> master
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,7 +44,11 @@
 </head>
 <!--/head-->
 <body>
+<<<<<<< HEAD
 	<header id="header"> <!--header-->
+=======
+	<%-- <header id="header"> <!--header-->
+>>>>>>> master
 	<div class="header_top">
 		<!--header_top-->
 		<div class="container">
@@ -166,13 +176,23 @@
 	</div>
 	<!--/header-bottom--> </header>
 	<!--/header-->
+<<<<<<< HEAD
 
+=======
+--%>
+
+<jsp:include page="headerAdmin.jsp"></jsp:include>
+>>>>>>> master
 	<section id="cart_items">
 	<div class="container">
 		<div class="breadcrumbs">
 			<ol class="breadcrumb">
 				<li><a href="#">Admin</a></li>
+<<<<<<< HEAD
 				<li class="active">菜品管理</li>
+=======
+				<li class="active">用户管理</li>
+>>>>>>> master
 			</ol>
 		</div>
 		<!--/breadcrums-->
@@ -195,14 +215,27 @@
 					<tr>
 						<th>用户名</th>
 						<th>密码</th>
+<<<<<<< HEAD
 						<th>昵称</th>
+=======
+						<th>邮箱</th>
+>>>>>>> master
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<%
+<<<<<<< HEAD
 						ICustomerDAO cusDAO = (ICustomerDAO) DAOFactory
 								.newInstance("com.cugb.javaee.onlinefoodcourt.dao.ICustomerDAO");
+=======
+						Customer admin = (Customer)session.getAttribute("loginuser") ;
+						if(admin == null || !admin.getUsername().equals(ConfigFactory.readProperty("username"))){
+							response.sendRedirect("login.jsp");
+						}
+						ICustomerDAO cusDAO = (ICustomerDAO) DAOFactory
+								.newInstance("ICustomerDAO");
+>>>>>>> master
 						ArrayList<Customer> arr = cusDAO.findCustomers();
 						for (int i = 0; i < arr.size(); i++) {
 							Customer cus = arr.get(i);
@@ -230,6 +263,7 @@
 
 
 
+<<<<<<< HEAD
 	<footer id="footer"> <!--Footer-->
 	<div class="footer-top">
 		<div class="container">
@@ -408,6 +442,11 @@
 	<script src="js/jquery.scrollUp.min.js"></script>
 	<script src="js/jquery.prettyPhoto.js"></script>
 	<script src="js/main.js"></script>
+=======
+	
+
+	<jsp:include page="footer.jsp"></jsp:include>
+>>>>>>> master
 
 </body>
 </html>

@@ -1,0 +1,21 @@
+# PM2.5Prediction
+
+## 环境说明
+
+- Java 1.8 
+- Tomcat 8
+
+## 使用说明
+
+在MySQL数据库中新建数据库执行文档中附录指令，创建数据库
+
+## 开发者
+  来自中国地质大学（北京）信息工程学院 OVO开发组
+- [TTT](http://git.cugbteam.org/9ttt6)
+- [Fanleehao](https://github.com/fanleehao)
+- [TerransForce](https://github.com/TerransForce) [个人主页](https://terransforce.github.io)
+
+
+## 鸣谢
+
+中国地质大学（北京）龙腾老师
